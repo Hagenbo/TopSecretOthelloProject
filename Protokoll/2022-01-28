@@ -1,0 +1,32 @@
+Protokoll 2022-01-28
+Projektgrupp 10/G055
+
+Hanterade frågeställningar:
+    1. Genomgång av de tekniska kraven för projektet.
+    2. Första steg för att komma igång.
+    3. Beslut om projektidé.
+    4. Vad som bör hunnits med under nästa vecka.
+
+1. Genomgång av de tekniska kraven för projektet.
+
+2. Projektets arbetsgång kommer att ske iterativt. Till att börja med bör vi skapa en tydlig plan för vilka klasser
+   vi vill ska ingå i vårt program samt hur de ska interagera med varandra. När detta är gjort kan vi påbörja
+   implementationsfasen. Allteftersom projektet fortskrider kommer vi behöva korrigera vår planering.
+   Rekommendation om att skapa “kort” där alla funktionaliteter framgår. På så vis kan alla se vad som saknas.
+
+3. Beslut fattas om att skapa ett “Othello”-spel. Enklare grafiska funktioner bör kunna implementeras med Swing.
+   Intellij kommer användas som IDE.
+
+4. Under nästa vecka ska:
+   - alla ha skapat ett github-konto och
+   - ett repo ska ha skapats.
+   - Samtliga gruppmedlemmar bör ha pushat något till repot.
+   - Fått ihop en första plan för projektet.
+   - Påbörjat implementation.
+
+
+
+
+
+
+
