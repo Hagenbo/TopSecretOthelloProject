@@ -3,6 +3,7 @@ package Othello;
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+	justALittleClass lilClass = new justALittleClass(1);
+    lilClass.printSomething();
     }
 }
