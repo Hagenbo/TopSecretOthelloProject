@@ -15,5 +15,7 @@ public class Main {
     System.out.println("Tjena mittbena");
     System.out.println("Tjena mittbena mvh lovisa");
 
+    System.out.println("1520");
+
     }
 }
