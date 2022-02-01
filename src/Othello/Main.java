@@ -8,5 +8,6 @@ public class Main {
         System.out.println("hej hej mvh Lovisa");
         System.out.println("hej hej mvh Ernst");
 
+    System.out.println("Hajsan bajsan");
     }
 }
