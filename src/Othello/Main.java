@@ -7,5 +7,6 @@ public class Main {
     lilClass.printSomething();
     System.out.println("hej hej mvh Lovisa");
 
+    System.out.println("Hajsan bajsan");
     }
 }
