@@ -12,5 +12,7 @@ public class Main {
 	System.out.println("he hej mvh Alex");
 
     System.out.println("Tjena mittbena");
+    System.out.println("Tjena mittbena mvh lovisa");
+
     }
 }
