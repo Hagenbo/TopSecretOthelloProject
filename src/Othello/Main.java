@@ -11,7 +11,6 @@ public class Main {
 
 	System.out.println("he hej mvh Alex");
 
-    System.out.println("Hajsan bajsan");
     System.out.println("Tjena mittbena");
     }
 }
