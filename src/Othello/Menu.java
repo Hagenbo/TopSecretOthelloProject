@@ -17,11 +17,28 @@ public class Menu extends JPanel {
 
         JPanel p = new JPanel();
         p.setBackground(color);
-
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(4, 5));
-        buttonPanel.add(setUpMenuButtons());
-        //this.setUpMenuButtons();
+
+        JButton b0 = new JButton("Load New Game");
+        b0.setBackground(Color.black);
+        b0.setForeground(Color.white);
+        buttonPanel.add(b0);
+
+        JButton b1 = new JButton("Load Game");
+        b1.setBackground(Color.black);
+        b1.setForeground(Color.white);
+        buttonPanel.add(b1);
+
+        JButton b2 = new JButton("Options");
+        b2.setBackground(Color.black);
+        b2.setForeground(Color.white);
+        buttonPanel.add(b2);
+
+        JButton b3 = new JButton("Rules");
+        b3.setBackground(Color.black);
+        b3.setForeground(Color.white);
+        buttonPanel.add(b3);
 
 
         p.add(buttonPanel, BorderLayout.CENTER);
@@ -34,38 +51,6 @@ public class Menu extends JPanel {
     public static void main(String[] args) {
         Menu m = new Menu();
 
-    }
-
-
-      /*public JPanel getButtonPanel(){
-        return buttonPanel;
-    }*/
-
-
-    public Component setUpMenuButtons() {
-        // JPanel buttonPanel = this.getButtonPanel();
-
-        JButton b0 = new JButton("Load New Game");
-        b0.setBackground(Color.black);
-        b0.setForeground(Color.white);
-        //buttonPanel.add(b0);
-
-        JButton b1 = new JButton("Load Game");
-        b1.setBackground(Color.black);
-        b1.setForeground(Color.white);
-        //buttonPanel.add(b1);
-
-        JButton b2 = new JButton("Options");
-        b2.setBackground(Color.black);
-        b2.setForeground(Color.white);
-        //buttonPanel.add(b2);
-
-        JButton b3 = new JButton("Rules");
-        b3.setBackground(Color.black);
-        b3.setForeground(Color.white);
-        //buttonPanel.add(b3);
-
-        return null;
     }
 
 }
