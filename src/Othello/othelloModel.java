@@ -5,7 +5,7 @@ import java.util.Random;
 public class othelloModel {
     private int gameID;
     private static final int n = 10;
-    private PieceColor[][] boardSquare = new PieceColor[n][n];
+    private PieceColor[][] board = new PieceColor[n][n];
     private boolean isBlackTurn;
 
     public othelloModel() {
@@ -13,7 +13,7 @@ public class othelloModel {
         this.gameID = r.nextInt();
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                boardSquare[i][j] = PieceColor.EMPTY;
+                board[i][j] = PieceColor.EMPTY;
             }
         }
 
@@ -21,12 +21,12 @@ public class othelloModel {
     public int getColumns() { return n;}
 
     public PieceColor getPiece( int i, int j) {
-        return boardSquare[i][j];
+        return board[i][j];
     }
 
     public void placePieceAt( int i, int j) {           //anropas av controller
         if(gameOver()) { return;}
-        if( boardSquare[i][j] != PieceColor.EMPTY) { return;}
+        if( board[i][j] != PieceColor.EMPTY) { return;}
         PieceColor c;
         if (isBlackTurn) {
             c = PieceColor.BLACK;
@@ -34,7 +34,7 @@ public class othelloModel {
         else {
             c = PieceColor.WHITE;
         }
-        boardSquare[i][j] = c;
+        board[i][j] = c;
         isBlackTurn = !isBlackTurn;
     }
 
@@ -43,13 +43,13 @@ public class othelloModel {
         int no_white = 0;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                if (boardSquare[i][j] == PieceColor.EMPTY) {
+                if (board[i][j] == PieceColor.EMPTY) {
                     return false;
                 }
-                if (boardSquare[i][j] == PieceColor.BLACK) {
+                if (board[i][j] == PieceColor.BLACK) {
                     no_black++;
                 }
-                if (boardSquare[i][j] == PieceColor.WHITE) {
+                if (board[i][j] == PieceColor.WHITE) {
                     no_white++;
                 }
             }
