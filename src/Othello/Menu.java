@@ -8,13 +8,9 @@ import java.awt.event.ActionListener;
 
 //något som får upp en meny. hur allt kopplas ihop idk än
 public class Menu extends JPanel implements ActionListener {
+    //ska den va i konstruktor?
+    private static final Color color = new Color(0, 78, 56);
 
-    /*ActionListener a = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            System.out.println("b0");
-        }
-    };*/
     @Override
     public void actionPerformed(ActionEvent e){
         //"hämtar det objekt som utlöst eventet" till obj
@@ -43,9 +39,6 @@ public class Menu extends JPanel implements ActionListener {
 
         }
     }
-
-    //ska den va i konstruktor?
-    private static final Color color = new Color(0, 78, 56);
 
     public Menu() {
         JFrame f = new JFrame("Menu");
@@ -82,7 +75,6 @@ public class Menu extends JPanel implements ActionListener {
         b3.addActionListener(this);
         buttonPanel.add(b3);
 
-
         p.add(buttonPanel, BorderLayout.CENTER);
         f.add(p);
         f.setVisible(true);
@@ -96,3 +88,4 @@ public class Menu extends JPanel implements ActionListener {
     }
 
 }
+
