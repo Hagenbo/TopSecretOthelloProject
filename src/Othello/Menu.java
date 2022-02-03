@@ -1,11 +1,49 @@
 
-        package Othello;
-        import javax.swing.*;
-        import java.awt.*;
+package Othello;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 //något som får upp en meny. hur allt kopplas ihop idk än
-public class Menu extends JPanel {
+public class Menu extends JPanel implements ActionListener {
+
+    /*ActionListener a = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("b0");
+        }
+    };*/
+    @Override
+    public void actionPerformed(ActionEvent e){
+        //"hämtar det objekt som utlöst eventet" till obj
+        //om det inte är en knapp, return
+        Object obj = e.getSource();
+        if(!(obj instanceof JButton)){
+            return;
+        }
+        //typecast Object obj till en JButton
+        JButton b = (JButton)obj;
+        String str = b.getText();
+
+        switch(str){
+            case "New Game":
+                System.out.println("New Game");
+                break;
+            case "Load Game":
+                System.out.println("Load game");
+                break;
+            case "Options":
+                System.out.println("Options");
+                break;
+            case "Rules":
+                System.out.println("Rules");
+                break;
+
+        }
+    }
+
     //ska den va i konstruktor?
     private static final Color color = new Color(0, 78, 56);
 
@@ -20,24 +58,28 @@ public class Menu extends JPanel {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(4, 5));
 
-        JButton b0 = new JButton("Load New Game");
+        JButton b0 = new JButton("New Game");
         b0.setBackground(Color.black);
         b0.setForeground(Color.white);
+        b0.addActionListener(this);
         buttonPanel.add(b0);
 
         JButton b1 = new JButton("Load Game");
         b1.setBackground(Color.black);
         b1.setForeground(Color.white);
+        b1.addActionListener(this);
         buttonPanel.add(b1);
 
         JButton b2 = new JButton("Options");
         b2.setBackground(Color.black);
         b2.setForeground(Color.white);
+        b2.addActionListener(this);
         buttonPanel.add(b2);
 
         JButton b3 = new JButton("Rules");
         b3.setBackground(Color.black);
         b3.setForeground(Color.white);
+        b3.addActionListener(this);
         buttonPanel.add(b3);
 
 
