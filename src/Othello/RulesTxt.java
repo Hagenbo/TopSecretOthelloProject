@@ -12,11 +12,11 @@ public class RulesTxt extends JPanel {
         f.setSize(500, 500);
         f.setLocation(400, 300);
 
-        JPanel bottomPanel= new JPanel(new BorderLayout());
+        JPanel bottomPanel = new JPanel(new BorderLayout());
         bottomPanel.setBackground(color);
 
 
-        JLabel label= new JLabel ("Back to menu");
+        JLabel label = new JLabel("Back to menu");
         label.setBackground(color);
         label.setForeground(Color.white);
 
@@ -28,7 +28,6 @@ public class RulesTxt extends JPanel {
         f.add(mainPanel);
         f.setVisible(true);
     }
-
     public String getText(){
         String s = "Regler fbjngjefbvi";
         return s;
