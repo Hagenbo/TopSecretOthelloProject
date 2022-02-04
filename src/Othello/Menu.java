@@ -9,43 +9,25 @@ public class Menu extends JPanel implements ActionListener {
     //ska den va i konstruktor?
     private static final Color color = new Color(0, 78, 56);
 
-    @Override
-    public void actionPerformed(ActionEvent e){
-        Object obj = e.getSource();
-        if(!(obj instanceof JButton)){
-            return;
-        }
-        //typecast Object obj till en JButton
-        JButton b = (JButton)obj;
-        String str = b.getText();
-
-        switch(str){
-            case "New Game":
-                System.out.println("New Game");
-                break;
-            case "Load Game":
-                System.out.println("Load game");
-                break;
-            case "Options":
-                System.out.println("Options");
-                break;
-            case "Rules":
-                System.out.println("Rules");
-                break;
-
-        }
-    }
-
     public Menu() {
         JFrame f = new JFrame("Menu");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setSize(500, 500);
         f.setLocation(300, 300);
-
         JPanel p = new JPanel();
         p.setBackground(color);
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(4, 5));
+        p.add(this.Buttons(), BorderLayout.CENTER);
+        f.add(p);
+        f.setVisible(true);
+    }
+
+    public JPanel setUpButtonPanel(){
+        JPanel bp = new JPanel();
+        bp.setLayout(new GridLayout(5, 5));
+        return bp;
+    }
+    public JPanel Buttons(){
+        JPanel buttonPanel = this.setUpButtonPanel();
 
         JButton b0 = new JButton("New Game");
         b0.setBackground(Color.black);
@@ -71,10 +53,46 @@ public class Menu extends JPanel implements ActionListener {
         b3.addActionListener(this);
         buttonPanel.add(b3);
 
-        p.add(buttonPanel, BorderLayout.CENTER);
-        f.add(p);
-        f.setVisible(true);
+        JButton b4 = new JButton("Exit");
+        b4.setBackground(Color.black);
+        b4.setForeground(Color.white);
+        buttonPanel.add(b4);
+
+        return buttonPanel;
+
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e){
+        Object obj = e.getSource();
+        if(!(obj instanceof JButton)){
+            return;
+        }
+        //typecast Object obj till en JButton
+        JButton b = (JButton)obj;
+        String str = b.getText();
+
+        switch(str){
+            case "New Game":
+                System.out.println("New Game");
+                break;
+            case "Load Game":
+                System.out.println("Load game");
+                break;
+            case "Options":
+                System.out.println("Options");
+                break;
+            case "Rules":
+                RulesTxt rt = new RulesTxt();
+                break;
+            case "Exit":
+                //funkar nt
+                System.exit(0);
+                break;
+
+        }
+    }
+
 
 
     //ska va i Controll ??
