@@ -9,6 +9,7 @@ public class othelloModel {
     private boolean isBlackTurn;
 
     public othelloModel() {
+        isBlackTurn = true;
         Random r = new Random();
         this.gameID = r.nextInt();
         for (int i = 0; i < n; i++) {
