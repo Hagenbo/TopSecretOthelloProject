@@ -1,4 +1,4 @@
-package Othello;
+package Othello.model;
 
 import java.util.Random;
 
