@@ -6,6 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Menu extends JPanel implements ActionListener {
+    private enum State{
+        NEWGAME, LOADGAME, OPTIONS, RULES;
+    }
     //ska den va i konstruktor?
     private static final Color color = new Color(0, 78, 56);
 
