@@ -1,20 +1,16 @@
-
 package Othello;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
-//något som får upp en meny. hur allt kopplas ihop idk än
 public class Menu extends JPanel implements ActionListener {
     //ska den va i konstruktor?
     private static final Color color = new Color(0, 78, 56);
 
     @Override
     public void actionPerformed(ActionEvent e){
-        //"hämtar det objekt som utlöst eventet" till obj
-        //om det inte är en knapp, return
         Object obj = e.getSource();
         if(!(obj instanceof JButton)){
             return;
@@ -81,7 +77,7 @@ public class Menu extends JPanel implements ActionListener {
     }
 
 
-    //i labb5 hade vi main i Controll-delen men
+    //ska va i Controll ??
     public static void main(String[] args) {
         Menu m = new Menu();
 
