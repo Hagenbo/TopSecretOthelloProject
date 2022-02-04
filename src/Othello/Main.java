@@ -3,10 +3,9 @@ package Othello;
 public class Main {
 
     public static void main(String[] args) {
-	//justALittleClass lilClass = new justALittleClass(1);
 
-        Otello otello = new Otello;
-        lilClass.printSomething();
+
+        Othello otello = new Othello();
         System.out.println("hej hej mvh Lovisa");
         System.out.println("hej hej mvh Ernst");
 

@@ -7,14 +7,26 @@ public class othelloModel {
     private static final int n = 10;
     private PieceColor[][] board = new PieceColor[n][n];
     private boolean isBlackTurn;
+    private boolean playerWithdrawn;
 
     public othelloModel() {
         isBlackTurn = true;
-        Random r = new Random();
-        this.gameID = r.nextInt();
+        playerWithdrawn = false;
+        Random r = new Random();        // this may not be used
+        this.gameID = r.nextInt();      // this may not be used
+
+        // Fills the grid according to main setup (hopefully)...
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                board[i][j] = PieceColor.EMPTY;
+                if ((i == n/2 && j == n/2) || (i == n/2 + 1 && j == n/2 + 1)) {
+                    board[i][j] = PieceColor.BLACK;
+                }
+                else if ((i == n/2 && j == n/2 + 1) || (i == n/2 + 1 && j == n/2) ) {
+                    board[i][j] = PieceColor.WHITE;
+                }
+                else {
+                    board[i][j] = PieceColor.EMPTY;
+                }
             }
         }
 
@@ -39,12 +51,18 @@ public class othelloModel {
         isBlackTurn = !isBlackTurn;
     }
 
+    public void withdraw() {
+        playerWithdrawn = true;
+    }
+
+    // checks if there are any empty spots on the board and if a player has withdrawn.
+    // counts the pieces of each color.
     public boolean gameOver() {
         int no_black = 0;
         int no_white = 0;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                if (board[i][j] == PieceColor.EMPTY) {
+                if (board[i][j] == PieceColor.EMPTY && !playerWithdrawn) {
                     return false;
                 }
                 if (board[i][j] == PieceColor.BLACK) {
