@@ -53,30 +53,31 @@ public class othelloModel {
 
     public void withdraw() {
         playerWithdrawn = true;
+        gameOver();
     }
 
     // checks if there are any empty spots on the board and if a player has withdrawn.
     // counts the pieces of each color.
     public boolean gameOver() {
-        int no_black = 0;
-        int no_white = 0;
+        int nr_black = 0;
+        int nr_white = 0;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (board[i][j] == PieceColor.EMPTY && !playerWithdrawn) {
                     return false;
                 }
                 if (board[i][j] == PieceColor.BLACK) {
-                    no_black++;
+                    nr_black++;
                 }
                 if (board[i][j] == PieceColor.WHITE) {
-                    no_white++;
+                    nr_white++;
                 }
             }
         }
-        if (no_black > no_white) {
+        if (nr_black > nr_white) {
             System.out.println("Winner is Black");   //replace with playerId
         }
-        if (no_white > no_black) {
+        if (nr_white > nr_black) {
             System.out.println("Winner is White");   //replace with playerId
         } else {
             System.out.println("It's a draw!");
