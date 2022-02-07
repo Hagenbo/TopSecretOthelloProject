@@ -129,6 +129,7 @@ import java.awt.event.ActionListener;
 
                 case "Back to menu":
                     setPan(menuPanel());
+                    System.out.println("back to menu");
                     break;
 
             }
