@@ -28,7 +28,7 @@ import java.awt.event.ActionListener;
         }
 
         //start panelen
-        public JPanel menuPanel(){
+        public JPanel menuPanel() {
             JPanel menuPanel = new JPanel();
             menuPanel.setBackground(color);
             menuPanel.add(this.Buttons(), BorderLayout.CENTER);
