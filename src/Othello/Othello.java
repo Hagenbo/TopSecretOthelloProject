@@ -1,5 +1,7 @@
 package Othello;
 
+import Othello.model.PieceColor;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -17,7 +19,7 @@ public class Othello extends JFrame implements ActionListener {
     JPanel title_panel = new JPanel();
     JPanel button_panel = new JPanel();
     JLabel textfield = new JLabel();
-    JButton[][] buttons = new JButton[8][8];
+    MyButton[][] buttons = new MyButton[8][8];
     boolean player1_turn; //Om true är det Player1 tur, vid false är det Player2 tur
 
     Othello() {
@@ -44,7 +46,7 @@ public class Othello extends JFrame implements ActionListener {
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                buttons[i][j] = new JButton();
+                buttons[i][j] = new MyButton();
                 button_panel.add(buttons[i][j]);
                 buttons[i][j].setFocusable(false);
                 buttons[i][j].addActionListener(this);
@@ -52,6 +54,15 @@ public class Othello extends JFrame implements ActionListener {
                 buttons[i][j].setOpaque(true);
             }
         }
+        buttons[3][3].setDisc(PieceColor.BLACK);
+        buttons[3][3].setText("SVART");
+        buttons[3][4].setDisc(PieceColor.WHITE);
+        buttons[3][4].setText("VIT");
+        buttons[4][3].setDisc(PieceColor.WHITE);
+        buttons[4][3].setText("VIT");
+        buttons[4][4].setDisc(PieceColor.BLACK);
+        buttons[4][4].setText("SVART");
+
 
         title_panel.add(textfield);
         frame.add(title_panel, BorderLayout.NORTH);
@@ -82,35 +93,34 @@ public class Othello extends JFrame implements ActionListener {
                 if (e.getSource() == buttons[i][j]) {
                     if (player1_turn) {
                         if (buttons[i][j].getText() == "") {
-                            buttons[i][j].setForeground(new Color(255, 255, 255));
-                            buttons[i][j].setText("O");
+                            //buttons[i][j].setForeground(new Color(255, 255, 255));
+                            buttons[i][j].setText("VIT");
                             player1_turn = false; //Efter knappen är tryckt blir turnen false och därmed blir det Player 2 tur
                             textfield.setText("Svarts tur");
                             //checkWinner();
                         }
-                    }
-                } else {
-                    if (buttons[i][j].getText() == "") {
-                        buttons[i][j].setForeground(new Color(0, 0, 0));
-                        buttons[i][j].setText("O");
-                        player1_turn = true;
-                        textfield.setText("Vits tur");
-                        //checkWinner();
+                    } else {
+                        if (buttons[i][j].getText() == "") {
+                            //buttons[i][j].setForeground(new Color(0, 0, 0));
+                            buttons[i][j].setText("SVART");
+                            player1_turn = true;
+                            textfield.setText("Vits tur");
+                            //checkWinner();
+                        }
+
                     }
 
                 }
 
+
+                //public void check(){}
+
+                //public void whiteWins(int a, int b, int c){
+
             }
 
-
-
-            //public void check(){}
-
-            //public void whiteWins(int a, int b, int c){
-
+            // public void blackWins(int a, int b, int c){}
         }
-
-        // public void blackWins(int a, int b, int c){}
     }
 
     // en main så man kan testa
