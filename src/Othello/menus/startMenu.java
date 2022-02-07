@@ -5,24 +5,23 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-    public class startMenu extends JFrame implements ActionListener {
-        private enum State{
-            NEWGAME, LOADGAME, OPTIONS, RULES;
-        }
+public class startMenu extends JFrame implements ActionListener {
 
         private static final Color color = new Color(0, 78, 56);
 
         public startMenu() {
-            //JFrame start = new JFrame("Start");
+
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setSize(500, 500);
             setLocation(300, 300);
-            setContentPane(menuPanel());
+            setPanel(menuPanel());
             setVisible(true);
         }
 
-        public void setPan(JPanel p){
+        public void setPanel(JPanel p){
             setContentPane(p);
             validate();
         }
@@ -35,12 +34,12 @@ import java.awt.event.ActionListener;
             return menuPanel;
         }
 
-
         public JPanel setUpButtonPanel(){
             JPanel bp = new JPanel();
             bp.setLayout(new GridLayout(5, 5));
             return bp;
         }
+
         public JPanel Buttons(){
             JPanel buttonPanel = this.setUpButtonPanel();
 
@@ -77,22 +76,95 @@ import java.awt.event.ActionListener;
 
         }
 
-
         //rules panelen
         public JPanel rulesPanel(){
-            JPanel rulesPanel = new JPanel();
-            rulesPanel.setBackground(color);
 
             JPanel bottomPanel = new JPanel(new BorderLayout());
             bottomPanel.setBackground(color);
             JLabel back = new JLabel ("Back to menu");
             back.setForeground(Color.white);
+            back.addMouseListener(backButton);
             bottomPanel.add(back, BorderLayout.LINE_END);
 
-            rulesPanel.add(bottomPanel, BorderLayout.PAGE_END);
+            JPanel topPanel = new JPanel();
+            topPanel.setBackground(color);
+            JTextArea rulesText = new JTextArea(getRules(), 10, 10 );
+            rulesText.setBackground(color);
+            rulesText.setForeground(Color.white);
+            topPanel.add(rulesText);
+
+            JPanel rulesPanel = new JPanel(new BorderLayout());
+            rulesPanel.setBackground(color);
+
+            rulesPanel.add(topPanel, BorderLayout.CENTER);
+            rulesPanel.add(bottomPanel, BorderLayout.SOUTH);
+
             return rulesPanel;
+        }
+
+        public String getRules(){
+            String str = "MAssa regler sjdfhdwsöuihwuiöewhiuöweywuiw23838bfebjs";
+            return str;
+        }
+
+
+       public JPanel optionsPanel(){
+            JPanel topPanel = new JPanel(new BorderLayout());
+            topPanel.setBackground(color);
+
+            JPanel buttonsPanel = new JPanel();
+            buttonsPanel.setBackground(color);
+            JButton toggleSound = new JButton("Toggle sound");
+            toggleSound.setBackground(Color.black);
+            toggleSound.setForeground(color.white);
+            toggleSound.addActionListener(this);
+
+            buttonsPanel.add(toggleSound);
+            topPanel.add(buttonsPanel, BorderLayout.NORTH);
+
+            JPanel bottomPanel = new JPanel(new BorderLayout());
+            bottomPanel.setBackground(color);
+
+            JLabel back = new JLabel ("Back to menu");
+            back.setForeground(Color.white);
+            back.addMouseListener(backButton);
+            bottomPanel.add(back, BorderLayout.LINE_END);
+
+            JPanel optionsPanel = new JPanel(new BorderLayout());
+            optionsPanel.setBackground(color);
+            optionsPanel.add(topPanel, BorderLayout.CENTER);
+            optionsPanel.add(bottomPanel, BorderLayout.SOUTH);
+
+            return optionsPanel;
+
 
         }
+
+
+
+
+
+        MouseListener backButton = new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                setPanel(menuPanel());
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+        };
+
+
 
         @Override
         public void actionPerformed(ActionEvent e){
@@ -114,16 +186,20 @@ import java.awt.event.ActionListener;
                     break;
 
                 case "Options":
-                    System.out.println("Options");
+                    setPanel(optionsPanel());
                     break;
 
                 case "Rules":
-                    setPan(rulesPanel());
+                    setPanel(rulesPanel());
                     break;
 
                 case "Exit":
                     //funkar nt
                     System.exit(0);
+                    break;
+
+                case "Toggle sound":
+                    System.out.println("Toggle sound");
                     break;
 
             }
