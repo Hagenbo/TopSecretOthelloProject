@@ -18,13 +18,8 @@ import java.awt.event.ActionListener;
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setSize(500, 500);
             setLocation(300, 300);
-            setpan(menuPanel());
+            setContentPane(menuPanel());
             setVisible(true);
-        }
-
-        public void setpan(JPanel p){
-            setContentPane(p);
-            validate();
         }
 
 
@@ -91,7 +86,6 @@ import java.awt.event.ActionListener;
             bottomPanel.add(back, BorderLayout.LINE_END);
 
             rulesPanel.add(bottomPanel, BorderLayout.PAGE_END);
-            rulesPanel.setVisible(true);
             return rulesPanel;
 
         }
@@ -99,7 +93,7 @@ import java.awt.event.ActionListener;
         @Override
         public void actionPerformed(ActionEvent e){
             Object obj = e.getSource();
-            if(!(obj instanceof JButton)){
+            if(!(obj instanceof JButton)) {
                 return;
             }
             //typecast Object obj till en JButton
@@ -120,7 +114,9 @@ import java.awt.event.ActionListener;
                     break;
 
                 case "Rules":
-                    setpan(rulesPanel());
+                    //JPanel r = rulesPanel();
+                    //getContentPane(rulesPanel());
+                    getContentPane().add(rulesPanel());
                     break;
 
                 case "Exit":
