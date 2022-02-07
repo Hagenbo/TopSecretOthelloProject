@@ -22,6 +22,10 @@ import java.awt.event.ActionListener;
             setVisible(true);
         }
 
+        public void setPan(JPanel p){
+            setContentPane(p);
+            validate();
+        }
 
         //start panelen
         public JPanel menuPanel(){
@@ -114,9 +118,7 @@ import java.awt.event.ActionListener;
                     break;
 
                 case "Rules":
-                    //JPanel r = rulesPanel();
-                    //getContentPane(rulesPanel());
-                    getContentPane().add(rulesPanel());
+                    setPan(rulesPanel());
                     break;
 
                 case "Exit":
