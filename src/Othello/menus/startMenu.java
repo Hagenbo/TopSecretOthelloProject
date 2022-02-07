@@ -70,6 +70,7 @@ public class startMenu extends JFrame implements ActionListener {
             JButton b4 = new JButton("Exit");
             b4.setBackground(Color.black);
             b4.setForeground(Color.white);
+            b4.addActionListener(this);
             buttonPanel.add(b4);
 
             return buttonPanel;
@@ -194,7 +195,6 @@ public class startMenu extends JFrame implements ActionListener {
                     break;
 
                 case "Exit":
-                    //funkar nt
                     System.exit(0);
                     break;
 
