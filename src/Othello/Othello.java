@@ -8,6 +8,10 @@ import java.util.*;
 
 public class Othello extends JFrame implements ActionListener {
 
+    //skulle behöva en boolean sound, så man kan stänga av/sätta på ljud
+    // also private static final Color color = new Color(0, 78, 56);
+
+
     Random random = new Random();
     JFrame frame = new JFrame();
     JPanel title_panel = new JPanel();
@@ -107,6 +111,12 @@ public class Othello extends JFrame implements ActionListener {
         }
 
         // public void blackWins(int a, int b, int c){}
+    }
+
+    // en main så man kan testa
+
+    public static void main (String [] args){
+        Othello o = new Othello();
     }
 }
 

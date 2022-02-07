@@ -1,20 +1,19 @@
 
-package Othello;
+package Othello.menus;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-    public class startMenu extends JFrame implements ActionListener {
-        private enum State{
-            NEWGAME, LOADGAME, OPTIONS, RULES;
-        }
+public class startMenu extends JFrame implements ActionListener {
+
 
         private static final Color color = new Color(0, 78, 56);
 
         public startMenu() {
-            //JFrame start = new JFrame("Start");
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setSize(500, 500);
             setLocation(300, 300);
@@ -22,7 +21,7 @@ import java.awt.event.ActionListener;
             setVisible(true);
         }
 
-        public void setPan(JPanel p){
+        public void setPanel(JPanel p){
             setContentPane(p);
             validate();
         }
@@ -80,19 +79,91 @@ import java.awt.event.ActionListener;
 
         //rules panelen
         public JPanel rulesPanel(){
-            JPanel rulesPanel = new JPanel();
-            rulesPanel.setBackground(color);
 
             JPanel bottomPanel = new JPanel(new BorderLayout());
             bottomPanel.setBackground(color);
+
+            JPanel textPanel = new JPanel();
+            textPanel.setBackground(color);
+
+            JTextArea text = new JTextArea(rulesString(), 10, 10);
+            text.setBackground(color);
+            text.setForeground(Color.white);
+            textPanel.add(text);
+
             JLabel back = new JLabel ("Back to menu");
+            back.setBackground(color);
             back.setForeground(Color.white);
+            back.addMouseListener(backListener);
             bottomPanel.add(back, BorderLayout.LINE_END);
 
-            rulesPanel.add(bottomPanel, BorderLayout.PAGE_END);
+            JPanel rulesPanel = new JPanel(new BorderLayout());
+            rulesPanel.setBackground(color);
+            rulesPanel.add(textPanel, BorderLayout.CENTER);
+            //page_end ska va SOUTH ist
+            rulesPanel.add(bottomPanel, BorderLayout.SOUTH);
             return rulesPanel;
 
         }
+
+        public String rulesString(){
+            String str= "massa regler dfjfhwdökhfweäsijhihföwsdhfäiwsdhfäoda";
+            return str;
+        }
+
+        //options panelen
+        public JPanel optionsPanel(){
+
+
+            JPanel buttonsPanel = new JPanel();
+            buttonsPanel.setBackground(color);
+
+            JButton sound = new JButton("Toggle sound");
+            sound.setBackground(Color.black);
+            sound.setForeground(Color.white);
+            sound.addActionListener(this);
+            buttonsPanel.add(sound);
+
+            JPanel bottomPanel = new JPanel(new BorderLayout());
+            bottomPanel.setBackground(color);
+
+            JLabel back = new JLabel ("Back to menu");
+            back.setBackground(color);
+            back.setForeground(Color.white);
+            back.addMouseListener(backListener);
+            bottomPanel.add(back, BorderLayout.LINE_END);
+
+            JPanel optionsPanel = new JPanel(new BorderLayout());
+            optionsPanel.setBackground(color);
+
+            optionsPanel.add(bottomPanel, BorderLayout.SOUTH);
+
+            optionsPanel.add(buttonsPanel, BorderLayout.CENTER);
+            return optionsPanel;
+
+        }
+
+        MouseListener backListener = new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                setPanel(menuPanel());
+            }
+
+            //måste dom va här.....?
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        };
 
         @Override
         public void actionPerformed(ActionEvent e){
@@ -114,11 +185,12 @@ import java.awt.event.ActionListener;
                     break;
 
                 case "Options":
-                    System.out.println("Options");
+
+                    setPanel(optionsPanel());
                     break;
 
                 case "Rules":
-                    setPan(rulesPanel());
+                    setPanel(rulesPanel());
                     break;
 
                 case "Exit":
@@ -126,12 +198,18 @@ import java.awt.event.ActionListener;
                     System.exit(0);
                     break;
 
+                case "Toggle sound":
+                    System.out.println("Toggle sound");
+                    break;
+
             }
         }
 
 
+
+
         //ska va i Controll ??
-        public static void main(String[] args) {
+        public static void main (String[] args) {
             startMenu m = new startMenu();
 
         }
