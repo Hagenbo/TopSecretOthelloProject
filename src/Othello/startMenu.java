@@ -71,6 +71,7 @@ import java.awt.event.ActionListener;
             JButton b4 = new JButton("Exit");
             b4.setBackground(Color.black);
             b4.setForeground(Color.white);
+            b4.addActionListener(this);
             buttonPanel.add(b4);
 
             return buttonPanel;
@@ -85,8 +86,9 @@ import java.awt.event.ActionListener;
 
             JPanel bottomPanel = new JPanel(new BorderLayout());
             bottomPanel.setBackground(color);
-            JLabel back = new JLabel ("Back to menu");
+            JButton back = new JButton ("Back to menu");
             back.setForeground(Color.white);
+            back.addActionListener(this);
             bottomPanel.add(back, BorderLayout.LINE_END);
 
             rulesPanel.add(bottomPanel, BorderLayout.PAGE_END);
@@ -122,8 +124,11 @@ import java.awt.event.ActionListener;
                     break;
 
                 case "Exit":
-                    //funkar nt
                     System.exit(0);
+                    break;
+
+                case "Back to menu":
+                    setPan(menuPanel());
                     break;
 
             }
