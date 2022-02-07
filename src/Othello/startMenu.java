@@ -18,8 +18,13 @@ import java.awt.event.ActionListener;
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setSize(500, 500);
             setLocation(300, 300);
-            setContentPane(menuPanel());
+            setpan(menuPanel());
             setVisible(true);
+        }
+
+        public void setpan(JPanel p){
+            setContentPane(p);
+            validate();
         }
 
 
@@ -86,6 +91,7 @@ import java.awt.event.ActionListener;
             bottomPanel.add(back, BorderLayout.LINE_END);
 
             rulesPanel.add(bottomPanel, BorderLayout.PAGE_END);
+            rulesPanel.setVisible(true);
             return rulesPanel;
 
         }
@@ -114,9 +120,7 @@ import java.awt.event.ActionListener;
                     break;
 
                 case "Rules":
-                    //JPanel r = rulesPanel();
-                    //getContentPane(rulesPanel());
-                    getContentPane().add(rulesPanel());
+                    setpan(rulesPanel());
                     break;
 
                 case "Exit":
