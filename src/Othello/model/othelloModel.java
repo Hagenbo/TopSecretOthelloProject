@@ -8,6 +8,7 @@ public class othelloModel {
     private PieceColor[][] board = new PieceColor[n][n];
     private boolean isBlackTurn;
     private boolean playerWithdrawn;
+    private boolean soundOn;
 
     //some additions: See comments in player-class
     private final Player player1;
@@ -18,6 +19,7 @@ public class othelloModel {
         playerWithdrawn = false;
         Random r = new Random();        // this may not be used
         this.gameID = r.nextInt();      // this may not be used
+        this.soundOn = true;
 
         //assign players and Colors. See comments in player-class
         this.player1 = new Player(p1);
@@ -51,6 +53,7 @@ public class othelloModel {
 
     public void placePieceAt( int i, int j) {           //anropas av controller
         if(gameOver()) { return;}
+        //lägg till ljud om det inte är EMPTY
         if( board[i][j] != PieceColor.EMPTY) { return;}
         PieceColor c;
         if (isBlackTurn) {

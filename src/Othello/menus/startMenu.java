@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class startMenu extends JFrame implements ActionListener {
+public class startMenu extends JFrame implements ActionListener, MouseListener {
 
         private static final Color color = new Color(0, 78, 56);
 
@@ -84,7 +84,7 @@ public class startMenu extends JFrame implements ActionListener {
             bottomPanel.setBackground(color);
             JLabel back = new JLabel ("Back to menu");
             back.setForeground(Color.white);
-            back.addMouseListener(backButton);
+            back.addMouseListener(this);
             bottomPanel.add(back, BorderLayout.LINE_END);
 
             JPanel topPanel = new JPanel();
@@ -109,43 +109,37 @@ public class startMenu extends JFrame implements ActionListener {
         }
 
 
-       public JPanel optionsPanel(){
-            JPanel topPanel = new JPanel(new BorderLayout());
-            topPanel.setBackground(color);
+       public JPanel optionsPanel() {
+           JPanel topPanel = new JPanel(new BorderLayout());
+           topPanel.setBackground(color);
 
-            JPanel buttonsPanel = new JPanel();
-            buttonsPanel.setBackground(color);
-            JButton toggleSound = new JButton("Toggle sound");
-            toggleSound.setBackground(Color.black);
-            toggleSound.setForeground(color.white);
-            toggleSound.addActionListener(this);
+           JPanel buttonsPanel = new JPanel();
+           buttonsPanel.setBackground(color);
+           JButton toggleSound = new JButton("Toggle sound");
+           toggleSound.setBackground(Color.black);
+           toggleSound.setForeground(color.white);
+           toggleSound.addActionListener(this);
 
-            buttonsPanel.add(toggleSound);
-            topPanel.add(buttonsPanel, BorderLayout.NORTH);
+           buttonsPanel.add(toggleSound);
+           topPanel.add(buttonsPanel, BorderLayout.NORTH);
 
-            JPanel bottomPanel = new JPanel(new BorderLayout());
-            bottomPanel.setBackground(color);
+           JPanel bottomPanel = new JPanel(new BorderLayout());
+           bottomPanel.setBackground(color);
 
-            JLabel back = new JLabel ("Back to menu");
-            back.setForeground(Color.white);
-            back.addMouseListener(backButton);
-            bottomPanel.add(back, BorderLayout.LINE_END);
+           JLabel back = new JLabel("Back to menu");
+           back.setForeground(Color.white);
+           back.addMouseListener(this);
+           bottomPanel.add(back, BorderLayout.LINE_END);
 
-            JPanel optionsPanel = new JPanel(new BorderLayout());
-            optionsPanel.setBackground(color);
-            optionsPanel.add(topPanel, BorderLayout.CENTER);
-            optionsPanel.add(bottomPanel, BorderLayout.SOUTH);
+           JPanel optionsPanel = new JPanel(new BorderLayout());
+           optionsPanel.setBackground(color);
+           optionsPanel.add(topPanel, BorderLayout.CENTER);
+           optionsPanel.add(bottomPanel, BorderLayout.SOUTH);
 
-            return optionsPanel;
-
-
-        }
+           return optionsPanel;
+       }
 
 
-
-
-
-        MouseListener backButton = new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 setPanel(menuPanel());
@@ -163,7 +157,7 @@ public class startMenu extends JFrame implements ActionListener {
             @Override
             public void mouseExited(MouseEvent e) {
             }
-        };
+
 
 
 
