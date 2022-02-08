@@ -47,6 +47,7 @@ public class othelloModel {
 
     public int getColumns() { return n;}
 
+    // maybe remove if not used?
     public PieceColor getPiece( int i, int j) {
         return board[i][j];
     }
@@ -73,6 +74,8 @@ public class othelloModel {
 
     // checks if there are any empty spots on the board and if a player has withdrawn.
     // counts the pieces of each color.
+    //TODO add some kind of check that makes sure that at least one of the players can make a move.
+    // If not the game should end.
     public boolean gameOver() {
         int nr_black = 0;
         int nr_white = 0;
@@ -99,4 +102,114 @@ public class othelloModel {
         }
         return true;
     }
+
+    // Methods for checking color of an immediate neighbour of a given piece. Returns PieceColor.
+    //TODO add checks for diagonal, but first make sure that these work as intended.
+    private PieceColor checkAbove(int i, int j) {
+            return board[i - 1][j];
+    }
+
+    private PieceColor checkBelow( int i, int j ) {
+        return board[i + 1][j];
+    }
+
+    private PieceColor checkRight( int i, int j ) {
+        return board[i][j - 1];
+    }
+
+    private PieceColor checkLeft( int i, int j ) {
+        return board[i][j + 1];
+    }
+
+    // Methods for checking if a "flippable move" is possible in every direction from a given piece.
+    // Ugh, except diagonal.
+    //TODO add checks for diagonal, but first make sure that these work as intended.
+    public boolean checkVerticalUp(int i, int j) {
+        PieceColor startColor;
+        if (board[i][j] == PieceColor.EMPTY && isBlackTurn) {
+            startColor = PieceColor.BLACK;
+        }
+        else if (board[i][j] == PieceColor.EMPTY && !isBlackTurn) {
+            startColor = PieceColor.WHITE;
+        }
+        else { startColor = board[i][j];}
+        while (checkAbove(i,j) != PieceColor.EMPTY && i > 0) {
+            if (checkAbove(i, j) == startColor) {
+                return true;
+            }
+            i--;
+        }
+        return false;
+    }
+
+    public boolean checkVerticalDown(int i, int j) {
+        PieceColor startColor;
+        if (board[i][j] == PieceColor.EMPTY && isBlackTurn) {
+            startColor = PieceColor.BLACK;
+        }
+        else if (board[i][j] == PieceColor.EMPTY && !isBlackTurn) {
+            startColor = PieceColor.WHITE;
+        }
+        else { startColor = board[i][j];}
+        while (checkBelow(i,j) != PieceColor.EMPTY && i < 9) {
+            if (checkBelow(i, j) == startColor) {
+                return true;
+            }
+            i++;
+        }
+        return false;
+    }
+
+    public boolean checkHorizontalRight(int i, int j) {
+        PieceColor startColor;
+        if (board[i][j] == PieceColor.EMPTY && isBlackTurn) {
+            startColor = PieceColor.BLACK;
+        }
+        else if (board[i][j] == PieceColor.EMPTY && !isBlackTurn) {
+            startColor = PieceColor.WHITE;
+        }
+        else { startColor = board[i][j];}
+        while (checkRight(i,j) != PieceColor.EMPTY && j > 0) {
+            if (checkRight(i, j) == startColor) {
+                return true;
+            }
+            j--;
+        }
+        return false;
+    }
+
+    public boolean checkHorizontalLeft(int i, int j) {
+        PieceColor startColor;
+        if (board[i][j] == PieceColor.EMPTY && isBlackTurn) {
+            startColor = PieceColor.BLACK;
+        }
+        else if (board[i][j] == PieceColor.EMPTY && !isBlackTurn) {
+            startColor = PieceColor.WHITE;
+        }
+        else { startColor = board[i][j];}
+        while (checkLeft(i,j) != PieceColor.EMPTY && j < 9) {
+            if (checkLeft(i, j) == startColor) {
+                return true;
+            }
+            j++;
+        }
+        return false;
+    }
+
+    // checks if a move is possible. Should be called each new turn.
+    // If this returns false, a prompt saying that no moves are possible should pop up and it will be the next players turn.
+    public boolean playPossible() {
+            for (int i = 0; i < 10; i++) {
+                for (int j = 0; j < 10; j++) {
+                    if(board[i][j] == PieceColor.EMPTY) {
+                        return (checkVerticalUp(i,j) ||
+                                checkVerticalDown(i,j) ||
+                                checkHorizontalRight(i,j) ||
+                                checkHorizontalLeft(i,j));
+                    }
+                }
+            }
+            return false;
+    }
 }
+
