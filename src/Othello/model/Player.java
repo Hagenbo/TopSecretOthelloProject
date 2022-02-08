@@ -7,6 +7,7 @@ public class Player {
     private final String userName;
     //private String password;
     private PieceColor color;
+    //ip?
 
     public Player(String uname) {
         this.userName = uname;
