@@ -125,14 +125,7 @@ public class othelloModel {
     // Ugh, except diagonal.
     //TODO add checks for diagonal, but first make sure that these work as intended.
     public boolean checkVerticalUp(int i, int j) {
-        PieceColor startColor;
-        if (board[i][j] == PieceColor.EMPTY && isBlackTurn) {
-            startColor = PieceColor.BLACK;
-        }
-        else if (board[i][j] == PieceColor.EMPTY && !isBlackTurn) {
-            startColor = PieceColor.WHITE;
-        }
-        else { startColor = board[i][j];}
+        PieceColor startColor = setStartColor(i, j);
         while (checkAbove(i,j) != PieceColor.EMPTY && i > 0) {
             if (checkAbove(i, j) == startColor) {
                 return true;
@@ -143,14 +136,7 @@ public class othelloModel {
     }
 
     public boolean checkVerticalDown(int i, int j) {
-        PieceColor startColor;
-        if (board[i][j] == PieceColor.EMPTY && isBlackTurn) {
-            startColor = PieceColor.BLACK;
-        }
-        else if (board[i][j] == PieceColor.EMPTY && !isBlackTurn) {
-            startColor = PieceColor.WHITE;
-        }
-        else { startColor = board[i][j];}
+        PieceColor startColor = setStartColor(i,j);
         while (checkBelow(i,j) != PieceColor.EMPTY && i < 9) {
             if (checkBelow(i, j) == startColor) {
                 return true;
@@ -161,14 +147,7 @@ public class othelloModel {
     }
 
     public boolean checkHorizontalRight(int i, int j) {
-        PieceColor startColor;
-        if (board[i][j] == PieceColor.EMPTY && isBlackTurn) {
-            startColor = PieceColor.BLACK;
-        }
-        else if (board[i][j] == PieceColor.EMPTY && !isBlackTurn) {
-            startColor = PieceColor.WHITE;
-        }
-        else { startColor = board[i][j];}
+        PieceColor startColor = setStartColor(i,j);
         while (checkRight(i,j) != PieceColor.EMPTY && j > 0) {
             if (checkRight(i, j) == startColor) {
                 return true;
@@ -179,14 +158,7 @@ public class othelloModel {
     }
 
     public boolean checkHorizontalLeft(int i, int j) {
-        PieceColor startColor;
-        if (board[i][j] == PieceColor.EMPTY && isBlackTurn) {
-            startColor = PieceColor.BLACK;
-        }
-        else if (board[i][j] == PieceColor.EMPTY && !isBlackTurn) {
-            startColor = PieceColor.WHITE;
-        }
-        else { startColor = board[i][j];}
+        PieceColor startColor = setStartColor(i,j);
         while (checkLeft(i,j) != PieceColor.EMPTY && j < 9) {
             if (checkLeft(i, j) == startColor) {
                 return true;
@@ -196,8 +168,22 @@ public class othelloModel {
         return false;
     }
 
+    // helper-method used in check"direction"-methods.
+    private PieceColor setStartColor(int i, int j) {
+        PieceColor startColor;
+        if (board[i][j] == PieceColor.EMPTY && isBlackTurn) {
+            startColor = PieceColor.BLACK;
+        } else if (board[i][j] == PieceColor.EMPTY && !isBlackTurn) {
+            startColor = PieceColor.WHITE;
+        } else {
+            startColor = board[i][j];
+        }
+        return startColor;
+    }
+
     // checks if a move is possible. Should be called each new turn.
-    // If this returns false, a prompt saying that no moves are possible should pop up and it will be the next players turn.
+    // If this returns false, a prompt saying that no moves are possible should pop up,
+    // and it will be the next players turn.
     public boolean playPossible() {
             for (int i = 0; i < 10; i++) {
                 for (int j = 0; j < 10; j++) {
