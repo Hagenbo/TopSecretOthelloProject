@@ -22,7 +22,6 @@ public class othelloView extends JPanel {
 
         gameFrame.setVisible(true);
 
-
     }
     //everything below this was just for testing, dont keep
     public othelloModel setBoard(){
