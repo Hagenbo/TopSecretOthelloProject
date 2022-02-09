@@ -1,5 +1,6 @@
 package Othello.model;
 
+import java.awt.*;
 import java.util.Random;
 
 public class othelloModel {
@@ -9,6 +10,8 @@ public class othelloModel {
     private boolean isBlackTurn;
     private boolean playerWithdrawn;
     private boolean soundOn;
+    private static final Color color = new Color(0, 78, 56);
+
 
     //some additions: See comments in player-class
     private final Player player1;
@@ -28,6 +31,7 @@ public class othelloModel {
         player2.assignColor(PieceColor.WHITE);
 
 
+        //Should this be in othelloView constructor? the setup that is
         // Fills the grid according to main setup (hopefully)...
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -40,6 +44,12 @@ public class othelloModel {
                 else {
                     board[i][j] = PieceColor.EMPTY;
                 }
+                // something like this, gamePanel.add(board[i][j]);
+                // but needs to be in othelloView in that case?
+
+                //TODO add actionlisteners, start with printing [i][j] for each "square"
+
+
             }
         }
 
