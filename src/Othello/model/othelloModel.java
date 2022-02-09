@@ -3,7 +3,6 @@ package Othello.model;
 import java.awt.*;
 import java.util.Random;
 
-
 public class othelloModel {
     private int gameID;
     private static final int n = 10;
@@ -45,7 +44,7 @@ public class othelloModel {
                 else {
                     board[i][j] = PieceColor.EMPTY;
                 }
-               // something like this, gamePanel.add(board[i][j]);
+                // something like this, gamePanel.add(board[i][j]);
                 // but needs to be in othelloView in that case?
 
                 //TODO add actionlisteners, start with printing [i][j] for each "square"
