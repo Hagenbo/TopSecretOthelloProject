@@ -10,6 +10,8 @@ public class othelloModel {
     private boolean isBlackTurn;
     private boolean playerWithdrawn;
     private boolean soundOn;
+
+    //Should not be in model
     private static final Color color = new Color(0, 78, 56);
 
 

@@ -1,0 +1,20 @@
+Protokoll 2022-02-04
+Projektgrupp 10/G055
+
+Hanterade frågeställningar:
+    1. Spelmeny
+    2. Arkitektur-frågor
+    3. Nästa steg.
+
+1. Spelmenyn visas upp i sitt nuvarande tillstånd. Nästa steg blir att implementera varje knapp för att göra det den ska.
+   För att komma runt att nya fönster öppnas föreslås att meny-fönstret utgörs av en content-pane vars innehåll
+   kan bytas ut beroende på vilken knapp man trycker på.
+
+2. Model, View och cotroller bör inte tolkas som egna klasser utan snarare som paket/familjer som kan innehålla flera olika klasser.
+
+3. Nästa steg i projektet blir följande:
+    - Börja implementera knapparna i menyn.
+    - Konkretisera planeringen så det blir tydligt vilka metoder som kommer behövas.
+    - Börja fundera över hur Model/controller ska interagera med varandra.
+
+
