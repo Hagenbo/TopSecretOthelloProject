@@ -5,14 +5,11 @@ import java.util.Random;
 
 public class othelloModel {
     private int gameID;
-    private static final int n = 10;
+    private static final int n = 8;
     private PieceColor[][] board = new PieceColor[n][n];
     private boolean isBlackTurn;
     private boolean playerWithdrawn;
     private boolean soundOn;
-
-    //Should not be in model
-    private static final Color color = new Color(0, 78, 56);
 
 
     //some additions: See comments in player-class
@@ -32,29 +29,19 @@ public class othelloModel {
         player1.assignColor(PieceColor.BLACK);
         player2.assignColor(PieceColor.WHITE);
 
-
-        //Should this be in othelloView constructor? the setup that is
-        // Fills the grid according to main setup (hopefully)...
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                if ((i == n/2 && j == n/2) || (i == n/2 + 1 && j == n/2 + 1)) {
+                if ((i == n/2 - 1 && j == n/2 - 1) || (i == n/2 && j == n/2)) {
                     board[i][j] = PieceColor.BLACK;
                 }
-                else if ((i == n/2 && j == n/2 + 1) || (i == n/2 + 1 && j == n/2) ) {
+                else if ((i == n/2 - 1 && j == n/2) || (i == n/2 && j == n/2 - 1) ) {
                     board[i][j] = PieceColor.WHITE;
                 }
                 else {
                     board[i][j] = PieceColor.EMPTY;
                 }
-                // something like this, gamePanel.add(board[i][j]);
-                // but needs to be in othelloView in that case?
-
-                //TODO add actionlisteners, start with printing [i][j] for each "square"
-
-
             }
         }
-
     }
 
     public int getColumns() { return n;}
@@ -149,7 +136,7 @@ public class othelloModel {
 
     public boolean checkVerticalDown(int i, int j) {
         PieceColor startColor = setStartColor(i,j);
-        while (checkBelow(i,j) != PieceColor.EMPTY && i < 9) {
+        while (checkBelow(i,j) != PieceColor.EMPTY && i < (n-1)) {
             if (checkBelow(i, j) == startColor) {
                 return true;
             }
@@ -171,7 +158,7 @@ public class othelloModel {
 
     public boolean checkHorizontalLeft(int i, int j) {
         PieceColor startColor = setStartColor(i,j);
-        while (checkLeft(i,j) != PieceColor.EMPTY && j < 9) {
+        while (checkLeft(i,j) != PieceColor.EMPTY && j < (n-1)) {
             if (checkLeft(i, j) == startColor) {
                 return true;
             }
@@ -209,5 +196,7 @@ public class othelloModel {
             }
             return false;
     }
+
+    //TODO implement a flip-method that changes the value in the PieceColor-array
 }
 
