@@ -18,7 +18,7 @@ public class othelloView extends JPanel {
 
     public othelloView() {
 
-        //TODO add manubar with items "save game" and  "withdraw"
+        //TODO add menubar with items "save game" and  "withdraw"
         // implement save game
 
         om = new othelloModel("player1", "player2");  //TODO use a userinput variable
@@ -47,19 +47,23 @@ public class othelloView extends JPanel {
                 mb.setBackground(this.color);
                 gamePanel.add(mb);
 
-                //TODO modify to work according to game-rules
                 mb.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         MyButton pressedButton = (MyButton)e.getSource();
+
                         om.placePieceAt(pressedButton.getRow(), pressedButton.getCol());
                         flipButtons();
 
-                        /* if (!playPossible()) {
-                        //TODO add prompt saying move for next player is not possible with "ok" button
-                        om.changeTurn();        // changes turn
-                        om.gameOver();          // last check if move is possible, if not the game will end
-                         */
+                        if (!om.playPossible()) {
+
+                        //TODO add prompt saying move for next player is not possible, include an "ok"-button
+
+                            om.changeTurn();           // changes turn
+                            if (!om.playPossible()) {  //if none of the players can make a move, the game ends.
+                                    om.gameOver();
+                            }
+                        }
                     }
                 });
             }
