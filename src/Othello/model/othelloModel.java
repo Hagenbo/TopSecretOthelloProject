@@ -43,12 +43,15 @@ public class othelloModel {
             }
         }
     }
-
+    // maybe remove if not used?
     public int getColumns() { return n;}
 
-    // maybe remove if not used?
     public PieceColor getPiece( int i, int j) {
         return board[i][j];
+    }
+
+    public void changeTurn() {
+        isBlackTurn = !isBlackTurn;
     }
 
     public void placePieceAt( int i, int j) {           //anropas av controller
@@ -63,7 +66,7 @@ public class othelloModel {
             c = PieceColor.WHITE;
         }
         board[i][j] = c;
-        isBlackTurn = !isBlackTurn;
+        changeTurn();
     }
 
     public void withdraw() {
@@ -73,14 +76,12 @@ public class othelloModel {
 
     // checks if there are any empty spots on the board and if a player has withdrawn.
     // counts the pieces of each color.
-    //TODO add some kind of check that makes sure that at least one of the players can make a move.
-    // If not the game should end.
     public boolean gameOver() {
         int nr_black = 0;
         int nr_white = 0;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                if (board[i][j] == PieceColor.EMPTY && !playerWithdrawn) {
+                if (board[i][j] == PieceColor.EMPTY && !playerWithdrawn && playPossible() ) {
                     return false;
                 }
                 if (board[i][j] == PieceColor.BLACK) {

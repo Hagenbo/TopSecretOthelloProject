@@ -24,7 +24,7 @@ public class othelloView extends JPanel {
         om = new othelloModel("player1", "player2");  //TODO use a userinput variable
         JFrame gameFrame = new JFrame("Othello ");
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gameFrame.setSize(500, 500);
+        gameFrame.setSize(750, 750);
         gameFrame.setLocation(800, 300);
 
         JPanel gamePanel = new JPanel();
@@ -54,6 +54,12 @@ public class othelloView extends JPanel {
                         MyButton pressedButton = (MyButton)e.getSource();
                         om.placePieceAt(pressedButton.getRow(), pressedButton.getCol());
                         flipButtons();
+
+                        /* if (!playPossible()) {
+                        //TODO add prompt saying move for next player is not possible with "ok" button
+                        om.changeTurn();        // changes turn
+                        om.gameOver();          // last check if move is possible, if not the game will end
+                         */
                     }
                 });
             }
