@@ -173,6 +173,7 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
 
             switch(str){
                 case "New Game":
+                    //TODO start a new game, have a new JPanel where players put in their names (and IP-adresses if thats how this works)?
                     System.out.println("New Game");
                     break;
 
