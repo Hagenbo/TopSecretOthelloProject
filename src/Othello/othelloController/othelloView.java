@@ -28,7 +28,7 @@ public class othelloView extends JPanel {
         gameFrame.setLocation(800, 300);
 
         JPanel gamePanel = new JPanel();
-        gamePanel.setBackground(Color.black);
+        gamePanel.setBackground(this.color);
         gamePanel.setLayout(new GridLayout(8, 8, 3, 3));
 
         //TODO put an ICON on a button instead of text
