@@ -10,6 +10,10 @@ import java.awt.event.ActionListener;
 
 public class othelloView extends JPanel {
 
+    private JFrame frame = new JFrame();
+    private static int boardWidht = 900;
+    private static int boardHeight = 900;
+
     private static final int n = 8;
     private MyButton[][] buttons = new MyButton[n][n];
     private othelloModel om;
@@ -22,14 +26,15 @@ public class othelloView extends JPanel {
         // implement save game
 
         om = new othelloModel("player1", "player2");  //TODO use a userinput variable
-        JFrame gameFrame = new JFrame("Othello ");
-        gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gameFrame.setSize(750, 750);
-        gameFrame.setLocation(800, 300);
+        this.frame= frame;
+        frame.setTitle("Othello");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(boardWidht, boardHeight);
+        frame.setLocation(800, 300);
+        createMenuBar(frame);
 
-        JPanel gamePanel = new JPanel();
-        gamePanel.setBackground(this.color);
-        gamePanel.setLayout(new GridLayout(8, 8, 3, 3));
+        setBackground(this.color);
+        setLayout(new GridLayout(8, 8, 3, 3));
 
         //TODO put an ICON on a button instead of text
         for (int i = 0; i < n; i++) {
@@ -45,7 +50,7 @@ public class othelloView extends JPanel {
                 }
                 buttons[i][j] = mb;
                 mb.setBackground(this.color);
-                gamePanel.add(mb);
+                add(mb);
 
                 mb.addActionListener(new ActionListener() {
                     @Override
@@ -67,10 +72,38 @@ public class othelloView extends JPanel {
                     }
                 });
             }
-            gameFrame.add(gamePanel);
-            gameFrame.setVisible(true);
+            frame.add(this);
+            frame.setVisible(true);
+            frame.pack();
         }
     }
+
+    private JMenuBar createMenuBar(JFrame f) {
+        JMenuBar menuBar = new JMenuBar();
+
+
+        JMenu quit = new JMenu("Quit");
+        menuBar.add(quit);
+
+        JMenu withdraw = new JMenu("Withdraw");
+        menuBar.add(withdraw);
+
+        JMenu saveGame = new JMenu("Save Game");
+        menuBar.add(saveGame);
+
+        //TODO add actionListeners, instance of?
+        // Or new classes for each "button" and load classes dynamically? F11
+
+        /*JMenuItem openItem = new JMenuItem("Open");
+        fileMenu.add(openItem);
+
+        JMenuItem quitItem = new JMenuItem("Quit");
+        fileMenu.add(quitItem);*/
+
+        f.setJMenuBar(menuBar);
+        return menuBar;
+    }
+
 
     private void flipButtons() {
         for (int i = 0; i < n; i++) {
