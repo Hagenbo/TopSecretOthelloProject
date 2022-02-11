@@ -49,7 +49,7 @@ public class othelloView extends JPanel {
                     mb = new MyButton(" ", i, j);
                 }
                 buttons[i][j] = mb;
-                mb.setBackground(this.color);
+                mb.setBackground(color);
                 add(mb);
 
                 mb.addActionListener(new ActionListener() {
