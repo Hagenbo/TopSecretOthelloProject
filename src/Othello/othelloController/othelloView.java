@@ -11,8 +11,8 @@ import java.awt.event.ActionListener;
 public class othelloView extends JPanel {
 
     private JFrame frame = new JFrame();
-    private static final int boardWidht = 900;
-    private static final int boardHeight = 900;
+    private static final int boardWidht = 750;
+    private static final int boardHeight = 750;
 
     private static final int n = 8;
     private MyButton[][] buttons = new MyButton[n][n];
@@ -26,7 +26,7 @@ public class othelloView extends JPanel {
         // implement save game
 
         om = new othelloModel("player1", "player2");  //TODO use a userinput variable
-        frame= frame;
+        frame = frame;
         frame.setTitle("Othello");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(boardWidht, boardHeight);
@@ -55,18 +55,18 @@ public class othelloView extends JPanel {
                 mb.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        MyButton pressedButton = (MyButton)e.getSource();
+                        MyButton pressedButton = (MyButton) e.getSource();
 
                         om.placePieceAt(pressedButton.getRow(), pressedButton.getCol());
                         flipButtons();
 
                         if (!om.playPossible()) {
 
-                        //TODO add prompt saying move for next player is not possible, include an "ok"-button
+                            //TODO add prompt saying move for next player is not possible, include an "ok"-button
 
                             om.changeTurn();           // changes turn
                             if (!om.playPossible()) {  //if none of the players can make a move, the game ends.
-                                    om.gameOver();
+                                om.gameOver();
                             }
                         }
                     }
@@ -74,6 +74,7 @@ public class othelloView extends JPanel {
             }
             frame.add(this);
             frame.setVisible(true);
+
         }
     }
 
