@@ -8,6 +8,8 @@ public class othelloModel {
     private static final int n = 8;
     private PieceColor[][] board = new PieceColor[n][n];
     private boolean isBlackTurn;
+
+    //put in view/controller?
     private boolean playerWithdrawn;
 
     //some additions: See comments in player-class
@@ -69,6 +71,7 @@ public class othelloModel {
         return true;
     }
 
+    //Put in view instead? The player who withdraws is always the loser?
     public void withdraw() {
         playerWithdrawn = true;
         gameOver();
