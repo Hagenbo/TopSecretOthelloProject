@@ -87,6 +87,8 @@ public class othelloModel {
                 }
             }
         }
+        //TODO add prompt with an "ok"-button saying who is the winner.
+        // when ok_button is pressed the game ends and returns to main menu. Should be in view somehow...
         if (nr_black > nr_white) {
             System.out.println("Winner is " + player1.getPlayerName());   // get player1 username, method in Player-class
         }
