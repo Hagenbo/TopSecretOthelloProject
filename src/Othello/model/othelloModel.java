@@ -11,7 +11,6 @@ public class othelloModel {
     private boolean playerWithdrawn;
     private boolean soundOn;
 
-
     //some additions: See comments in player-class
     private final Player player1;
     private final Player player2;

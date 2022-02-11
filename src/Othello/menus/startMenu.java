@@ -11,9 +11,9 @@ import java.awt.event.MouseListener;
 public class startMenu extends JFrame implements ActionListener, MouseListener {
 
         private static final Color color = new Color(0, 78, 56);
+        //private othelloModel om behövs detta? för soundOn osv
 
         public startMenu() {
-
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setSize(500, 500);
             setLocation(300, 300);
@@ -115,6 +115,7 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
 
            JPanel buttonsPanel = new JPanel();
            buttonsPanel.setBackground(color);
+           //should we remove toggle sound from options?
            JButton toggleSound = new JButton("Toggle sound");
            toggleSound.setBackground(Color.black);
            toggleSound.setForeground(color.white);
@@ -175,6 +176,7 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
                     break;
 
                 case "Load Game":
+                    //TODO load game somehow, but first the "conncection panel"
                     System.out.println("Load game");
                     break;
 
@@ -191,7 +193,7 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
                     break;
 
                 case "Toggle sound":
-                    System.out.println("Toggle sound");
+
                     break;
 
             }

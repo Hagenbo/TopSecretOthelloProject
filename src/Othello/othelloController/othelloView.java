@@ -78,7 +78,7 @@ public class othelloView extends JPanel {
         }
     }
 
-    private JMenuBar createMenuBar(JFrame f) {
+    private void createMenuBar(JFrame f) {
         JMenuBar menuBar = new JMenuBar();
 
         JMenu quit = new JMenu("Quit");
@@ -94,10 +94,10 @@ public class othelloView extends JPanel {
         menuBar.add(saveGame);
 
         //TODO add actionListeners, instance of?
-        // Or new classes for each "button" and load classes dynamically? F11
+        // dont use dynamic class
 
         f.setJMenuBar(menuBar);
-        return menuBar;
+
     }
 
 
