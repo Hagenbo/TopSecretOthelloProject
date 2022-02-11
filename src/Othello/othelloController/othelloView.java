@@ -27,14 +27,14 @@ public class othelloView extends JPanel {
         // implement save game
 
         om = new othelloModel("player1", "player2");  //TODO use a userinput variable
-        this.frame= frame;
+        frame = frame;
         frame.setTitle("Othello");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(boardWidth, boardHeight);
         frame.setLocation(800, 300);
         createMenuBar(frame);
 
-        setBackground(this.color);
+        setBackground(color);
         setLayout(new GridLayout(8, 8, 3, 3));
 
         //TODO put an ICON on a button instead of text
@@ -50,13 +50,13 @@ public class othelloView extends JPanel {
                     mb = new MyButton(" ", i, j);
                 }
                 buttons[i][j] = mb;
-                mb.setBackground(this.color);
+                mb.setBackground(color);
                 add(mb);
 
                 mb.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        MyButton pressedButton = (MyButton)e.getSource();
+                        MyButton pressedButton = (MyButton) e.getSource();
 
                         if (!om.placePieceAt(pressedButton.getRow(), pressedButton.getCol())) {
                             if(soundOn){
@@ -68,11 +68,11 @@ public class othelloView extends JPanel {
 
                         if (!om.playPossible()) {
 
-                        //TODO add prompt saying move for next player is not possible, include an "ok"-button
+                            //TODO add prompt saying move for next player is not possible, include an "ok"-button
 
                             om.changeTurn();           // changes turn
                             if (!om.playPossible()) {  //if none of the players can make a move, the game ends.
-                                    om.gameOver();
+                                om.gameOver();
                             }
                         }
                     }
@@ -80,13 +80,12 @@ public class othelloView extends JPanel {
             }
             frame.add(this);
             frame.setVisible(true);
-            //frame.pack();
+
         }
     }
 
-    private JMenuBar createMenuBar(JFrame f) {
+    private void createMenuBar(JFrame f) {
         JMenuBar menuBar = new JMenuBar();
-
 
         JMenu quit = new JMenu("Quit");
         menuBar.add(quit);
@@ -94,20 +93,17 @@ public class othelloView extends JPanel {
         JMenu withdraw = new JMenu("Withdraw");
         menuBar.add(withdraw);
 
+        JMenu toggleSound = new JMenu("Toggle sound");
+        menuBar.add(toggleSound);
+
         JMenu saveGame = new JMenu("Save Game");
         menuBar.add(saveGame);
 
         //TODO add actionListeners, instance of?
-        // Or new classes for each "button" and load classes dynamically? F11
-
-        /*JMenuItem openItem = new JMenuItem("Open");
-        fileMenu.add(openItem);
-
-        JMenuItem quitItem = new JMenuItem("Quit");
-        fileMenu.add(quitItem);*/
+        // dont use dynamic class
 
         f.setJMenuBar(menuBar);
-        return menuBar;
+
     }
 
 

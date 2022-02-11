@@ -10,7 +10,6 @@ public class othelloModel {
     private boolean isBlackTurn;
     private boolean playerWithdrawn;
 
-
     //some additions: See comments in player-class
     private final Player player1;
     private final Player player2;
