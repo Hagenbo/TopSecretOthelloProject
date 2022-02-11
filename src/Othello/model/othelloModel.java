@@ -56,7 +56,11 @@ public class othelloModel {
 
     public void placePieceAt( int i, int j) {           //anropas av controller
         //lägg till ljud om det inte är EMPTY
-        if(!movePossible(i,j) || board[i][j] != PieceColor.EMPTY) { return;}
+        if(!movePossible(i,j) || board[i][j] != PieceColor.EMPTY) {
+            if(soundOn){
+                Toolkit.getDefaultToolkit().beep();
+            }
+            return;}
         PieceColor c;
         if (isBlackTurn) {
             c = PieceColor.BLACK;
