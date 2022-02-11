@@ -11,8 +11,8 @@ import java.awt.event.ActionListener;
 public class othelloView extends JPanel {
 
     private JFrame frame = new JFrame();
-    private static final int boardWidht = 900;
-    private static final int boardHeight = 900;
+    private static final int boardWidht = 750;
+    private static final int boardHeight = 750;
 
     private static final int n = 8;
     private MyButton[][] buttons = new MyButton[n][n];
@@ -74,7 +74,7 @@ public class othelloView extends JPanel {
             }
             frame.add(this);
             frame.setVisible(true);
-            frame.pack();
+            //frame.pack();
         }
     }
 
