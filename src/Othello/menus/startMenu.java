@@ -139,7 +139,6 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
            return optionsPanel;
        }
 
-
             @Override
             public void mouseClicked(MouseEvent e) {
                 setPanel(menuPanel());
@@ -157,8 +156,6 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
             @Override
             public void mouseExited(MouseEvent e) {
             }
-
-
 
 
         @Override

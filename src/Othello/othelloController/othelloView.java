@@ -26,14 +26,14 @@ public class othelloView extends JPanel {
         // implement save game
 
         om = new othelloModel("player1", "player2");  //TODO use a userinput variable
-        this.frame= frame;
+        frame= frame;
         frame.setTitle("Othello");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(boardWidht, boardHeight);
         frame.setLocation(800, 300);
         createMenuBar(frame);
 
-        setBackground(this.color);
+        setBackground(color);
         setLayout(new GridLayout(8, 8, 3, 3));
 
         //TODO put an ICON on a button instead of text
@@ -74,13 +74,11 @@ public class othelloView extends JPanel {
             }
             frame.add(this);
             frame.setVisible(true);
-            frame.pack();
         }
     }
 
     private JMenuBar createMenuBar(JFrame f) {
         JMenuBar menuBar = new JMenuBar();
-
 
         JMenu quit = new JMenu("Quit");
         menuBar.add(quit);
@@ -88,17 +86,14 @@ public class othelloView extends JPanel {
         JMenu withdraw = new JMenu("Withdraw");
         menuBar.add(withdraw);
 
+        JMenu toggleSound = new JMenu("Toggle sound");
+        menuBar.add(toggleSound);
+
         JMenu saveGame = new JMenu("Save Game");
         menuBar.add(saveGame);
 
         //TODO add actionListeners, instance of?
         // Or new classes for each "button" and load classes dynamically? F11
-
-        /*JMenuItem openItem = new JMenuItem("Open");
-        fileMenu.add(openItem);
-
-        JMenuItem quitItem = new JMenuItem("Quit");
-        fileMenu.add(quitItem);*/
 
         f.setJMenuBar(menuBar);
         return menuBar;
