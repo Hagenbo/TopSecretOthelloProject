@@ -1,6 +1,7 @@
 package Othello;
 
 import Othello.model.PieceColor;
+import Othello.model.othelloModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +14,7 @@ public class Othello extends JFrame implements ActionListener {
     //skulle behöva en boolean sound, så man kan stänga av/sätta på ljud
     // also private static final Color color = new Color(0, 78, 56);
 
-
+    othelloModel model;
     Random random = new Random();
     JFrame frame = new JFrame();
     JPanel title_panel = new JPanel();
@@ -23,6 +24,8 @@ public class Othello extends JFrame implements ActionListener {
     boolean player1_turn; //Om true är det Player1 tur, vid false är det Player2 tur
 
     Othello() {
+
+        model = new othelloModel("p1","p2");
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(700, 700);
@@ -92,16 +95,18 @@ public class Othello extends JFrame implements ActionListener {
             for (int j = 0; j < 8; j++) {
                 if (e.getSource() == buttons[i][j]) {
                     if (player1_turn) {
-                        if (buttons[i][j].getText() == "") {
+                        if (buttons[i][j].getText().equals("")) {
                             //buttons[i][j].setForeground(new Color(255, 255, 255));
+                            model.placePieceAt(i,j);
                             buttons[i][j].setText("VIT");
                             player1_turn = false; //Efter knappen är tryckt blir turnen false och därmed blir det Player 2 tur
                             textfield.setText("Svarts tur");
                             //checkWinner();
                         }
                     } else {
-                        if (buttons[i][j].getText() == "") {
+                        if (buttons[i][j].getText().equals("")) {
                             //buttons[i][j].setForeground(new Color(0, 0, 0));
+                            model.placePieceAt(i,j);
                             buttons[i][j].setText("SVART");
                             player1_turn = true;
                             textfield.setText("Vits tur");
