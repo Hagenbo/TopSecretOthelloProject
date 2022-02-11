@@ -1,5 +1,5 @@
 
-package Othello;
+package Othello.menus;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,11 +7,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import Othello.othelloController.*;
 
 public class startMenu extends JFrame implements ActionListener, MouseListener {
 
         private static final Color color = new Color(0, 78, 56);
 
+        /*othelloView ov = new othelloView();
+        ov.om.gameOver();*/
         public startMenu() {
 
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

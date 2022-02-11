@@ -10,8 +10,9 @@ import java.awt.event.ActionListener;
 
 public class othelloView extends JPanel {
 
+    private boolean soundOn = true;
     private JFrame frame = new JFrame();
-    private static final int boardWidht = 750;
+    private static final int boardWidth = 750;
     private static final int boardHeight = 750;
 
     private static final int n = 8;
@@ -29,7 +30,7 @@ public class othelloView extends JPanel {
         this.frame= frame;
         frame.setTitle("Othello");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(boardWidht, boardHeight);
+        frame.setSize(boardWidth, boardHeight);
         frame.setLocation(800, 300);
         createMenuBar(frame);
 
@@ -57,7 +58,12 @@ public class othelloView extends JPanel {
                     public void actionPerformed(ActionEvent e) {
                         MyButton pressedButton = (MyButton)e.getSource();
 
-                        om.placePieceAt(pressedButton.getRow(), pressedButton.getCol());
+                        if (!om.placePieceAt(pressedButton.getRow(), pressedButton.getCol())) {
+                            if(soundOn){
+                                Toolkit.getDefaultToolkit().beep();
+                            }
+                            return;
+                        }
                         flipButtons();
 
                         if (!om.playPossible()) {
