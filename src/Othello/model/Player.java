@@ -1,8 +1,10 @@
 package Othello.model;
 
+import java.io.Serializable;
+
 // So far: a new player is created with each new game and their information is stored when a game is saved
 // do we want an account to be set up that can be reused for several games?
-public class Player {
+public class Player implements Serializable {
 
     private final String userName;
     //private String password;

@@ -23,12 +23,12 @@ public class othelloView extends JPanel {
 
     private static final Color color = new Color(0, 78, 56);
 
-    public othelloView() {
+    public othelloView(othelloModel model) {
 
         //TODO add menubar with items "save game" and  "withdraw"
         // implement save game
 
-        om = new othelloModel("player1", "player2");  //TODO use a userinput variable
+        om = model;//new othelloModel("player1", "player2");  //TODO use a userinput variable
         frame = frame;
         frame.setTitle("Othello");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -147,8 +147,16 @@ public class othelloView extends JPanel {
         }
     }
 
+    public void setModel(othelloModel model){
+        om = model;
+    }
+
+    public othelloModel getModel(){
+        return om;
+    }
+
         public static void main (String[]args){
-            othelloView ov = new othelloView();
+            othelloView ov = new othelloView(new othelloModel("player1", "player2"));
         }
 
 }

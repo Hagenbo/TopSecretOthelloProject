@@ -7,6 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.*;
+
+import Othello.model.othelloModel;
 import Othello.othelloController.*;
 
 public class startMenu extends JFrame implements ActionListener, MouseListener {
@@ -14,14 +17,15 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
         private static final Color color = new Color(0, 78, 56);
         //private othelloModel om behövs detta? för soundOn osv
 
-        /*othelloView ov = new othelloView();
-        ov.om.gameOver();*/
+        private othelloView game;
+        //ov.om.gameOver();
         public startMenu() {
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setSize(500, 500);
             setLocation(300, 300);
             setPanel(menuPanel());
             setVisible(true);
+            game = new othelloView(new othelloModel("player1","player2"));
         }
 
         public void setPanel(JPanel p){
@@ -176,11 +180,14 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
                 case "New Game":
                     //TODO start a new game, have a new JPanel where players put in their names (and IP-adresses if thats how this works)?
                     System.out.println("New Game");
+                    setPanel(game);
                     break;
 
                 case "Load Game":
                     //TODO load game somehow, but first the "conncection panel"
                     System.out.println("Load game");
+                    String filename = JOptionPane.showInputDialog("Give a file name:");
+                    game.setModel(load(filename));
                     break;
 
                 case "Options":
@@ -201,6 +208,22 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
 
             }
         }
+
+    private othelloModel load(String filename) {
+        try {
+            FileInputStream input = new FileInputStream(filename);
+            ObjectInputStream objectInputStream = new ObjectInputStream(input);
+            othelloModel stored = (othelloModel) (objectInputStream.readObject());
+            objectInputStream.close();
+            System.out.println("Loaded " + filename);
+            return stored;
+        } catch (Exception e) {
+            System.out.println("load failed because " + e);
+            //System.out.println("returned current game.");
+            //return othelloView.getModel();
+            return new othelloModel("player1","player2");
+        }
+    }
 
 
         //ska va i Controll ??
