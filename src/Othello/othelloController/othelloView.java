@@ -4,6 +4,8 @@ import Othello.model.*;
 import java.io.*;
 
 import javax.swing.*;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -98,13 +100,16 @@ public class othelloView extends JPanel {
 
         JMenu saveGame = new JMenu("Save Game");
         menuBar.add(saveGame);
-        saveGame.addActionListener(new ActionListener() {
+        saveGame.addMenuListener(new MenuListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("save test");
+            public void menuSelected(MenuEvent e) {
                 String filename = JOptionPane.showInputDialog("Give a file name:");
                 save(om,filename);
             }
+            @Override
+            public void menuDeselected(MenuEvent e) {}
+            @Override
+            public void menuCanceled(MenuEvent e) {}
         });
 
         //TODO add actionListeners, instance of?
