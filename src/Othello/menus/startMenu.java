@@ -184,13 +184,18 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
                     System.out.println("New Game");
                     setPanel(game);
                     createMenuBar(this);
+                    game.revalidate();
+                    game.flipButtons();
                     break;
 
                 case "Load Game":
                     //TODO load game somehow, but first the "conncection panel"
-                    System.out.println("Load game");
                     String filename = JOptionPane.showInputDialog("Give a file name:");
                     game.setModel(load(filename));
+                    setPanel(game);
+                    createMenuBar(this);
+                    game.revalidate();
+                    game.flipButtons();
                     break;
 
                 case "Options":
@@ -236,8 +241,8 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
         } catch (Exception e) {
             System.out.println("load failed because " + e);
             //System.out.println("returned current game.");
-            //return othelloView.getModel();
-            return new othelloModel("player1","player2");
+            //return othelloView.getModel(); //getModel static?
+            return new othelloModel("player1","player2"); //tillfällig lösning tills getModel funkar
         }
     }
 
@@ -275,7 +280,7 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
     }
 
 
-        //ska va i Controll ??
+
         public static void main(String[] args) {
             startMenu m = new startMenu();
 

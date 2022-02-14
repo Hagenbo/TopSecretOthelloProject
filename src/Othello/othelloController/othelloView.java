@@ -120,7 +120,7 @@ public class othelloView extends JPanel {
     }
 */
 
-    private void flipButtons() {
+    public void flipButtons() {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 PieceColor pc = om.getPiece(i,j);
@@ -154,11 +154,11 @@ public class othelloView extends JPanel {
     public othelloModel getModel(){
         return om;
     }
-
+/*
         public static void main (String[]args){
             othelloView ov = new othelloView(new othelloModel("player1", "player2"));
         }
-
+*/
 }
 
 
