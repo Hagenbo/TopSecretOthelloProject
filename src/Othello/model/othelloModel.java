@@ -1,9 +1,10 @@
 package Othello.model;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.Random;
 
-public class othelloModel {
+public class othelloModel implements Serializable {
     private int gameID;
     private static final int n = 8;
     private PieceColor[][] board = new PieceColor[n][n];

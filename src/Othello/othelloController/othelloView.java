@@ -1,7 +1,7 @@
 package Othello.othelloController;
 import Othello.MyButton;
 import Othello.model.*;
-
+import java.io.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -98,6 +98,14 @@ public class othelloView extends JPanel {
 
         JMenu saveGame = new JMenu("Save Game");
         menuBar.add(saveGame);
+        saveGame.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("save test");
+                String filename = JOptionPane.showInputDialog("Give a file name:");
+                save(om,filename);
+            }
+        });
 
         //TODO add actionListeners, instance of?
         // dont use dynamic class
@@ -118,6 +126,19 @@ public class othelloView extends JPanel {
                     buttons[i][j].setText("White");
                 }
             }
+        }
+    }
+
+    private void save(othelloModel model, String filename) {
+        try {
+            FileOutputStream output = new FileOutputStream(filename);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(output);
+            objectOutputStream.writeObject(model);
+            objectOutputStream.flush();
+            objectOutputStream.close();
+            System.out.println(filename + " stored.");
+        } catch (IOException e) {
+            System.out.println("save failed because " + e);
         }
     }
 
