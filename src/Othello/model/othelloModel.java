@@ -209,7 +209,66 @@ public class othelloModel implements Serializable {
         }
         return (possibleMoves > 0);
     }
+/*
+    public boolean flip(int i, int j){
+     boolean up=false;
+     boolean down=false;
+     boolean right=false;
+     boolean left=false;
 
+        if(playPossible()){
+            int countFlips = 0;
+            while(checkVerticalDown(i, j)){
+                countFlips++;
+                i++;
+                down = true;
+            }
+            while(checkVerticalUp(i, j)){
+                countFlips++;
+                i--;
+                up = true;
+            }
+            while(checkHorizontalLeft(i, j)){
+                countFlips++;
+                j++;
+                left = true;
+            }
+            while(checkHorizontalRight(i, j)){
+                countFlips++;
+                j--;
+                right = true;
+            }
+
+            System.out.println(countFlips);
+
+            if(countFlips == 0){
+                return false;
+            } else if(isBlackTurn){
+                while(countFlips > 0){
+                    if(down){i++;}
+                    if(up){i--;}
+                    if(left){j--;}
+                    if(right){j++;}
+                    this.board[i][j] = player1.getColor();
+                    System.out.println("Player1");
+                    countFlips--;
+                }
+            } else { //VEMS TUR ÄR DET??
+                while (countFlips > 0) {
+                    if(down){i++;}
+                    if(up){i--;}
+                    if(left){j--;}
+                    if(right){j++;}
+                    this.board[i][j] = player2.getColor();
+                    System.out.println("Player2");
+                    countFlips--;
+                }
+            }
+            //System.out.println(board[i][j]);
+            return true;
+        }
+        return false;
+    }*/
     //TODO implement a flip-method that changes the values in the PieceColor-array
 }
 

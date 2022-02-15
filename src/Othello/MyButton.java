@@ -9,29 +9,35 @@ public class MyButton extends JButton {
     private PieceColor disc;
     private int row;
     private int col;
+    private ImageIcon icon;
 
     public MyButton(){
         super();
         disc = PieceColor.EMPTY;
     }
 
-    public MyButton(String text, int i, int j/*, PieceColor disc*/){
-        super(text);
+    public MyButton(ImageIcon icon, int i, int j/*, PieceColor disc*/){
+        super();
         this.row = i;
         this.col = j;
+        this.icon = icon;
         //this.disc =disc;
     }
 
     public PieceColor getDisc() {
-        return disc;
+        return this.disc;
+    }
+
+    public ImageIcon getIcon(){
+        return this.icon;
     }
 
     public int getRow() {
-        return row;
+        return this.row;
     }
 
     public int getCol() {
-        return col;
+        return this.col;
     }
 
     public void setDisc(PieceColor disc) {

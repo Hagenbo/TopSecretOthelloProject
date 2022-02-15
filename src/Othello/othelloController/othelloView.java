@@ -19,7 +19,9 @@ public class othelloView extends JPanel {
     private othelloModel om;
 
     private static final Color color = new Color(0, 78, 56);
-
+    ImageIcon transparent = new ImageIcon(getClass().getResource("/transp.png"), "1");
+    ImageIcon blackPiece = new ImageIcon(getClass().getResource("/blackPiece.png"), "2");
+    ImageIcon whitePiece = new ImageIcon(getClass().getResource("/whitePiece.png"), "3");
     public othelloView(othelloModel model) {
 
 
@@ -34,11 +36,11 @@ public class othelloView extends JPanel {
                 PieceColor pc = om.getPiece(i, j);
                 MyButton mb;
                 if (pc == PieceColor.BLACK) {
-                    mb = new MyButton("Black", i, j);
+                    mb = new MyButton(blackPiece, i, j);
                 } else if (pc == PieceColor.WHITE) {
-                    mb = new MyButton("White", i, j);
+                    mb = new MyButton(whitePiece, i, j);
                 } else {
-                    mb = new MyButton(" ", i, j);
+                    mb = new MyButton(transparent, i, j);
                 }
                 buttons[i][j] = mb;
                 mb.setBackground(color);
@@ -79,10 +81,13 @@ public class othelloView extends JPanel {
             for (int j = 0; j < n; j++) {
                 PieceColor pc = om.getPiece(i,j);
                 if (pc == PieceColor.BLACK) {
-                    buttons[i][j].setText("Black");
+                    buttons[i][j].setIcon(blackPiece);
                 }
                 else if (pc == PieceColor.WHITE) {
-                    buttons[i][j].setText("White");
+                    buttons[i][j].setIcon(whitePiece);
+                }
+                else {
+                    buttons[i][j].setIcon(transparent);
                 }
             }
         }
