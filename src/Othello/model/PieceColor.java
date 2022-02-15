@@ -1,5 +1,7 @@
 package Othello.model;
 
-public enum PieceColor {
+import java.io.Serializable;
+
+public enum PieceColor implements Serializable {
     EMPTY, BLACK, WHITE;
 }

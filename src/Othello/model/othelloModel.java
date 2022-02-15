@@ -1,13 +1,16 @@
 package Othello.model;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.Random;
 
-public class othelloModel {
+public class othelloModel implements Serializable {
     private int gameID;
     private static final int n = 8;
     private PieceColor[][] board = new PieceColor[n][n];
     private boolean isBlackTurn;
+
+    //put in view/controller?
     private boolean playerWithdrawn;
 
     //some additions: See comments in player-class
@@ -69,6 +72,7 @@ public class othelloModel {
         return true;
     }
 
+    //Put in view instead? The player who withdraws is always the loser?
     public void withdraw() {
         playerWithdrawn = true;
         gameOver();
@@ -87,6 +91,8 @@ public class othelloModel {
                 }
             }
         }
+        //TODO add prompt with an "ok"-button saying who is the winner.
+        // when ok_button is pressed the game ends and returns to main menu. Should be in view somehow...
         if (nr_black > nr_white) {
             System.out.println("Winner is " + player1.getPlayerName());   // get player1 username, method in Player-class
         }

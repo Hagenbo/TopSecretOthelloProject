@@ -2,11 +2,16 @@
 package Othello.menus;
 
 import javax.swing.*;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.*;
+
+import Othello.model.othelloModel;
 import Othello.othelloController.*;
 
 public class startMenu extends JFrame implements ActionListener, MouseListener {
@@ -14,14 +19,15 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
         private static final Color color = new Color(0, 78, 56);
         //private othelloModel om behövs detta? för soundOn osv
 
-        /*othelloView ov = new othelloView();
-        ov.om.gameOver();*/
+        private othelloView game;
+        //ov.om.gameOver();
         public startMenu() {
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setSize(500, 500);
             setLocation(300, 300);
             setPanel(menuPanel());
             setVisible(true);
+            game = new othelloView(new othelloModel("player1","player2"));
         }
 
         public void setPanel(JPanel p){
@@ -176,11 +182,20 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
                 case "New Game":
                     //TODO start a new game, have a new JPanel where players put in their names (and IP-adresses if thats how this works)?
                     System.out.println("New Game");
+                    setPanel(game);
+                    createMenuBar(this);
+                    game.revalidate();
+                    game.flipButtons();
                     break;
 
                 case "Load Game":
                     //TODO load game somehow, but first the "conncection panel"
-                    System.out.println("Load game");
+                    String filename = JOptionPane.showInputDialog("Give a file name:");
+                    game.setModel(load(filename));
+                    setPanel(game);
+                    createMenuBar(this);
+                    game.revalidate();
+                    game.flipButtons();
                     break;
 
                 case "Options":
@@ -202,8 +217,70 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
             }
         }
 
+    private void save(othelloModel model, String filename) {
+        try {
+            FileOutputStream output = new FileOutputStream(filename);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(output);
+            objectOutputStream.writeObject(model);
+            objectOutputStream.flush();
+            objectOutputStream.close();
+            System.out.println(filename + " stored.");
+        } catch (IOException e) {
+            System.out.println("save failed because " + e);
+        }
+    }
 
-        //ska va i Controll ??
+    private othelloModel load(String filename) {
+        try {
+            FileInputStream input = new FileInputStream(filename);
+            ObjectInputStream objectInputStream = new ObjectInputStream(input);
+            othelloModel stored = (othelloModel) (objectInputStream.readObject());
+            objectInputStream.close();
+            System.out.println("Loaded " + filename);
+            return stored;
+        } catch (Exception e) {
+            System.out.println("load failed because " + e);
+            //System.out.println("returned current game.");
+            //return othelloView.getModel(); //getModel static?
+            return new othelloModel("player1","player2"); //tillfällig lösning tills getModel funkar
+        }
+    }
+
+    private void createMenuBar(JFrame f) {
+        JMenuBar menuBar = new JMenuBar();
+
+        JMenu quit = new JMenu("Quit");
+        menuBar.add(quit);
+
+        JMenu withdraw = new JMenu("Withdraw");
+        menuBar.add(withdraw);
+
+        JMenu toggleSound = new JMenu("Toggle sound");
+        menuBar.add(toggleSound);
+
+        JMenu saveGame = new JMenu("Save Game");
+        menuBar.add(saveGame);
+        saveGame.addMenuListener(new MenuListener() {
+            @Override
+            public void menuSelected(MenuEvent e) {
+                String filename = JOptionPane.showInputDialog("Give a file name:");
+                save(game.getModel(),filename);
+            }
+            @Override
+            public void menuDeselected(MenuEvent e) {}
+            @Override
+            public void menuCanceled(MenuEvent e) {}
+        });
+
+        //TODO add actionListeners, instance of?
+        // dont use dynamic class
+
+        f.setJMenuBar(menuBar);
+
+    }
+
+
+
         public static void main(String[] args) {
             startMenu m = new startMenu();
 

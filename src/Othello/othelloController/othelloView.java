@@ -1,9 +1,11 @@
 package Othello.othelloController;
 import Othello.MyButton;
 import Othello.model.*;
-
+import java.io.*;
 
 import javax.swing.*;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +13,7 @@ import java.awt.event.ActionListener;
 public class othelloView extends JPanel {
 
     private boolean soundOn = true;
-    private JFrame frame = new JFrame();
+    //private JFrame frame = new JFrame();
     private static final int boardWidth = 750;
     private static final int boardHeight = 750;
 
@@ -21,7 +23,7 @@ public class othelloView extends JPanel {
 
     private static final Color color = new Color(0, 78, 56);
 
-    public othelloView() {
+    public othelloView(othelloModel model) {
 
         //TODO add menubar with items "save game" and  "withdraw"
         // implement save game
@@ -32,6 +34,13 @@ public class othelloView extends JPanel {
         frame.setSize(boardWidth, boardHeight);
         frame.setLocation(800, 300);
         createMenuBar(frame);
+        om = model;//new othelloModel("player1", "player2");  //TODO use a userinput variable
+        //frame = frame;
+        //frame.setTitle("Othello");
+        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frame.setSize(boardWidth, boardHeight);
+        //frame.setLocation(800, 300);
+        //createMenuBar(frame);
 
         setBackground(color);
         setLayout(new GridLayout(8, 8, 3, 3));
@@ -77,12 +86,12 @@ public class othelloView extends JPanel {
                     }
                 });
             }
-            frame.add(this);
-            frame.setVisible(true);
+            //frame.add(this);
+            //frame.setVisible(true);
 
         }
     }
-
+/*
     private void createMenuBar(JFrame f) {
         JMenuBar menuBar = new JMenuBar();
 
@@ -97,6 +106,17 @@ public class othelloView extends JPanel {
 
         JMenu saveGame = new JMenu("Save Game");
         menuBar.add(saveGame);
+        saveGame.addMenuListener(new MenuListener() {
+            @Override
+            public void menuSelected(MenuEvent e) {
+                String filename = JOptionPane.showInputDialog("Give a file name:");
+                save(om,filename);
+            }
+            @Override
+            public void menuDeselected(MenuEvent e) {}
+            @Override
+            public void menuCanceled(MenuEvent e) {}
+        });
 
         //TODO add actionListeners, instance of?
         // dont use dynamic class
@@ -104,9 +124,9 @@ public class othelloView extends JPanel {
         f.setJMenuBar(menuBar);
 
     }
+*/
 
-
-    private void flipButtons() {
+    public void flipButtons() {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 PieceColor pc = om.getPiece(i,j);
@@ -119,16 +139,35 @@ public class othelloView extends JPanel {
             }
         }
     }
+/*
+    private void save(othelloModel model, String filename) {
+        try {
+            FileOutputStream output = new FileOutputStream(filename);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(output);
+            objectOutputStream.writeObject(model);
+            objectOutputStream.flush();
+            objectOutputStream.close();
+            System.out.println(filename + " stored.");
+        } catch (IOException e) {
+            System.out.println("save failed because " + e);
+        }
+    }
+*/
+    public void setModel(othelloModel model){
+        om = model;
+    }
 
     public void toggleSound(){
         soundOn = !soundOn;
     }
 
-        public static void main (String[]args){
-            othelloView ov = new othelloView();
+
+        public static void main (String[]args) {
+            othelloView ov = new othelloView(new othelloModel("player1", "player2"));
         }
 
 }
+
 
 
 
