@@ -12,12 +12,12 @@ import java.awt.event.MouseListener;
 import java.io.*;
 
 import Othello.model.othelloModel;
+import Othello.othelloView.othelloView;
 import Othello.othelloController.*;
 
 public class startMenu extends JFrame implements ActionListener, MouseListener {
-
         private static final Color color = new Color(0, 78, 56);
-        //private othelloModel om behövs detta? för soundOn osv
+        private othelloModel model;
 
         private othelloView game;
         //ov.om.gameOver();
@@ -181,7 +181,6 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
             switch(str){
                 case "New Game":
                     //TODO start a new game, have a new JPanel where players put in their names (and IP-adresses if thats how this works)?
-                    //game.setModel(new othelloModel("player1","player2"));
                     setPanel(game);
                     createMenuBar(this);
                     setSize(600, 600);
@@ -191,21 +190,22 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
 
                 case "Load Game":
                     //TODO load game somehow, but first the "conncection panel"
-                    String filename = JOptionPane.showInputDialog("Give a file name:");
+                    String filename = JOptionPane.showInputDialog("Enter a file name:");
                     game.setModel(load(filename));
                     setPanel(game);
                     createMenuBar(this);
                     setSize(600, 600);
                     game.revalidate();
                     game.flipButtons();
+
                     break;
 
                 case "Options":
-                    setPanel(optionsPanel());
+                    //setPanel(optionsPanel());
                     break;
 
                 case "Rules":
-                    setPanel(rulesPanel());
+                    //setPanel(rulesPanel());
                     break;
 
                 case "Exit":
@@ -243,7 +243,7 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
         } catch (Exception e) {
             System.out.println("load failed because " + e);
             //System.out.println("returned current game.");
-            //return othelloView.getModel(); //getModel static?
+            //return Othello.othelloView.getModel(); //getModel static?
             return new othelloModel("player1","player2"); //tillfällig lösning tills getModel funkar
         }
     }
@@ -289,8 +289,9 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
         //TODO add actionListeners, instance of?
         // dont use dynamic class
 
-        f.setJMenuBar(menuBar);
-    }
+       f.setJMenuBar(menuBar);
+
+ }
 
 
 
