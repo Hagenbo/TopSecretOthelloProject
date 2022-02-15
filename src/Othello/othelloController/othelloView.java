@@ -25,15 +25,7 @@ public class othelloView extends JPanel {
 
     public othelloView(othelloModel model) {
 
-        //TODO add menubar with items "save game" and  "withdraw"
-        // implement save game
 
-        om = new othelloModel("player1", "player2");  //TODO use a userinput variable
-        frame.setTitle("Othello");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(boardWidth, boardHeight);
-        frame.setLocation(800, 300);
-        createMenuBar(frame);
         om = model;//new othelloModel("player1", "player2");  //TODO use a userinput variable
         //frame = frame;
         //frame.setTitle("Othello");
@@ -155,6 +147,10 @@ public class othelloView extends JPanel {
 */
     public void setModel(othelloModel model){
         om = model;
+    }
+
+    public othelloModel getModel(){
+        return om;
     }
 
     public void toggleSound(){
