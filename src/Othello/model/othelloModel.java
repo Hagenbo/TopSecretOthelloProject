@@ -9,13 +9,12 @@ public class othelloModel implements Serializable {
     private static final int n = 8;
     private PieceColor[][] board = new PieceColor[n][n];
     private boolean isBlackTurn;
-
-    //put in view/controller?
     private boolean playerWithdrawn;
 
     //some additions: See comments in player-class
     private final Player player1;
     private final Player player2;
+
 
     public othelloModel(String p1, String p2) {
         isBlackTurn = true;
@@ -43,8 +42,6 @@ public class othelloModel implements Serializable {
             }
         }
     }
-    // maybe remove if not used?
-    public int getColumns() { return n;}
 
     public PieceColor getPiece( int i, int j) {
         return board[i][j];
@@ -55,8 +52,8 @@ public class othelloModel implements Serializable {
     }
 
 
-    //gör om till BOOL, ljud ska inte finnas i model.
-    public boolean placePieceAt( int i, int j) {           //anropas av controller
+
+    public boolean placePieceAt( int i, int j) {
         //lägg till ljud om det inte är EMPTY
         if(!movePossible(i,j) || board[i][j] != PieceColor.EMPTY) {
             return false;}

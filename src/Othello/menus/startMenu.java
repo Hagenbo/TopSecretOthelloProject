@@ -18,9 +18,8 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
 
         private static final Color color = new Color(0, 78, 56);
         //private othelloModel om behövs detta? för soundOn osv
-
         private othelloView game;
-        //ov.om.gameOver();
+
         public startMenu() {
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setSize(500, 500);
@@ -254,6 +253,7 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
         JMenu quit = new JMenu("Quit");
         menuBar.add(quit);
 
+        //TODO ask if player is certain they want to withdraw, update panel how?
         JMenu withdraw = new JMenu("Withdraw");
         menuBar.add(withdraw);
         withdraw.addMenuListener(new MenuListener() {
@@ -271,6 +271,7 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
 
         JMenu toggleSound = new JMenu("Toggle sound");
         menuBar.add(toggleSound);
+        //TODO add actionlistener for toggle sound
 
         JMenu saveGame = new JMenu("Save Game");
         menuBar.add(saveGame);
@@ -286,8 +287,6 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
             public void menuCanceled(MenuEvent e) {}
         });
 
-        //TODO add actionListeners, instance of?
-        // dont use dynamic class
 
         f.setJMenuBar(menuBar);
     }

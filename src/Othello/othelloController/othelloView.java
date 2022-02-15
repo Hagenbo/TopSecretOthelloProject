@@ -13,9 +13,6 @@ import java.awt.event.ActionListener;
 public class othelloView extends JPanel {
 
     private boolean soundOn = true;
-    //private JFrame frame = new JFrame();
-    private static final int boardWidth = 750;
-    private static final int boardHeight = 750;
 
     private static final int n = 8;
     private MyButton[][] buttons = new MyButton[n][n];
@@ -26,13 +23,7 @@ public class othelloView extends JPanel {
     public othelloView(othelloModel model) {
 
 
-        om = model;//new othelloModel("player1", "player2");  //TODO use a userinput variable
-        //frame = frame;
-        //frame.setTitle("Othello");
-        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //frame.setSize(boardWidth, boardHeight);
-        //frame.setLocation(800, 300);
-        //createMenuBar(frame);
+        om = model; //TODO use a userinput variable
 
         setBackground(color);
         setLayout(new GridLayout(8, 8, 3, 3));
@@ -78,45 +69,10 @@ public class othelloView extends JPanel {
                     }
                 });
             }
-            //frame.add(this);
-            //frame.setVisible(true);
+
 
         }
     }
-/*
-    private void createMenuBar(JFrame f) {
-        JMenuBar menuBar = new JMenuBar();
-
-        JMenu quit = new JMenu("Quit");
-        menuBar.add(quit);
-
-        JMenu withdraw = new JMenu("Withdraw");
-        menuBar.add(withdraw);
-
-        JMenu toggleSound = new JMenu("Toggle sound");
-        menuBar.add(toggleSound);
-
-        JMenu saveGame = new JMenu("Save Game");
-        menuBar.add(saveGame);
-        saveGame.addMenuListener(new MenuListener() {
-            @Override
-            public void menuSelected(MenuEvent e) {
-                String filename = JOptionPane.showInputDialog("Give a file name:");
-                save(om,filename);
-            }
-            @Override
-            public void menuDeselected(MenuEvent e) {}
-            @Override
-            public void menuCanceled(MenuEvent e) {}
-        });
-
-        //TODO add actionListeners, instance of?
-        // dont use dynamic class
-
-        f.setJMenuBar(menuBar);
-
-    }
-*/
 
     public void flipButtons() {
         for (int i = 0; i < n; i++) {
@@ -131,20 +87,7 @@ public class othelloView extends JPanel {
             }
         }
     }
-/*
-    private void save(othelloModel model, String filename) {
-        try {
-            FileOutputStream output = new FileOutputStream(filename);
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(output);
-            objectOutputStream.writeObject(model);
-            objectOutputStream.flush();
-            objectOutputStream.close();
-            System.out.println(filename + " stored.");
-        } catch (IOException e) {
-            System.out.println("save failed because " + e);
-        }
-    }
-*/
+
     public void setModel(othelloModel model){
         om = model;
     }
@@ -157,10 +100,6 @@ public class othelloView extends JPanel {
         soundOn = !soundOn;
     }
 
-
-        public static void main (String[]args) {
-            othelloView ov = new othelloView(new othelloModel("player1", "player2"));
-        }
 
 }
 
