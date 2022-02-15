@@ -24,7 +24,7 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
         public startMenu() {
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setSize(500, 500);
-            setLocation(300, 300);
+            setLocation(200, 200);
             setPanel(menuPanel());
             setVisible(true);
             game = new othelloView(new othelloModel("player1","player2"));
@@ -181,9 +181,10 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
             switch(str){
                 case "New Game":
                     //TODO start a new game, have a new JPanel where players put in their names (and IP-adresses if thats how this works)?
-                    System.out.println("New Game");
+                    game.setModel(new othelloModel("player1","player2"));
                     setPanel(game);
                     createMenuBar(this);
+                    setSize(600, 600);
                     game.revalidate();
                     game.flipButtons();
                     break;
@@ -194,6 +195,7 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
                     game.setModel(load(filename));
                     setPanel(game);
                     createMenuBar(this);
+                    setSize(600, 600);
                     game.revalidate();
                     game.flipButtons();
                     break;
@@ -258,6 +260,7 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
             @Override
             public void menuSelected(MenuEvent e) {
                 setJMenuBar(null);
+                setSize(500, 500);
                 setPanel(menuPanel());
             }
             @Override
@@ -287,7 +290,6 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
         // dont use dynamic class
 
         f.setJMenuBar(menuBar);
-
     }
 
 
