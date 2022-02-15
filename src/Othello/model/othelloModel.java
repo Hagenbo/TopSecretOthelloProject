@@ -49,8 +49,6 @@ public class othelloModel implements Serializable {
         isBlackTurn = !isBlackTurn;
     }
 
-
-
     public boolean placePieceAt( int i, int j) {
         if(!movePossible(i,j) || board[i][j] != PieceColor.EMPTY) {
             return false;}
@@ -94,22 +92,18 @@ public class othelloModel implements Serializable {
 
     // Methods for checking color of an immediate neighbour of a given piece. Returns PieceColor.
     //TODO add checks for diagonal, but first make sure that these work as intended.
-    private PieceColor checkAbove(int i, int j) {
-        return board[i - 1][j];
-    }
-    private PieceColor checkBelow( int i, int j ) {
-        return board[i + 1][j];
-    }
-    private PieceColor checkRight( int i, int j ) {
-        return board[i][j - 1];
-    }
-    private PieceColor checkLeft( int i, int j ) {
-        return board[i][j + 1];
-    }
+    private PieceColor checkAbove(int i, int j) { return board[i - 1][j];}
+    private PieceColor checkBelow( int i, int j ) { return board[i + 1][j];}
+    private PieceColor checkRight( int i, int j ) { return board[i][j - 1];}
+    private PieceColor checkLeft( int i, int j ) { return board[i][j + 1];}
+    //Diagonal checks
+    private PieceColor checkUpRight(int i, int j) { return board[i-1][j+1];}
+    private PieceColor checkDownRight(int i, int j) { return board[i+1][j+1];}
+    private PieceColor checkDownLeft(int i, int j) { return board[i+1][j-1];}
+    private PieceColor checkUpLeft(int i, int j) { return board[i-1][j-1];}
 
     // Methods for checking if a "flippable move" is possible in every direction from a given piece.
-    // Ugh, except diagonal.
-    //TODO add checks for diagonal, but first make sure that these work as intended.
+
     public boolean checkVerticalUp(int i, int j) {
         PieceColor startColor = setStartColor(i, j);
         if( i > 0 && checkAbove(i,j) == startColor) {
@@ -166,6 +160,66 @@ public class othelloModel implements Serializable {
         return false;
     }
 
+    public boolean checkDiagonalUR(int i, int j) {
+        PieceColor startColor = setStartColor(i, j);
+        if( (i > 0 && j < n-1) && checkUpRight(i,j) == startColor) {
+            return false;
+        }
+        while ((i > 0 && j < n-1) && checkUpRight(i,j) != PieceColor.EMPTY) {
+            if (checkUpRight(i, j) == startColor) {
+                return true;
+            }
+            i--;
+            j++;
+        }
+        return false;
+    }
+
+    public boolean checkDiagonalDR(int i, int j) {
+        PieceColor startColor = setStartColor(i, j);
+        if( (i < n-1 && j < n-1) && checkDownRight(i,j) == startColor) {
+            return false;
+        }
+        while ((i < n-1 && j < n-1) && checkDownRight(i,j) != PieceColor.EMPTY) {
+            if (checkDownRight(i, j) == startColor) {
+                return true;
+            }
+            i++;
+            j++;
+        }
+        return false;
+    }
+
+    public boolean checkDiagonalDL(int i, int j) {
+        PieceColor startColor = setStartColor(i, j);
+        if( (i < n-1 && j > 0) && checkDownLeft(i,j) == startColor) {
+            return false;
+        }
+        while ((i < n-1 && j > 0) && checkDownLeft(i,j) != PieceColor.EMPTY) {
+            if (checkDownLeft(i, j) == startColor) {
+                return true;
+            }
+            i++;
+            j--;
+        }
+        return false;
+    }
+
+    public boolean checkDiagonalUL(int i, int j) {
+        PieceColor startColor = setStartColor(i, j);
+        if( (i > 0 && j > 0) && checkUpLeft(i,j) == startColor) {
+            return false;
+        }
+        while ((i > 0 && j > 0) && checkUpLeft(i,j) != PieceColor.EMPTY) {
+            if (checkUpLeft(i, j) == startColor) {
+                return true;
+            }
+            i--;
+            j--;
+        }
+        return false;
+    }
+
     // helper-method used in check"direction"-methods.
     private PieceColor setStartColor(int i, int j) {
         PieceColor startColor;
@@ -186,7 +240,11 @@ public class othelloModel implements Serializable {
         return (checkVerticalUp(i,j) ||
                 checkVerticalDown(i,j) ||
                 checkHorizontalRight(i,j) ||
-                checkHorizontalLeft(i,j));
+                checkHorizontalLeft(i,j) ||
+                checkDiagonalUR(i,j) ||
+                checkDiagonalDR(i,j) ||
+                checkDiagonalDL(i,j) ||
+                checkDiagonalUL(i,j));
     }
 
     public boolean playPossible() {
