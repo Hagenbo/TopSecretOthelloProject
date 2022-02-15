@@ -19,7 +19,7 @@ public class othelloView extends JPanel {
     private othelloModel om;
 
     private static final Color color = new Color(0, 78, 56);
-    ImageIcon transparent = new ImageIcon(getClass().getResource("/transp.png"), "1");
+    ImageIcon transparent = new ImageIcon(getClass().getResource("/transparent.png"), "1");
     ImageIcon blackPiece = new ImageIcon(getClass().getResource("/blackPiece.png"), "2");
     ImageIcon whitePiece = new ImageIcon(getClass().getResource("/whitePiece.png"), "3");
     public othelloView(othelloModel model) {
@@ -45,6 +45,8 @@ public class othelloView extends JPanel {
                 buttons[i][j] = mb;
                 mb.setBackground(color);
                 add(mb);
+
+
 
                 mb.addActionListener(new ActionListener() {
                     @Override
