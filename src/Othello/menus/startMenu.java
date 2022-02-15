@@ -14,7 +14,7 @@ import java.io.*;
 import Othello.model.othelloModel;
 import Othello.othelloController.*;
 
-public class startMenu extends JFrame implements ActionListener, MouseListener {
+public class startMenu extends JFrame implements ActionListener, MouseListener, MenuListener {
 
         private static final Color color = new Color(0, 78, 56);
         //private othelloModel om behövs detta? för soundOn osv
@@ -34,7 +34,6 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
             validate();
         }
 
-        //start panelen
         public JPanel menuPanel() {
             JPanel menuPanel = new JPanel();
             menuPanel.setBackground(color);
@@ -85,7 +84,7 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
 
         }
 
-        //rules panelen
+
         public JPanel rulesPanel(){
 
             JPanel bottomPanel = new JPanel(new BorderLayout());
@@ -170,11 +169,10 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
         @Override
         public void actionPerformed(ActionEvent e){
             Object obj = e.getSource();
-            if(!(obj instanceof JButton)) {
+            if(!(obj instanceof JButton b)) {
                 return;
             }
-            //typecast Object obj till en JButton
-            JButton b = (JButton)obj;
+
             String str = b.getText();
 
             switch(str){
@@ -251,54 +249,70 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
         JMenuBar menuBar = new JMenuBar();
 
         JMenu quit = new JMenu("Quit");
+        quit.addMenuListener(this);
         menuBar.add(quit);
 
         //TODO ask if player is certain they want to withdraw, update panel how?
         JMenu withdraw = new JMenu("Withdraw");
+        withdraw.addMenuListener(this);
         menuBar.add(withdraw);
-        withdraw.addMenuListener(new MenuListener() {
-            @Override
-            public void menuSelected(MenuEvent e) {
-                setJMenuBar(null);
-                setSize(500, 500);
-                setPanel(menuPanel());
-            }
-            @Override
-            public void menuDeselected(MenuEvent e) {}
-            @Override
-            public void menuCanceled(MenuEvent e) {}
-        });
 
         JMenu toggleSound = new JMenu("Toggle sound");
+        toggleSound.addMenuListener(this);
         menuBar.add(toggleSound);
-        //TODO add actionlistener for toggle sound
 
         JMenu saveGame = new JMenu("Save Game");
         menuBar.add(saveGame);
-        saveGame.addMenuListener(new MenuListener() {
-            @Override
-            public void menuSelected(MenuEvent e) {
-                String filename = JOptionPane.showInputDialog("Give a file name:");
-                save(game.getModel(),filename);
-            }
-            @Override
-            public void menuDeselected(MenuEvent e) {}
-            @Override
-            public void menuCanceled(MenuEvent e) {}
-        });
-
+        saveGame.addMenuListener(this);
 
         f.setJMenuBar(menuBar);
+    };
+
+
+    @Override
+    public void menuSelected(MenuEvent e) {
+        Object obj = e.getSource();
+        if (!(obj instanceof JMenu j)) {
+            return;
+        }
+        String str = j.getText();
+
+        switch (str) {
+            case "Withdraw":
+                setJMenuBar(null);
+                setSize(500, 500);
+                setPanel(menuPanel());
+                break;
+
+            case "Save Game":
+                String filename = JOptionPane.showInputDialog("Enter a file name:");
+                save(game.getModel(), filename);
+                break;
+
+            case "Quit":
+                //do something
+                break;
+
+            case "Toggle sound":
+                game.toggleSound();
+                break;
+        }
     }
+
+        @Override
+        public void menuDeselected(MenuEvent e) {
+        }
+        @Override
+        public void menuCanceled(MenuEvent e) {
+        }
 
 
 
         public static void main(String[] args) {
-            startMenu m = new startMenu();
-
+            startMenu start = new startMenu();
         }
 
-    }
+}
 
 
 
