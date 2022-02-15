@@ -184,7 +184,7 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
                     //game.setModel(new othelloModel("player1","player2"));
                     setPanel(game);
                     createMenuBar(this);
-                    setSize(600, 600);
+                    setSize(600, 600); //om man vill att spelbrädet blir större än menyn
                     game.revalidate();
                     game.flipButtons();
                     break;
