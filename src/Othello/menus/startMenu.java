@@ -254,6 +254,17 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
 
         JMenu withdraw = new JMenu("Withdraw");
         menuBar.add(withdraw);
+        withdraw.addMenuListener(new MenuListener() {
+            @Override
+            public void menuSelected(MenuEvent e) {
+                setJMenuBar(null);
+                setPanel(menuPanel());
+            }
+            @Override
+            public void menuDeselected(MenuEvent e) {}
+            @Override
+            public void menuCanceled(MenuEvent e) {}
+        });
 
         JMenu toggleSound = new JMenu("Toggle sound");
         menuBar.add(toggleSound);
