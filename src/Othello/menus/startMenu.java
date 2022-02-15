@@ -181,7 +181,7 @@ public class startMenu extends JFrame implements ActionListener, MouseListener {
             switch(str){
                 case "New Game":
                     //TODO start a new game, have a new JPanel where players put in their names (and IP-adresses if thats how this works)?
-                    game.setModel(new othelloModel("player1","player2"));
+                    //game.setModel(new othelloModel("player1","player2"));
                     setPanel(game);
                     createMenuBar(this);
                     setSize(600, 600);
