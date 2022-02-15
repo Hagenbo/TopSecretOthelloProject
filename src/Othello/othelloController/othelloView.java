@@ -48,27 +48,26 @@ public class othelloView extends JPanel {
 
 
 
-                mb.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        MyButton pressedButton = (MyButton) e.getSource();
+                mb.addActionListener(e -> {
+                    MyButton pressedButton = (MyButton) e.getSource();
+                    int x = pressedButton.getCol();
+                    int y = pressedButton.getRow();
 
-                        if (!om.placePieceAt(pressedButton.getRow(), pressedButton.getCol())) {
-                            if(soundOn){
-                                Toolkit.getDefaultToolkit().beep();
-                            }
-                            return;
+                    if (!om.placePieceAt(y, x)) {
+                        if(soundOn){
+                            Toolkit.getDefaultToolkit().beep();
                         }
-                        flipButtons();
+                        return;
+                    }
+                    flipButtons();
 
-                        if (!om.playPossible()) {
+                    if (!om.playPossible()) {
 
-                            //TODO add prompt saying move for next player is not possible, include an "ok"-button
+                        //TODO add prompt saying move for next player is not possible, include an "ok"-button
 
-                            om.changeTurn();           // changes turn
-                            if (!om.playPossible()) {  //if none of the players can make a move, the game ends.
-                                om.gameOver();
-                            }
+                        om.changeTurn();           // changes turn
+                        if (!om.playPossible()) {  //if none of the players can make a move, the game ends.
+                            om.gameOver();
                         }
                     }
                 });

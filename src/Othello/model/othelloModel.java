@@ -9,6 +9,7 @@ public class othelloModel implements Serializable {
     private static final int n = 8;
     private PieceColor[][] board = new PieceColor[n][n];
     private boolean isBlackTurn;
+    private PieceColor startColor;
 
     //some additions: See comments in player-class
     private final Player player1;
@@ -50,16 +51,11 @@ public class othelloModel implements Serializable {
     }
 
     public boolean placePieceAt( int i, int j) {
+        startColor = setStartColor();
         if(!movePossible(i,j) || board[i][j] != PieceColor.EMPTY) {
             return false;}
-        PieceColor c;
-        if (isBlackTurn) {
-            c = PieceColor.BLACK;
-        }
-        else {
-            c = PieceColor.WHITE;
-        }
-        board[i][j] = c;
+        board[i][j] = startColor;
+        flip(i,j);
         changeTurn();
         return true;
     }
@@ -90,12 +86,43 @@ public class othelloModel implements Serializable {
         }
     }
 
+    public boolean playPossible() {
+        int possibleMoves = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (board[i][j] == PieceColor.EMPTY && movePossible(i, j)) {
+                    possibleMoves++;
+                }
+            }
+        }
+        return (possibleMoves > 0);
+    }
+
+    // checks if a move is possible. Should be called each new turn.
+    // If this returns false, a prompt saying that no moves are possible should pop up,
+    // and it will be the next players turn.
+    private boolean movePossible(int i, int j) {
+        return (checkVerticalUp(i,j) || checkVerticalDown(i,j) ||
+                checkHorizontalRight(i,j) || checkHorizontalLeft(i,j) ||
+                checkDiagonalUR(i,j) || checkDiagonalDR(i,j) ||
+                checkDiagonalDL(i,j) || checkDiagonalUL(i,j));
+    }
+
+    // helper-method used in check"direction"-methods.
+    private PieceColor setStartColor() {
+        if (isBlackTurn) {
+            return PieceColor.BLACK;
+        } else {
+            return PieceColor.WHITE;
+        }
+    }
+
     // Methods for checking color of an immediate neighbour of a given piece. Returns PieceColor.
     //TODO add checks for diagonal, but first make sure that these work as intended.
     private PieceColor checkAbove(int i, int j) { return board[i - 1][j];}
     private PieceColor checkBelow( int i, int j ) { return board[i + 1][j];}
-    private PieceColor checkRight( int i, int j ) { return board[i][j - 1];}
-    private PieceColor checkLeft( int i, int j ) { return board[i][j + 1];}
+    private PieceColor checkRight( int i, int j ) { return board[i][j + 1];}
+    private PieceColor checkLeft( int i, int j ) { return board[i][j - 1];}
     //Diagonal checks
     private PieceColor checkUpRight(int i, int j) { return board[i-1][j+1];}
     private PieceColor checkDownRight(int i, int j) { return board[i+1][j+1];}
@@ -104,8 +131,7 @@ public class othelloModel implements Serializable {
 
     // Methods for checking if a "flippable move" is possible in every direction from a given piece.
 
-    public boolean checkVerticalUp(int i, int j) {
-        PieceColor startColor = setStartColor(i, j);
+    private boolean checkVerticalUp(int i, int j) {
         if( i > 0 && checkAbove(i,j) == startColor) {
             return false;
         }
@@ -117,9 +143,7 @@ public class othelloModel implements Serializable {
         }
         return false;
     }
-
-    public boolean checkVerticalDown(int i, int j) {
-        PieceColor startColor = setStartColor(i,j);
+    private boolean checkVerticalDown(int i, int j) {
         if( i < (n-1) && checkBelow(i,j) == startColor) {
             return false;
         }
@@ -131,41 +155,35 @@ public class othelloModel implements Serializable {
         }
         return false;
     }
-
-    public boolean checkHorizontalRight(int i, int j) {
-        PieceColor startColor = setStartColor(i,j);
-        if( j > 0 && checkRight(i,j) == startColor) {
+    private boolean checkHorizontalRight(int i, int j) {
+        if( j < (n-1)  && checkRight(i,j) == startColor) {
             return false;
         }
-        while (j > 0 && checkRight(i,j) != PieceColor.EMPTY) {
+        while (j < (n-1) && checkRight(i,j) != PieceColor.EMPTY) {
             if (checkRight(i, j) == startColor) {
-                return true;
-            }
-            j--;
-        }
-        return false;
-    }
-
-    public boolean checkHorizontalLeft(int i, int j) {
-        PieceColor startColor = setStartColor(i,j);
-        if( j < (n-1) && checkLeft(i,j) == startColor) {
-            return false;
-        }
-        while (j < (n-1) && checkLeft(i,j) != PieceColor.EMPTY) {
-            if (checkLeft(i, j) == startColor) {
                 return true;
             }
             j++;
         }
         return false;
     }
-
-    public boolean checkDiagonalUR(int i, int j) {
-        PieceColor startColor = setStartColor(i, j);
-        if( (i > 0 && j < n-1) && checkUpRight(i,j) == startColor) {
+    private boolean checkHorizontalLeft(int i, int j) {
+        if( j < 0 && checkLeft(i,j) == startColor) {
             return false;
         }
-        while ((i > 0 && j < n-1) && checkUpRight(i,j) != PieceColor.EMPTY) {
+        while (j > 0 && checkLeft(i,j) != PieceColor.EMPTY) {
+            if (checkLeft(i, j) == startColor) {
+                return true;
+            }
+            j--;
+        }
+        return false;
+    }
+    private boolean checkDiagonalUR(int i, int j) {
+        if( (i > 0 && j < (n-1)) && checkUpRight(i,j) == startColor) {
+            return false;
+        }
+        while ((i > 0 && j < (n-1)) && checkUpRight(i,j) != PieceColor.EMPTY) {
             if (checkUpRight(i, j) == startColor) {
                 return true;
             }
@@ -174,9 +192,7 @@ public class othelloModel implements Serializable {
         }
         return false;
     }
-
-    public boolean checkDiagonalDR(int i, int j) {
-        PieceColor startColor = setStartColor(i, j);
+    private boolean checkDiagonalDR(int i, int j) {
         if( (i < n-1 && j < n-1) && checkDownRight(i,j) == startColor) {
             return false;
         }
@@ -189,13 +205,11 @@ public class othelloModel implements Serializable {
         }
         return false;
     }
-
-    public boolean checkDiagonalDL(int i, int j) {
-        PieceColor startColor = setStartColor(i, j);
-        if( (i < n-1 && j > 0) && checkDownLeft(i,j) == startColor) {
+    private boolean checkDiagonalDL(int i, int j) {
+        if( i < n-1 && j > 0 && checkDownLeft(i,j) == startColor) {
             return false;
         }
-        while ((i < n-1 && j > 0) && checkDownLeft(i,j) != PieceColor.EMPTY) {
+        while (i < n-1 && j > 0 && checkDownLeft(i,j) != PieceColor.EMPTY) {
             if (checkDownLeft(i, j) == startColor) {
                 return true;
             }
@@ -204,9 +218,7 @@ public class othelloModel implements Serializable {
         }
         return false;
     }
-
-    public boolean checkDiagonalUL(int i, int j) {
-        PieceColor startColor = setStartColor(i, j);
+    private boolean checkDiagonalUL(int i, int j) {
         if( (i > 0 && j > 0) && checkUpLeft(i,j) == startColor) {
             return false;
         }
@@ -220,43 +232,74 @@ public class othelloModel implements Serializable {
         return false;
     }
 
-    // helper-method used in check"direction"-methods.
-    private PieceColor setStartColor(int i, int j) {
-        PieceColor startColor;
-        if (board[i][j] == PieceColor.EMPTY && isBlackTurn) {
-            startColor = PieceColor.BLACK;
-        } else if (board[i][j] == PieceColor.EMPTY && !isBlackTurn) {
-            startColor = PieceColor.WHITE;
-        } else {
-            startColor = board[i][j];
-        }
-        return startColor;
-    }
-
-    // checks if a move is possible. Should be called each new turn.
-    // If this returns false, a prompt saying that no moves are possible should pop up,
-    // and it will be the next players turn.
-    public boolean movePossible(int i, int j) {
-        return (checkVerticalUp(i,j) ||
-                checkVerticalDown(i,j) ||
-                checkHorizontalRight(i,j) ||
-                checkHorizontalLeft(i,j) ||
-                checkDiagonalUR(i,j) ||
-                checkDiagonalDR(i,j) ||
-                checkDiagonalDL(i,j) ||
-                checkDiagonalUL(i,j));
-    }
-
-    public boolean playPossible() {
-        int possibleMoves = 0;
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                if (board[i][j] == PieceColor.EMPTY && movePossible(i, j)) {
-                    possibleMoves++;
-                }
+    // changes the values in board[i][j] where applicable
+    private void flip(int i, int j) {
+        int x;
+        int y;
+        if (checkVerticalUp(i,j)) {
+            y = i - 1;
+            while (y > 0 && board[y][j] != startColor) {
+                board[y][j] = startColor;
+                y--;
             }
         }
-        return (possibleMoves > 0);
+        if (checkVerticalDown(i,j)) {
+            y = i + 1;
+            while (y < (n-1) && board[y][j] != startColor) {
+                board[y][j] = startColor;
+                y++;
+            }
+        }
+        if (checkHorizontalRight(i,j)) {
+            x = j + 1;
+            while (x < n-1 && board[i][x] != startColor) {
+                board[i][x] = startColor;
+                x++;
+            }
+        }
+        if (checkHorizontalLeft(i,j)) {
+            x = j - 1;
+            while (x > 0 && board[i][x] != startColor) {
+                board[i][x] = startColor;
+                x--;
+            }
+        }
+        if (checkDiagonalUR(i,j)) {
+            y = i - 1;
+            x = j + 1;
+            while ((y > 0 && x < n-1) && board[y][x] != startColor) {
+                board[y][x] = startColor;
+                y--;
+                x++;
+            }
+        }
+        if (checkDiagonalDR(i,j)) {
+            y = i + 1;
+            x = j + 1;
+            while ((y < n-1 && x < n-1) && board[y][x] != startColor) {
+                board[y][x] = startColor;
+                y++;
+                x++;
+            }
+        }
+        if (checkDiagonalDL(i,j)) {
+            y = i + 1;
+            x = j - 1;
+            while ((y < n - 1 && x > 0) && board[y][x] != startColor) {
+                board[y][x] = startColor;
+                y++;
+                x--;
+            }
+        }
+        if (checkDiagonalUL(i,j)) {
+            y = i - 1;
+            x = j - 1;
+            while ((y > 0 && x > 0) && board[y][x] != startColor) {
+                board[y][x] = startColor;
+                y--;
+                x--;
+            }
+        }
     }
 /*
     public boolean flip(int i, int j){
@@ -318,6 +361,6 @@ public class othelloModel implements Serializable {
         }
         return false;
     }*/
-    //TODO implement a flip-method that changes the values in the PieceColor-array
+
 }
 
