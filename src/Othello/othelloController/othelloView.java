@@ -27,7 +27,6 @@ public class othelloView extends JPanel {
         // implement save game
 
         om = new othelloModel("player1", "player2");  //TODO use a userinput variable
-        frame = frame;
         frame.setTitle("Othello");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(boardWidth, boardHeight);
@@ -119,6 +118,10 @@ public class othelloView extends JPanel {
                 }
             }
         }
+    }
+
+    public void toggleSound(){
+        soundOn = !soundOn;
     }
 
         public static void main (String[]args){
