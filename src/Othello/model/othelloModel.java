@@ -9,7 +9,6 @@ public class othelloModel implements Serializable {
     private static final int n = 8;
     private PieceColor[][] board = new PieceColor[n][n];
     private boolean isBlackTurn;
-    private boolean playerWithdrawn;
 
     //some additions: See comments in player-class
     private final Player player1;
@@ -18,9 +17,8 @@ public class othelloModel implements Serializable {
 
     public othelloModel(String p1, String p2) {
         isBlackTurn = true;
-        playerWithdrawn = false;
-        Random r = new Random();        // this may not be used
-        this.gameID = r.nextInt();      // this may not be used
+        /*Random r = new Random();        // this may not be used
+        this.gameID = r.nextInt();      // this may not be used*/
 
         //assign players and Colors. See comments in player-class
         this.player1 = new Player(p1);
@@ -54,7 +52,6 @@ public class othelloModel implements Serializable {
 
 
     public boolean placePieceAt( int i, int j) {
-        //lägg till ljud om det inte är EMPTY
         if(!movePossible(i,j) || board[i][j] != PieceColor.EMPTY) {
             return false;}
         PieceColor c;
@@ -67,12 +64,6 @@ public class othelloModel implements Serializable {
         board[i][j] = c;
         changeTurn();
         return true;
-    }
-
-    //Put in view instead? The player who withdraws is always the loser?
-    public void withdraw() {
-        playerWithdrawn = true;
-        gameOver();
     }
 
     public void gameOver() {

@@ -83,13 +83,13 @@ public class othelloView extends JPanel {
             for (int j = 0; j < n; j++) {
                 PieceColor pc = om.getPiece(i,j);
                 if (pc == PieceColor.BLACK) {
-                    buttons[i][j].setIcon(blackPiece);
+                    buttons[i][j].setIcon2(blackPiece);
                 }
                 else if (pc == PieceColor.WHITE) {
-                    buttons[i][j].setIcon(whitePiece);
+                    buttons[i][j].setIcon2(whitePiece);
                 }
                 else {
-                    buttons[i][j].setIcon(transparent);
+                    buttons[i][j].setIcon2(transparent);
                 }
             }
         }
@@ -105,6 +105,10 @@ public class othelloView extends JPanel {
 
     public void toggleSound(){
         soundOn = !soundOn;
+    }
+
+    public void withdraw() {
+        om.gameOver();
     }
 
 
