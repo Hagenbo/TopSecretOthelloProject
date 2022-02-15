@@ -1,15 +1,19 @@
-package Othello.othelloView;
+package Othello.othelloController;
 import Othello.MyButton;
 import Othello.model.*;
+import java.io.*;
 
 import javax.swing.*;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class othelloView extends JPanel {
 
-    private JFrame frame = new JFrame();
+    private boolean soundOn = true;
+    //private JFrame frame = new JFrame();
     private static final int boardWidth = 750;
     private static final int boardHeight = 750;
 
@@ -79,7 +83,7 @@ public class othelloView extends JPanel {
 
         }
     }
-
+/*
     private void createMenuBar(JFrame f) {
         JMenuBar menuBar = new JMenuBar();
 
@@ -112,7 +116,7 @@ public class othelloView extends JPanel {
         f.setJMenuBar(menuBar);
 
     }
-
+*/
 
     public void flipButtons() {
         for (int i = 0; i < n; i++) {
@@ -127,7 +131,7 @@ public class othelloView extends JPanel {
             }
         }
     }
-
+/*
     private void save(othelloModel model, String filename) {
         try {
             FileOutputStream output = new FileOutputStream(filename);
@@ -140,11 +144,18 @@ public class othelloView extends JPanel {
             System.out.println("save failed because " + e);
         }
     }
-
-   public void setModel(othelloModel model){
+*/
+    public void setModel(othelloModel model){
         om = model;
     }
 
+    public othelloModel getModel(){
+        return om;
+    }
+
+    public void toggleSound(){
+        soundOn = !soundOn;
+    }
 
 
         public static void main (String[]args) {
