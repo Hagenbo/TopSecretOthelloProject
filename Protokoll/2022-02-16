@@ -1,0 +1,16 @@
+Protokoll 2022-02-16
+Projektgrupp 10/G055
+
+Hanterade frågeställningar:
+    1. Programstruktur
+    2. Kommunkation mellan client och server
+
+1. Demonstration av programmet i dess nuvarande form. För närvarande är några av våra klasser för stora
+   och bryter mot single responsibility-principen. Framför allt Startmeny-klassen bör delas upp i mindre delar.
+   Även model kan delas upp om det bidrar till tydligare programkod. Ett UML-diagram har påbörjats men är ännu inte klart.
+   Metoder för save och load finns för närvarande i StartMeny-klassen men bör göras om till egna klasser
+   och flyttas till Model-paketet.
+
+   En observer implementeras så att en prompt dyker upp vid vinst.
+
+2. Kommunkation mellan client och server.
