@@ -1,0 +1,17 @@
+Protokoll 2022-02-11
+Projektgrupp 10/G055
+
+Hanterade frågeställningar:
+    1. Genomgång av struktur
+    2. Implementation av att koppla ihop två spelare.
+    3. Spara spel.
+
+1. Genomgång av hur programmet fungerar sekvensiellt samt vilka klasser som finns och interaktionen dem
+   emellan. För att få en tydligare bild hur programmet hänger ihop bör vi ha gjort ett UML- och ett sekvensdiagram
+   till nästa tillfälle.
+
+2. Supersocket.. Felix kommer till nästa tillfälle försöka sätta upp en server så att vi kan testa kommunikationen.
+
+3. För att spara ett pågående kan vi använda oss av input- och outputstream.
+   Det nuvarande tillståndet på model kommer då sparas. Samtliga model-klasser behöver därför
+   implementera serializable.
