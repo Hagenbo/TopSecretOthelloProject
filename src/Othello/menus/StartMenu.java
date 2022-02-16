@@ -11,22 +11,22 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.*;
 
-import Othello.model.othelloModel;
+import Othello.model.OthelloModel;
 import Othello.othelloController.*;
 
-public class startMenu extends JFrame implements ActionListener, MouseListener, MenuListener {
+public class StartMenu extends JFrame implements ActionListener, MouseListener, MenuListener {
 
         private static final Color color = new Color(0, 78, 56);
         //private othelloModel om behövs detta? för soundOn osv
-        private othelloView game;
+        private OthelloView game;
 
-        public startMenu() {
+        public StartMenu() {
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setSize(500, 500);
             setLocation(200, 200);
             setPanel(menuPanel());
             setVisible(true);
-            game = new othelloView(new othelloModel("player1","player2"));
+            game = new OthelloView(new OthelloModel("player1","player2"));
         }
 
         public void setPanel(JPanel p){
@@ -216,7 +216,7 @@ public class startMenu extends JFrame implements ActionListener, MouseListener, 
             }
         }
 //TODO add to model. Fix buggs
-    private void save(othelloModel model, String filename) {
+    private void save(OthelloModel model, String filename) {
         try {
             FileOutputStream output = new FileOutputStream(filename);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(output);
@@ -229,11 +229,11 @@ public class startMenu extends JFrame implements ActionListener, MouseListener, 
         }
     }
 
-    private othelloModel load(String filename) {
+    private OthelloModel load(String filename) {
         try {
             FileInputStream input = new FileInputStream(filename);
             ObjectInputStream objectInputStream = new ObjectInputStream(input);
-            othelloModel stored = (othelloModel) (objectInputStream.readObject());
+            OthelloModel stored = (OthelloModel) (objectInputStream.readObject());
             objectInputStream.close();
             System.out.println("Loaded " + filename);
             return stored;
@@ -241,7 +241,7 @@ public class startMenu extends JFrame implements ActionListener, MouseListener, 
             System.out.println("load failed because " + e);
             //System.out.println("returned current game.");
             //return othelloView.getModel(); //getModel static?
-            return new othelloModel("player1","player2"); //tillfällig lösning tills getModel funkar
+            return new OthelloModel("player1","player2"); //tillfällig lösning tills getModel funkar
         }
     }
 
@@ -309,7 +309,7 @@ public class startMenu extends JFrame implements ActionListener, MouseListener, 
 
 
         public static void main(String[] args) {
-            startMenu start = new startMenu();
+            StartMenu start = new StartMenu();
         }
 
 }

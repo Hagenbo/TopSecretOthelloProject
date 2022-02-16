@@ -7,13 +7,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.*;
 
-public class optionMenu extends JPanel implements ActionListener {
+public class OptionMenu extends JPanel implements ActionListener {
 
     private static final Color color = new Color(0, 78, 56);
 
 
 
-    public optionMenu (){
+    public OptionMenu(){
         setBackground(color);
         add(this.optionButtons(), BorderLayout.CENTER);
     }

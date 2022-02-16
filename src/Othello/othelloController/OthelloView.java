@@ -1,28 +1,23 @@
 package Othello.othelloController;
 import Othello.MyButton;
 import Othello.model.*;
-import java.io.*;
 
 import javax.swing.*;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class othelloView extends JPanel {
+public class OthelloView extends JPanel {
 
     private boolean soundOn = true;
 
     private static final int n = 8;
     private MyButton[][] buttons = new MyButton[n][n];
-    private othelloModel om;
+    private OthelloModel om;
 
     private static final Color color = new Color(0, 78, 56);
     ImageIcon transparent = new ImageIcon(getClass().getResource("/transparent.png"), "1");
     ImageIcon blackPiece = new ImageIcon(getClass().getResource("/blackPiece.png"), "2");
     ImageIcon whitePiece = new ImageIcon(getClass().getResource("/whitePiece.png"), "3");
-    public othelloView(othelloModel model) {
+    public OthelloView(OthelloModel model) {
 
         model.setOnGameOver((color)->{
             displayWinner(color);
@@ -98,11 +93,11 @@ public class othelloView extends JPanel {
         }
     }
 
-    public void setModel(othelloModel model){
+    public void setModel(OthelloModel model){
         om = model;
     }
 
-    public othelloModel getModel(){
+    public OthelloModel getModel(){
         return om;
     }
 
