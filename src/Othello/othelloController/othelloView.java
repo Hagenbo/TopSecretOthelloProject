@@ -22,14 +22,10 @@ public class othelloView extends JPanel {
     ImageIcon transparent = new ImageIcon(getClass().getResource("/transparent.png"), "1");
     ImageIcon blackPiece = new ImageIcon(getClass().getResource("/blackPiece.png"), "2");
     ImageIcon whitePiece = new ImageIcon(getClass().getResource("/whitePiece.png"), "3");
+
     public othelloView(othelloModel model) {
 
-        model.setOnGameOver((color)->{
-            displayWinner(color);
-        });
-
         om = model; //TODO use a userinput variable
-
         setBackground(color);
         setLayout(new GridLayout(8, 8, 3, 3));
 
@@ -49,8 +45,6 @@ public class othelloView extends JPanel {
                 mb.setBackground(color);
                 add(mb);
 
-
-
                 mb.addActionListener(e -> {
                     MyButton pressedButton = (MyButton) e.getSource();
                     int x = pressedButton.getCol();
@@ -67,7 +61,6 @@ public class othelloView extends JPanel {
                     if (!om.playPossible()) {
 
                         //TODO add prompt saying move for next player is not possible, include an "ok"-button
-
                         om.changeTurn();           // changes turn
                         if (!om.playPossible()) {  //if none of the players can make a move, the game ends.
                             om.gameOver();
@@ -75,9 +68,10 @@ public class othelloView extends JPanel {
                     }
                 });
             }
-
-
         }
+        model.setOnGameOver((color)->{
+            displayWinner(color);
+        });
     }
 
 
@@ -116,10 +110,9 @@ public class othelloView extends JPanel {
 
 
     public void displayWinner(PieceColor winner){
-
-        JOptionPane.showMessageDialog(null, "The winner is" + winner, "Winner", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(null, "The winner is " + winner, "Winner", JOptionPane.PLAIN_MESSAGE);
+        //TODO exit game on "OK", maybe make the JOptionPane more pretty
     }
-
 
 }
 
