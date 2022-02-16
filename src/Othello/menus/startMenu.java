@@ -215,7 +215,7 @@ public class startMenu extends JFrame implements ActionListener, MouseListener, 
 
             }
         }
-
+//TODO add to model. Fix buggs
     private void save(othelloModel model, String filename) {
         try {
             FileOutputStream output = new FileOutputStream(filename);
@@ -266,7 +266,7 @@ public class startMenu extends JFrame implements ActionListener, MouseListener, 
         saveGame.addMenuListener(this);
 
         f.setJMenuBar(menuBar);
-    };
+    }
 
 
     @Override

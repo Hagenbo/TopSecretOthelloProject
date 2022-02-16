@@ -24,6 +24,9 @@ public class othelloView extends JPanel {
     ImageIcon whitePiece = new ImageIcon(getClass().getResource("/whitePiece.png"), "3");
     public othelloView(othelloModel model) {
 
+        model.setOnGameOver((color)->{
+            displayWinner(color);
+        });
 
         om = model; //TODO use a userinput variable
 
@@ -111,15 +114,10 @@ public class othelloView extends JPanel {
         om.gameOver();
     }
 
-    public String getWinner(){
-        String str = om.gameOver();
-        return str;
-    }
 
-    public void displayWinner(){
+    public void displayWinner(PieceColor winner){
 
-        JOptionPane.showMessageDialog(null, "The winner is" + getWinner(), "Winner", JOptionPane.PLAIN_MESSAGE);
-
+        JOptionPane.showMessageDialog(null, "The winner is" + winner, "Winner", JOptionPane.PLAIN_MESSAGE);
     }
 
 

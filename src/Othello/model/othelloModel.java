@@ -3,6 +3,7 @@ package Othello.model;
 import java.awt.*;
 import java.io.Serializable;
 import java.util.Random;
+import java.util.function.Consumer;
 
 public class othelloModel implements Serializable {
     private int gameID;
@@ -10,6 +11,7 @@ public class othelloModel implements Serializable {
     private PieceColor[][] board = new PieceColor[n][n];
     private boolean isBlackTurn;
     private PieceColor startColor;
+    private Consumer<PieceColor> onGameOver;
 
     //some additions: See comments in player-class
     private final Player player1;
@@ -40,6 +42,11 @@ public class othelloModel implements Serializable {
                 }
             }
         }
+    }
+
+    public void setOnGameOver(Consumer <PieceColor> c){
+        onGameOver = c;
+
     }
 
     public PieceColor getPiece( int i, int j) {
@@ -77,16 +84,20 @@ public class othelloModel implements Serializable {
         //TODO add prompt with an "ok"-button saying who is the winner.
         // when ok_button is pressed the game ends and returns to main menu. Should be in view somehow...
         if (nr_black > nr_white) {
-            System.out.println("winner black");
+            if(onGameOver != null){
+                onGameOver.accept(PieceColor.BLACK);
+            }
             return "Black";
-            //System.out.println("Winner is " + player1.getPlayerName());   // get player1 username, method in Player-class
+
         }
         else if (nr_white > nr_black) {
-            //System.out.println("Winner is " + player2.getPlayerName());  // get player2 username, method in Player-class
-            System.out.println("winner white");
+            if(onGameOver != null){
+                onGameOver.accept(PieceColor.WHITE);
+            }
             return "White";
         }
         else {
+            //TODO add for draw
             //System.out.println("It's a draw!");
             System.out.println("Draw");
             return "Draw";
