@@ -60,7 +60,7 @@ public class othelloModel implements Serializable {
         return true;
     }
 
-    public void gameOver() {
+    public String gameOver() {
         int nr_black = 0;
         int nr_white = 0;
         for (int i = 0; i < n; i++) {
@@ -73,17 +73,25 @@ public class othelloModel implements Serializable {
                 }
             }
         }
+
         //TODO add prompt with an "ok"-button saying who is the winner.
         // when ok_button is pressed the game ends and returns to main menu. Should be in view somehow...
         if (nr_black > nr_white) {
-            System.out.println("Winner is " + player1.getPlayerName());   // get player1 username, method in Player-class
+            System.out.println("winner black");
+            return "Black";
+            //System.out.println("Winner is " + player1.getPlayerName());   // get player1 username, method in Player-class
         }
         else if (nr_white > nr_black) {
-            System.out.println("Winner is " + player2.getPlayerName());  // get player2 username, method in Player-class
+            //System.out.println("Winner is " + player2.getPlayerName());  // get player2 username, method in Player-class
+            System.out.println("winner white");
+            return "White";
         }
         else {
-            System.out.println("It's a draw!");
+            //System.out.println("It's a draw!");
+            System.out.println("Draw");
+            return "Draw";
         }
+
     }
 
     public boolean playPossible() {

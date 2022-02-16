@@ -77,6 +77,7 @@ public class othelloView extends JPanel {
         }
     }
 
+
     public void flipButtons() {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -108,6 +109,17 @@ public class othelloView extends JPanel {
 
     public void withdraw() {
         om.gameOver();
+    }
+
+    public String getWinner(){
+        String str = om.gameOver();
+        return str;
+    }
+
+    public void displayWinner(){
+
+        JOptionPane.showMessageDialog(null, "The winner is" + getWinner(), "Winner", JOptionPane.PLAIN_MESSAGE);
+
     }
 
 
