@@ -8,12 +8,12 @@ import java.awt.*;
 public class OthelloView extends JPanel {
 
     private boolean soundOn = true;
-
     private static final int n = 8;
     private MyButton[][] buttons = new MyButton[n][n];
     private OthelloModel om;
-
     private static final Color color = new Color(0, 78, 56);
+
+    //ska dessa nedan va private? eller ska dom ligga här såhär?
     ImageIcon transparent = new ImageIcon(getClass().getResource("/transparent.png"), "1");
     ImageIcon blackPiece = new ImageIcon(getClass().getResource("/blackPiece.png"), "2");
     ImageIcon whitePiece = new ImageIcon(getClass().getResource("/whitePiece.png"), "3");

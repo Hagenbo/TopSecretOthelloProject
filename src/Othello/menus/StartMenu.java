@@ -125,7 +125,7 @@ public class StartMenu extends JFrame implements ActionListener, MouseListener, 
            //should we remove toggle sound from options?
            JButton toggleSound = new JButton("Toggle sound");
            toggleSound.setBackground(Color.black);
-           toggleSound.setForeground(color.white);
+           toggleSound.setForeground(Color.white);
            toggleSound.addActionListener(this);
 
            buttonsPanel.add(toggleSound);
@@ -210,7 +210,6 @@ public class StartMenu extends JFrame implements ActionListener, MouseListener, 
                     break;
 
                 case "Toggle sound":
-
                     break;
 
             }
@@ -269,6 +268,7 @@ public class StartMenu extends JFrame implements ActionListener, MouseListener, 
     }
 
 
+
     @Override
     public void menuSelected(MenuEvent e) {
         Object obj = e.getSource();
@@ -305,6 +305,8 @@ public class StartMenu extends JFrame implements ActionListener, MouseListener, 
         @Override
         public void menuCanceled(MenuEvent e) {
         }
+
+
 
 
 
