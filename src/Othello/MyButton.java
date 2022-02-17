@@ -1,7 +1,5 @@
 package Othello;
 
-import Othello.model.PieceColor;
-
 import javax.swing.*;
 
 public class MyButton extends JButton {

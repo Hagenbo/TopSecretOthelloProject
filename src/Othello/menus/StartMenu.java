@@ -11,9 +11,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.*;
 
-import Othello.model.OthelloModel;
+import Othello.model.Game;
 import Othello.othelloController.*;
-import Othello.model.Save;
 
 public class StartMenu extends JFrame implements ActionListener, MouseListener, MenuListener {
 
@@ -28,7 +27,7 @@ public class StartMenu extends JFrame implements ActionListener, MouseListener, 
             setLocation(200, 200);
             setPanel(menuPanel());
             setVisible(true);
-            game = new OthelloView(new OthelloModel("player1","player2"));
+            game = new OthelloView(new Game("player1","player2"));
             //optionsPanel = new OptionsPanel();
 
         }
@@ -219,7 +218,7 @@ public class StartMenu extends JFrame implements ActionListener, MouseListener, 
             }
         }
 //TODO add to model. Fix buggs
-    private void save(OthelloModel model, String filename) {
+    private void save(Game model, String filename) {
         try {
             FileOutputStream output = new FileOutputStream(filename);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(output);
@@ -232,11 +231,11 @@ public class StartMenu extends JFrame implements ActionListener, MouseListener, 
         }
     }
 
-    private OthelloModel load(String filename) {
+    private Game load(String filename) {
         try {
             FileInputStream input = new FileInputStream(filename);
             ObjectInputStream objectInputStream = new ObjectInputStream(input);
-            OthelloModel stored = (OthelloModel) (objectInputStream.readObject());
+            Game stored = (Game) (objectInputStream.readObject());
             objectInputStream.close();
             System.out.println("Loaded " + filename);
             return stored;
@@ -244,7 +243,7 @@ public class StartMenu extends JFrame implements ActionListener, MouseListener, 
             System.out.println("load failed because " + e);
             //System.out.println("returned current game.");
             //return othelloView.getModel(); //getModel static?
-            return new OthelloModel("player1","player2"); //tillfällig lösning tills getModel funkar
+            return new Game("player1","player2"); //tillfällig lösning tills getModel funkar
         }
     }
 

@@ -1,6 +1,7 @@
 package Othello.othelloController;
 import Othello.MyButton;
-import Othello.model.*;
+import Othello.model.Game;
+import Othello.model.PieceColor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +12,7 @@ public class OthelloView extends JPanel implements Serializable {
     private boolean soundOn = true;
     private static final int n = 8;
     private MyButton[][] buttons = new MyButton[n][n];
-    private OthelloModel om;
+    private Game om;
     private static final Color color = new Color(0, 78, 56);
 
     //ska dessa nedan va private? eller ska dom ligga här såhär?
@@ -19,7 +20,7 @@ public class OthelloView extends JPanel implements Serializable {
     ImageIcon blackPiece = new ImageIcon(getClass().getResource("/blackPiece.png"), "2");
     ImageIcon whitePiece = new ImageIcon(getClass().getResource("/whitePiece.png"), "3");
 
-    public OthelloView(OthelloModel model) {
+    public OthelloView(Game model) {
 
         om = model; //TODO use a userinput variable
         setBackground(color);
@@ -54,11 +55,11 @@ public class OthelloView extends JPanel implements Serializable {
                     }
                     flipButtons();
 
-                    if (!om.playPossible()) {
+                    if (!om.playPossible(om.getStartColor())) {
 
                         //TODO add prompt saying move for next player is not possible, include an "ok"-button
                         om.changeTurn();           // changes turn
-                        if (!om.playPossible()) {  //if none of the players can make a move, the game ends.
+                        if (!om.playPossible(om.getStartColor())) {  //if none of the players can make a move, the game ends.
                             om.gameOver();
                         }
                     }
@@ -88,11 +89,11 @@ public class OthelloView extends JPanel implements Serializable {
         }
     }
 
-    public void setModel(OthelloModel model){
+    public void setModel(Game model){
         om = model;
     }
 
-    public OthelloModel getModel(){
+    public Game getModel(){
         return om;
     }
 
