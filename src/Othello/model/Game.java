@@ -36,7 +36,7 @@ public class Game implements Serializable {
         onGameOver = c;
     }
 
-    // helper-method used in check"direction"-methods.
+
     private PieceColor setStartColor() {
         if (isBlackTurn) {
             return PieceColor.BLACK;
@@ -58,6 +58,7 @@ public class Game implements Serializable {
         startColor = setStartColor();
     }
 
+    // method checks if the player has any possible moves
     public boolean playPossible(PieceColor startColor) {
         int possibleMoves = 0;
         for (int i = 0; i < n; i++) {
