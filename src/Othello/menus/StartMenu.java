@@ -13,12 +13,14 @@ import java.io.*;
 
 import Othello.model.OthelloModel;
 import Othello.othelloController.*;
+import Othello.model.Save;
 
 public class StartMenu extends JFrame implements ActionListener, MouseListener, MenuListener {
 
         private static final Color color = new Color(0, 78, 56);
         //private othelloModel om behövs detta? för soundOn osv
         private OthelloView game;
+        //private OptionsPanel optionsPanel;
 
         public StartMenu() {
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,6 +29,8 @@ public class StartMenu extends JFrame implements ActionListener, MouseListener, 
             setPanel(menuPanel());
             setVisible(true);
             game = new OthelloView(new OthelloModel("player1","player2"));
+            //optionsPanel = new OptionsPanel();
+
         }
 
         public void setPanel(JPanel p){
@@ -287,6 +291,7 @@ public class StartMenu extends JFrame implements ActionListener, MouseListener, 
             case "Save Game":
                 String filename = JOptionPane.showInputDialog("Enter a file name:");
                 save(game.getModel(), filename);
+                //saveTest.SaveFile(game.getModel(), filename);
                 break;
 
             case "Quit":

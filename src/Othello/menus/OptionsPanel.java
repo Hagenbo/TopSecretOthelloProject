@@ -18,6 +18,7 @@ public class OptionsPanel extends JPanel implements ActionListener, MouseListene
     //ska jag ha private startmenu och view, eller hur når jag setPanel och toggleSound annars? Skicka med ngt i konstruktorn?
 
     public OptionsPanel() {
+
         setBackground(color);
 
         JPanel optionsPanel = new JPanel(new BorderLayout());
@@ -37,7 +38,7 @@ public class OptionsPanel extends JPanel implements ActionListener, MouseListene
 
             JButton toggleSound = new JButton("Toggle sound");
             toggleSound.setBackground(Color.black);
-            toggleSound.setForeground(color);
+            toggleSound.setForeground(Color.white);
             toggleSound.addActionListener(this);
 
             buttonsPanel.add(toggleSound);

@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.function.Consumer;
 
 public class OthelloModel implements Serializable {
+
+    // behövs vid serializable: private static final long serialVersionUID = 1L;
     private int gameID;
     private static final int n = 8;
     private PieceColor[][] board = new PieceColor[n][n];
@@ -43,6 +45,7 @@ public class OthelloModel implements Serializable {
         }
     }
 
+    //observer-delen
     public void setOnGameOver(Consumer <PieceColor> c){
         onGameOver = c;
 

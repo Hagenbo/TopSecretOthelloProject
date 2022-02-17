@@ -4,8 +4,9 @@ import Othello.model.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serializable;
 
-public class OthelloView extends JPanel {
+public class OthelloView extends JPanel implements Serializable {
 
     private boolean soundOn = true;
     private static final int n = 8;
