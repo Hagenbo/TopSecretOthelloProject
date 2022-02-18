@@ -17,7 +17,7 @@ public class OthelloView extends JPanel {
     //private JPanel gameBoard;
     private static final int n = 8;
     private MyButton[][] buttons = new MyButton[n][n];
-    private OthelloModel om;
+    private Game om;
     private GameMenubar gm;
     private static final Color color = new Color(0, 78, 56);
 
@@ -26,7 +26,7 @@ public class OthelloView extends JPanel {
     ImageIcon blackPiece = new ImageIcon(getClass().getResource("/blackPiece.png"), "2");
     ImageIcon whitePiece = new ImageIcon(getClass().getResource("/whitePiece.png"), "3");
 
-    public OthelloView(OthelloModel model, StatesObservable so) {
+    public OthelloView(Game model, StatesObservable so) {
         obsrvble = so;
         om = model; //TODO use a userinput variable
        // gameBoard = new JPanel();
