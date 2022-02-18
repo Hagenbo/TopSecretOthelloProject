@@ -1,7 +1,5 @@
 package Othello.menus;
 
-import Othello.othelloController.OthelloView;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,14 +9,12 @@ import javax.swing.*;
 
 public class OptionsPanel extends JPanel implements ActionListener, MouseListener {
 
+    private StatesObservable obsrvble;
     private static final Color color = new Color(0, 78, 56);
-    private StartMenu startmenu;
-    private OthelloView view;
 
-    //ska jag ha private startmenu och view, eller hur når jag setPanel och toggleSound annars? Skicka med ngt i konstruktorn?
-
-    public OptionsPanel() {
-
+    //behöver skicka med so så panel kan säga till att den ändrar just "den instansen av observable"
+    public OptionsPanel(StatesObservable so) {
+        obsrvble = so;
         setBackground(color);
 
         JPanel optionsPanel = new JPanel(new BorderLayout());
@@ -65,8 +61,8 @@ public class OptionsPanel extends JPanel implements ActionListener, MouseListene
 
         @Override
         public void mouseClicked(MouseEvent e) {
-        //kan jag göra såhär?
-            startmenu.setPanel(startmenu.menuPanel());
+        //trycket på texten informerar StatesObservable att ändra sig
+        obsrvble.setValue(States.START);
         }
 
         @Override
@@ -85,7 +81,7 @@ public class OptionsPanel extends JPanel implements ActionListener, MouseListene
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        view.toggleSound();
+        //toggle sound
     }
 }
 
