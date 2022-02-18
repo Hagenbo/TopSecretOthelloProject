@@ -1,5 +1,7 @@
 package Othello.model;
 
+import Othello.menus.StatesObservable;
+
 import java.io.*;
 import java.util.function.Consumer;
 
@@ -116,7 +118,25 @@ public class Game implements Serializable {
         }
     }
 
+    public Game getGame() {
+        return this;
+    }
+
     //Methods for save and load
+
+    public void save(Game model, String filename) {
+        try {
+            FileOutputStream output = new FileOutputStream(filename);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(output);
+            objectOutputStream.writeObject(model);
+            objectOutputStream.flush();
+            objectOutputStream.close();
+            System.out.println(filename + " stored.");
+        } catch (IOException e) {
+            System.out.println("save failed because " + e);
+        }
+    }
+    /*
     public void SaveFile(Game model, String filename) {
         try {
             //fileName should be the name of model-object we want to save
@@ -133,6 +153,8 @@ public class Game implements Serializable {
             ioException.printStackTrace(); //for debugging
         }
     }
+    */
+
 
     public Game load(String filename) {
         try {

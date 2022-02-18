@@ -13,7 +13,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.*;
 
-import Othello.model.OthelloModel;
+import Othello.model.Game;
 import Othello.othelloController.*;
 
 
@@ -25,7 +25,8 @@ public class StartApp extends JFrame implements PropertyChangeListener {
         private StartPanel sp;
         private OptionsPanel op;
         private RulesPanel rp;
-        private StatesObservable obsrvble;
+        private StatesObservable observable;
+        private GameMenubar gm;
 
 
         public StartApp() {
@@ -34,15 +35,15 @@ public class StartApp extends JFrame implements PropertyChangeListener {
             setLocation(200, 200);
 
             state= States.START;
-            obsrvble = new StatesObservable();
+            observable = new StatesObservable();
             //skickar med "samma obsrvble" till startpaneln så dom jobbar med samma lxm
-            sp = new StartPanel(obsrvble);
-            op = new OptionsPanel(obsrvble);
-            rp = new RulesPanel(obsrvble);
+            sp = new StartPanel(observable);
+            op = new OptionsPanel(observable);
+            rp = new RulesPanel(observable);
             setContentPane(sp);
 
             //lägger till startApp som observer till observable
-            obsrvble.addPropertyChangeListener(this);
+            observable.addPropertyChangeListener(this);
             setVisible(true);
 
         }
@@ -76,11 +77,13 @@ public class StartApp extends JFrame implements PropertyChangeListener {
             }
 
             else if(state == States.PLAY){
-                game = new OthelloView(new OthelloModel("player1","player2"), obsrvble);
-                game.setModel(new OthelloModel("player1","player2"));
+                Game model = new Game("player1","player2");
+                game = new OthelloView(model, gm /*, observable*/);
+                game.setModel(new Game("player1","player2"));
                 setContentPane(game);
-                //createMenuBar(this);
+                gm = new GameMenubar(model, observable,this);
                 setSize(600, 600);
+                //this.add(gm);
                 game.revalidate();
                 game.flipButtons();
             }
@@ -252,10 +255,11 @@ public class StartApp extends JFrame implements PropertyChangeListener {
         }*/
 
 
-
+/*
 
 //TODO add to model. Fix buggs
-    private void save(OthelloModel model, String filename) {
+
+    private void save(Game model, String filename) {
         try {
             FileOutputStream output = new FileOutputStream(filename);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(output);
@@ -268,11 +272,11 @@ public class StartApp extends JFrame implements PropertyChangeListener {
         }
     }
 
-    private OthelloModel load(String filename) {
+    private Game load(String filename) {
         try {
             FileInputStream input = new FileInputStream(filename);
             ObjectInputStream objectInputStream = new ObjectInputStream(input);
-            OthelloModel stored = (OthelloModel) (objectInputStream.readObject());
+            Game stored = (Game) (objectInputStream.readObject());
             objectInputStream.close();
             System.out.println("Loaded " + filename);
             return stored;
@@ -280,9 +284,9 @@ public class StartApp extends JFrame implements PropertyChangeListener {
             System.out.println("load failed because " + e);
             //System.out.println("returned current game.");
             //return othelloView.getModel(); //getModel static?
-            return new OthelloModel("player1","player2"); //tillfällig lösning tills getModel funkar
+            return new Game("player1","player2"); //tillfällig lösning tills getModel funkar
         }
-    }
+    }*/
 
    /* private void createMenuBar(JFrame f) {
         JMenuBar menuBar = new JMenuBar();
@@ -347,8 +351,6 @@ public class StartApp extends JFrame implements PropertyChangeListener {
         public void menuCanceled(MenuEvent e) {
         }
 */
-
-
 
 
         public static void main(String[] args) {
