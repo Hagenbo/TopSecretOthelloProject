@@ -13,7 +13,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.*;
 
-import Othello.model.OthelloModel;
+//import Othello.model.OthelloModel;
 import Othello.othelloController.*;
 
 
