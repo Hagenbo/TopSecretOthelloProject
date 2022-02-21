@@ -12,7 +12,7 @@ public class StartPanel extends JPanel implements ActionListener {
     public StartPanel(StatesObservable so){
         obsrvble = so;
         setBackground(color);
-        add(this.Buttons(), BorderLayout.CENTER);
+        add(this.buttons(), BorderLayout.CENTER);
 
 
     }
@@ -22,7 +22,7 @@ public class StartPanel extends JPanel implements ActionListener {
         return buttonPanel;
     }
 
-    public JPanel Buttons(){
+    public JPanel buttons(){
         JPanel buttonPanel = this.setUpButtonPanel();
 
         JButton b0 = new JButton("New Game");

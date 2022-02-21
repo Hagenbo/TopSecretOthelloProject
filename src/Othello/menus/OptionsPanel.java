@@ -1,5 +1,7 @@
 package Othello.menus;
 
+import Othello.othelloController.Options;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,12 +11,14 @@ import javax.swing.*;
 
 public class OptionsPanel extends JPanel implements ActionListener, MouseListener {
 
-    private StatesObservable obsrvble;
+    private StatesObservable observable;
     private static final Color color = new Color(0, 78, 56);
+    private Options sound;
 
     //behöver skicka med so så panel kan säga till att den ändrar just "den instansen av observable"
-    public OptionsPanel(StatesObservable so) {
-        obsrvble = so;
+    public OptionsPanel(StatesObservable so, Options sound) {
+        observable = so;
+        this.sound = sound;
         setBackground(color);
 
         JPanel optionsPanel = new JPanel(new BorderLayout());
@@ -62,7 +66,7 @@ public class OptionsPanel extends JPanel implements ActionListener, MouseListene
         @Override
         public void mouseClicked(MouseEvent e) {
         //trycket på texten informerar StatesObservable att ändra sig
-        obsrvble.setValue(States.START);
+        observable.setValue(States.START);
         }
 
         @Override
@@ -81,7 +85,7 @@ public class OptionsPanel extends JPanel implements ActionListener, MouseListene
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        //toggle sound
+        sound.toggleSound();
     }
 }
 

@@ -2,17 +2,10 @@
 package Othello.menus;
 
 import javax.swing.*;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.*;
 
+import Othello.model.Board;
 import Othello.model.Game;
 import Othello.othelloController.*;
 
@@ -20,13 +13,13 @@ import Othello.othelloController.*;
 public class StartApp extends JFrame implements PropertyChangeListener {
 
         private OthelloView game_GUI;
-        private JPanel panel;
         private States state;
-        private StartPanel sp;
-        private OptionsPanel op;
-        private RulesPanel rp;
-        private StatesObservable observable;
-        private GameMenubar gm;
+        private final Options options;
+        private final StartPanel sp;
+        private final OptionsPanel op;
+        private final RulesPanel rp;
+        private final StatesObservable observable;
+        private static final int n = 8;
 
 
         public StartApp() {
@@ -34,11 +27,12 @@ public class StartApp extends JFrame implements PropertyChangeListener {
             setSize(500, 500);
             setLocation(200, 200);
 
-            state= States.START;
+            state = States.START;
             observable = new StatesObservable();
             //skickar med "samma obsrvble" till startpaneln så dom jobbar med samma lxm
+            options = new Options();
             sp = new StartPanel(observable);
-            op = new OptionsPanel(observable);
+            op = new OptionsPanel(observable, options);
             rp = new RulesPanel(observable);
             setContentPane(sp);
 
@@ -60,30 +54,28 @@ public class StartApp extends JFrame implements PropertyChangeListener {
     }
         public void setPanel(){
             if(state == States.START){
-                //this.panel = sp;
+                this.setJMenuBar(null);
                 setContentPane(sp);
                 validate();
             }
             else if(state == States.OPTIONS){
-                //this.panel = op;
                 setContentPane(op);
                 validate();
             }
 
             else if(state == States.RULES){
-                //this.panel = rp;
                 setContentPane(rp);
                 validate();
             }
 
             else if(state == States.PLAY){
-                Game model = new Game("player1","player2");
-                gm = new GameMenubar(model, observable,this);
-                game_GUI = new OthelloView(model, gm /*, observable*/);
-                game_GUI.setModel(new Game("player1","player2"));
+                Board board = new Board(n);
+                Game game = new Game("player1","player2", board);
+                new GameMenubar(game, options, observable,this);
+                game_GUI = new OthelloView(game, board, options /*, observable*/);
+                //game_GUI.setGame(new Game("player1","player2"));
                 setContentPane(game_GUI);
                 setSize(600, 600);
-                //this.add(gm);
                 game_GUI.revalidate();
                 game_GUI.flipButtons();
             }

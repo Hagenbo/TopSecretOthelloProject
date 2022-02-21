@@ -1,38 +1,37 @@
 package Othello.othelloController;
 import Othello.MyButton;
-import Othello.menus.States;
-import Othello.menus.StatesObservable;
 import Othello.model.*;
 
 import javax.swing.*;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
 import java.awt.*;
 import java.io.Serializable;
 
 public class OthelloView extends JPanel implements Serializable {
 
-    private static final int n = 8;
-    private MyButton[][] buttons = new MyButton[n][n];
-    private Game om;
+    private MyButton[][] buttons;
+    private Game game;
+    private Board board;
     private static final Color color = new Color(0, 78, 56);
-    private GameMenubar gm;
+    private final Options options;
 
     //ska dessa nedan va private? eller ska dom ligga här såhär?
-    ImageIcon transparent = new ImageIcon(getClass().getResource("/transparent.png"), "1");
-    ImageIcon blackPiece = new ImageIcon(getClass().getResource("/blackPiece.png"), "2");
-    ImageIcon whitePiece = new ImageIcon(getClass().getResource("/whitePiece.png"), "3");
+    private final ImageIcon transparent = new ImageIcon(getClass().getResource("/transparent.png"), "1");
+    private final ImageIcon blackPiece = new ImageIcon(getClass().getResource("/blackPiece.png"), "2");
+    private final ImageIcon whitePiece = new ImageIcon(getClass().getResource("/whitePiece.png"), "3");
 
-    public OthelloView(Game model, GameMenubar gm) {
-        this.gm = gm;
-        this.om = model; //TODO use a userinput variable
+    public OthelloView(Game g, Board b, Options options) {
+        int n = board.getBoardSize();
+        this.options = options;
+        this.game = g; //TODO use a userinput variable
+        this.board = b;
+        this.buttons = new MyButton[n][n];
         setBackground(color);
         setLayout(new GridLayout(8, 8, 3, 3));
 
         //TODO put an ICON on a button instead of text
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                PieceColor pc = om.getPiece(i, j);
+                PieceColor pc = board.getPiece(i, j);
                 MyButton mb;
                 if (pc == PieceColor.BLACK) {
                     mb = new MyButton(blackPiece, i, j);
@@ -50,34 +49,36 @@ public class OthelloView extends JPanel implements Serializable {
                     int x = pressedButton.getCol();
                     int y = pressedButton.getRow();
 
-                    if (!om.placePieceAt(y, x)) {
-                        if(gm.isSoundOn()){
+                    if (!board.placePieceAt(y, x, game.getCurrentColor())) {
+                        if(options.isSoundOn()){
                             Toolkit.getDefaultToolkit().beep();
                         }
                         return;
                     }
+                    game.changeTurn();
                     flipButtons();
 
-                    if (!om.playPossible(om.getStartColor())) {
+                    if (!board.playPossible(game.getCurrentColor())) {
 
                         //TODO add prompt saying move for next player is not possible, include an "ok"-button
-                        om.changeTurn();           // changes turn
-                        if (!om.playPossible(om.getStartColor())) {  //if none of the players can make a move, the game ends.
-                            om.gameOver();
+                        game.changeTurn();           // changes turn
+                        if (!board.playPossible(game.getCurrentColor())) {  //if none of the players can make a move, the game ends.
+                            game.gameOver();
                         }
                     }
                 });
             }
         }
-        model.setOnGameOver((color)->{
+        game.setOnGameOver((color)->{
             displayWinner(color);
         });
     }
 
     public void flipButtons() {
+        int n = board.getBoardSize();
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                PieceColor pc = om.getPiece(i,j);
+                PieceColor pc = board.getPiece(i,j);
                 if (pc == PieceColor.BLACK) {
                     buttons[i][j].setIcon2(blackPiece);
                 }
@@ -91,16 +92,16 @@ public class OthelloView extends JPanel implements Serializable {
         }
     }
 
-    public void setModel(Game model){
-        om = model;
+    public void setGame(Game g){
+        game = g;
     }
 
-    public Game getModel(){
-        return om;
+    public Game getGame(){
+        return game;
     }
 
     public void withdraw() {
-        om.gameOver();
+        game.gameOver();
     }
 
     public void displayWinner(PieceColor winner){

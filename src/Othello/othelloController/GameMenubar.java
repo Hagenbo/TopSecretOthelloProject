@@ -11,14 +11,15 @@ import java.io.Serializable;
 
 public class GameMenubar implements MenuListener, Serializable {
     private JMenuBar menuBar;
-    private StatesObservable obsrvble;
-    private Game game;
-    private boolean soundOn = true;
+    private final StatesObservable observable;
+    private final Game game;
+    private final Options options;
 
-    public GameMenubar(Game game,  StatesObservable so, JFrame frame){
-        obsrvble = so;
+    public GameMenubar(Game game, Options options, StatesObservable so, JFrame f){
+        observable = so;
+        this.options= options;
         this.game = game;
-        createMenuBar(frame);
+        createMenuBar(f);
     }
 
     private void createMenuBar(JFrame frame) {
@@ -57,7 +58,7 @@ public class GameMenubar implements MenuListener, Serializable {
                 //TODO add prompt asking if they rly want to withdraw
                 //setJMenuBar(null);
                 //setSize(500, 500);
-                obsrvble.setValue(States.START);
+                observable.setValue(States.START);
                 break;
 
             case "Save Game":
@@ -67,21 +68,13 @@ public class GameMenubar implements MenuListener, Serializable {
                 break;
 
             case "Quit":
-                obsrvble.setValue(States.START);
+                observable.setValue(States.START);
                 break;
 
             case "Toggle sound":
-                toggleSound();
+                options.toggleSound();
                 break;
         }
-    }
-
-    public void toggleSound(){
-        soundOn = !soundOn;
-    }
-
-    public boolean isSoundOn(){
-        return soundOn;
     }
 
 

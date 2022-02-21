@@ -6,11 +6,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class RulesPanel extends JPanel implements MouseListener {
-    private StatesObservable obsrvble;
+    private StatesObservable observable;
     private static final Color color = new Color(0, 78, 56);
 
     public RulesPanel(StatesObservable so) {
-        obsrvble = so;
+        observable = so;
 
         JPanel bottomPanel = new JPanel(new BorderLayout());
         bottomPanel.setBackground(color);
@@ -42,7 +42,7 @@ public class RulesPanel extends JPanel implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        obsrvble.setValue(States.START);
+        observable.setValue(States.START);
     }
 
     @Override
