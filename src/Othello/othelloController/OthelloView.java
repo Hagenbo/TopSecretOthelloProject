@@ -29,9 +29,6 @@ public class OthelloView extends JPanel implements Serializable {
         setBackground(color);
         setLayout(new GridLayout(8, 8, 3, 3));
 
-        setLayout(new GridLayout(8, 8, 3, 3));
-        setBackground(color);
-
         //TODO put an ICON on a button instead of text
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {

@@ -1,7 +1,5 @@
 package Othello.model;
 
-import Othello.menus.StatesObservable;
-
 import java.io.*;
 import java.util.function.Consumer;
 

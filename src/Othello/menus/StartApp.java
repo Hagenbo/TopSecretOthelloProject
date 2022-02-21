@@ -19,7 +19,7 @@ import Othello.othelloController.*;
 
 public class StartApp extends JFrame implements PropertyChangeListener {
 
-        private OthelloView game;
+        private OthelloView game_GUI;
         private JPanel panel;
         private States state;
         private StartPanel sp;
@@ -60,32 +60,32 @@ public class StartApp extends JFrame implements PropertyChangeListener {
     }
         public void setPanel(){
             if(state == States.START){
-                this.panel = sp;
+                //this.panel = sp;
                 setContentPane(sp);
                 validate();
             }
             else if(state == States.OPTIONS){
-                this.panel = op;
+                //this.panel = op;
                 setContentPane(op);
                 validate();
             }
 
             else if(state == States.RULES){
-                this.panel = rp;
+                //this.panel = rp;
                 setContentPane(rp);
                 validate();
             }
 
             else if(state == States.PLAY){
                 Game model = new Game("player1","player2");
-                game = new OthelloView(model, gm /*, observable*/);
-                game.setModel(new Game("player1","player2"));
-                setContentPane(game);
                 gm = new GameMenubar(model, observable,this);
+                game_GUI = new OthelloView(model, gm /*, observable*/);
+                game_GUI.setModel(new Game("player1","player2"));
+                setContentPane(game_GUI);
                 setSize(600, 600);
                 //this.add(gm);
-                game.revalidate();
-                game.flipButtons();
+                game_GUI.revalidate();
+                game_GUI.flipButtons();
             }
         }
 
