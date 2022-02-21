@@ -96,7 +96,8 @@ public class Game implements Serializable {
             }
         }
         //TODO add prompt with an "ok"-button saying who is the winner.
-        // when ok_button is pressed the game ends and returns to main menu. Should be in view somehow...
+        // when ok_button is pressed the game ends and returns to main menu. Should be in view somehow..
+        //this is done-ish?
         if (nr_black > nr_white) {
             if (onGameOver != null) {
                 onGameOver.accept(PieceColor.BLACK);
@@ -116,6 +117,7 @@ public class Game implements Serializable {
         }
     }
 
+    //TODO make new class for save and load
     //Methods for save and load
     public void SaveFile(Game model, String filename) {
         try {
