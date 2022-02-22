@@ -20,10 +20,10 @@ public class OthelloView extends JPanel implements Serializable {
     private final ImageIcon whitePiece = new ImageIcon(getClass().getResource("/whitePiece.png"), "3");
 
     public OthelloView(Game g, Board b, Options options) {
-        int n = board.getBoardSize();
         this.options = options;
         this.game = g; //TODO use a userinput variable
         this.board = b;
+        int n = board.getBoardSize();
         this.buttons = new MyButton[n][n];
         setBackground(color);
         setLayout(new GridLayout(8, 8, 3, 3));
