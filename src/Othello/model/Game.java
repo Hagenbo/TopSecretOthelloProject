@@ -77,7 +77,11 @@ public class Game implements Serializable {
         return this;
     }
 
-    //Methods for save and load
+    public Board getBoard() {
+        return board;
+    }
+
+    //Methods for save and load - maybe remove
 
     public void save(Game model, String filename) {
         try {
@@ -110,7 +114,7 @@ public class Game implements Serializable {
     }
     */
 
-
+/*
     public Game load(String filename) {
         try {
             FileInputStream input = new FileInputStream(filename);
@@ -125,6 +129,6 @@ public class Game implements Serializable {
             //return othelloView.getModel(); //getModel static?
             return new Game("player1","player2", board); //tillfällig lösning tills getGame funkar
         }
-    }
+    }*/
 }
 

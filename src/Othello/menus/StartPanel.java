@@ -71,19 +71,14 @@ public class StartPanel extends JPanel implements ActionListener {
         switch(str){
             case "New Game":
                 //TODO start a new game, have a new JPanel where players put in their names (and IP-adresses if thats how this works)?
-                //game.setModel(new othelloModel("player1","player2"));
                 obsrvble.setValue(States.PLAY);
-                /*setPanel(game);
-                createMenuBar(this);
-                setSize(600, 600);
-                game.revalidate();
-                game.flipButtons();*/
                 break;
 
             case "Load Game":
                 //TODO load game somehow, but first the "conncection panel"
-                /*String filename = JOptionPane.showInputDialog("Give a file name:");
-                game.setModel(load(filename));
+                //obsrvble.setValue(States.LOAD);
+                //String filename = JOptionPane.showInputDialog("Give a file name:");
+                /*game.setModel(load(filename));
                 setPanel(game);
                 createMenuBar(this);
                 setSize(600, 600);
@@ -92,21 +87,16 @@ public class StartPanel extends JPanel implements ActionListener {
                 break;
 
             case "Options":
-                //setPanel(optionsPanel());
                 obsrvble.setValue(States.OPTIONS);
                 break;
 
             case "Rules":
-                //setPanel(rulesPanel());
                 obsrvble.setValue(States.RULES);
                 break;
 
             case "Exit":
                 System.exit(0);
                 break;
-
-           /* case "Toggle sound":
-                break;*/
 
         }
     }

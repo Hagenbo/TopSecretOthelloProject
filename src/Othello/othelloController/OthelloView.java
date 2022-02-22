@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.Serializable;
 
-public class OthelloView extends JPanel implements Serializable {
+public class OthelloView extends JPanel /*implements Serializable*/ {
 
     private MyButton[][] buttons;
     private Game game;

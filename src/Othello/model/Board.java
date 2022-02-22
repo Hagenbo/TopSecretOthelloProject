@@ -80,8 +80,7 @@ public class Board implements Serializable {
                 }
             }
         }
-        //TODO add prompt with an "ok"-button saying who is the winner.
-        // when ok_button is pressed the game ends and returns to main menu. Should be in view somehow...
+
         if (nr_black > nr_white) {
             return "Black";
 
