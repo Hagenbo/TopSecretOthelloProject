@@ -35,7 +35,6 @@ public class Game implements Serializable {
         onGameOver = c;
     }
 
-
     private void setColor() {
         if (isBlackTurn) {
             currentColor = PieceColor.BLACK;

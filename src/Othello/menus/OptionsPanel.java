@@ -20,12 +20,16 @@ public class OptionsPanel extends JPanel implements ActionListener, MouseListene
         observable = so;
         this.sound = sound;
         setBackground(color);
-
+/*
         JPanel optionsPanel = new JPanel(new BorderLayout());
-        optionsPanel.setBackground(color);
+        setBackground(color);*/
+        setLayout(new BorderLayout());
 
+        add(topPanel(), BorderLayout.CENTER);
+        add(bottomPanel(), BorderLayout.SOUTH);
+        /*
         optionsPanel.add(topPanel(), BorderLayout.CENTER);
-        optionsPanel.add(bottomPanel(), BorderLayout.SOUTH);
+        optionsPanel.add(bottomPanel(), BorderLayout.SOUTH);*/
 
     }
 
