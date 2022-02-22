@@ -1,6 +1,7 @@
 package Othello.menus;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -27,14 +28,9 @@ public class RulesPanel extends JPanel implements MouseListener {
         topPanel.add(rulesText);
 
         setBackground(color);
+        setLayout(new BorderLayout());
         add(topPanel, BorderLayout.CENTER);
         add(bottomPanel, BorderLayout.SOUTH);
-
-        /*JPanel rulesPanel = new JPanel(new BorderLayout());
-        rulesPanel.setBackground(color);
-
-        rulesPanel.add(topPanel, BorderLayout.CENTER);
-        rulesPanel.add(bottomPanel, BorderLayout.SOUTH);*/
     }
 
     public String getRules() {
