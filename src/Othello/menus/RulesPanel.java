@@ -27,6 +27,7 @@ public class RulesPanel extends JPanel implements MouseListener {
         topPanel.add(rulesText);
 
         setBackground(color);
+        setLayout(new BorderLayout());
         add(topPanel, BorderLayout.CENTER);
         add(bottomPanel, BorderLayout.SOUTH);
 
