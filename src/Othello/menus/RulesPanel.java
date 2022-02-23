@@ -1,7 +1,6 @@
 package Othello.menus;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -38,7 +37,6 @@ public class RulesPanel extends JPanel implements MouseListener {
         return str;
     }
 
-
     @Override
     public void mouseClicked(MouseEvent e) {
         observable.setValue(States.START);
@@ -59,5 +57,4 @@ public class RulesPanel extends JPanel implements MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
     }
-
 }

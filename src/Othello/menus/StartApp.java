@@ -22,7 +22,6 @@ public class StartApp extends JFrame implements PropertyChangeListener {
         private final RulesPanel rp;
         private final StatesObservable observable;
         private static final int n = 8;
-        private Load load;
 
 
         public StartApp() {
@@ -42,7 +41,6 @@ public class StartApp extends JFrame implements PropertyChangeListener {
             //lägger till startApp som observer till observable
             observable.addPropertyChangeListener(this);
             setVisible(true);
-
         }
 
     @Override
@@ -71,12 +69,12 @@ public class StartApp extends JFrame implements PropertyChangeListener {
                 validate();
             }
 
+            // Do we want to add Options to Game instead of OthelloView? In that case we can keep the options
+            // when we load a game... In that case we also need a getOptions()-method in Game.
             else if(state == States.PLAY){
-                Board board = new Board(n);
-                Game game = new Game("player1","player2", board);
+                Game game = new Game("player1","player2", new Board(n));
                 new GameMenubar(game, options, observable,this);
-                game_GUI = new OthelloView(game, board, options /*, observable*/);
-                //game_GUI.setGame(new Game("player1","player2"));
+                game_GUI = new OthelloView(game, options);
                 setContentPane(game_GUI);
                 setSize(600, 600);
                 game_GUI.revalidate();
@@ -85,17 +83,10 @@ public class StartApp extends JFrame implements PropertyChangeListener {
 
            else if(state == States.LOAD){
                String filename = JOptionPane.showInputDialog("Give a file name:");
-                /*game.setModel(load(filename));
-                setPanel(game);
-                createMenuBar(this);
-                setSize(600, 600);
-                game.revalidate();
-                game.flipButtons();*/
-
                 try {
                     Game game = new Load().load(filename);
                     new GameMenubar(game, options, observable,this);
-                    game_GUI = new OthelloView(game, game.getBoard(), options);
+                    game_GUI = new OthelloView(game, options);
                     setContentPane(game_GUI);
                     setSize(600, 600);
                     game_GUI.revalidate();

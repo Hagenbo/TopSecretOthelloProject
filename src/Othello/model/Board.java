@@ -80,13 +80,13 @@ public class Board implements Serializable {
                 }
             }
         }
-
         if (nr_black > nr_white) {
             return "Black";
-
-        } else if (nr_white > nr_black) {
+        }
+        else if (nr_white > nr_black) {
             return "White";
-        } else {
+        }
+        else {
             //TODO add for draw
             //System.out.println("It's a draw!");
             return "Draw";

@@ -78,7 +78,6 @@ public class GameMenubar implements MenuListener, Serializable {
         }
     }
 
-
     @Override
     public void menuDeselected(MenuEvent e) {
     }
