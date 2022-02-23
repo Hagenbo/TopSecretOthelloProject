@@ -8,21 +8,20 @@ public class Game implements Serializable {
     // behövs vid serializable: private static final long serialVersionUID = 1L;
     private int gameID;
     private boolean isBlackTurn;
-    private PieceColor startColor;
+    private PieceColor currentColor;
     private Consumer<PieceColor> onGameOver;
     private final Board board;
-    private static final int n = 8;
 
     //some additions: See comments in player-class
     private final Player player1;
     private final Player player2;
 
-    public Game(String p1, String p2) {
+    public Game(String p1, String p2, Board b) {
         this.isBlackTurn = true;
         /*Random r = new Random();        // this may not be used
         this.gameID = r.nextInt();      // this may not be used*/
-        this.startColor = setStartColor();
-        this.board = new Board(n);
+        setColor();
+        this.board = b;
 
         //assign players and Colors. See comments in player-class
         this.player1 = new Player(p1);
@@ -36,89 +35,67 @@ public class Game implements Serializable {
         onGameOver = c;
     }
 
-
-    private PieceColor setStartColor() {
+    private void setColor() {
         if (isBlackTurn) {
-            return PieceColor.BLACK;
+            currentColor = PieceColor.BLACK;
         } else {
-            return PieceColor.WHITE;
+            currentColor = PieceColor.WHITE;
         }
     }
 
-    public PieceColor getStartColor() {
-        return startColor;
-    }
-
-    public PieceColor getPiece(int i, int j) {
-        return board.getPiece(i, j);
+    public PieceColor getCurrentColor() {
+        return currentColor;
     }
 
     public void changeTurn() {
         isBlackTurn = !isBlackTurn;
-        startColor = setStartColor();
-    }
-
-    // method checks if the player has any possible moves
-    public boolean playPossible(PieceColor startColor) {
-        int possibleMoves = 0;
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                if (board.getPiece(i, j) == PieceColor.EMPTY && board.movePossible(i, j, startColor)) {
-                    possibleMoves++;
-                }
-            }
-        }
-        return (possibleMoves > 0);
-    }
-
-    public boolean placePieceAt(int i, int j) {
-        //System.out.println(startColor);
-        if (!board.movePossible(i, j, startColor) || board.getPiece(i, j) != PieceColor.EMPTY) {
-            return false;
-        }
-        board.setPiece(i, j, startColor);
-        board.flip(i, j, startColor);
-        changeTurn();
-        return true;
+        setColor();
     }
 
     public String gameOver() {
-        int nr_black = 0;
-        int nr_white = 0;
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                if (board.getPiece(i, j) == PieceColor.BLACK) {
-                    nr_black++;
-                }
-                if (board.getPiece(i, j) == PieceColor.WHITE) {
-                    nr_white++;
-                }
-            }
-        }
+        String winner = board.countPieces();
         //TODO add prompt with an "ok"-button saying who is the winner.
-        // when ok_button is pressed the game ends and returns to main menu. Should be in view somehow..
-        //this is done-ish?
-        if (nr_black > nr_white) {
+        // when ok_button is pressed the game ends and returns to main menu. Should be in view somehow...
+        if (winner.equals("Black")) {
             if (onGameOver != null) {
                 onGameOver.accept(PieceColor.BLACK);
             }
-            return "Black";
 
-        } else if (nr_white > nr_black) {
+        } else if (winner.equals("White")) {
             if (onGameOver != null) {
                 onGameOver.accept(PieceColor.WHITE);
             }
-            return "White";
         } else {
             //TODO add for draw
             //System.out.println("It's a draw!");
             System.out.println("Draw");
-            return "Draw";
         }
+        return winner;
     }
 
-    //TODO make new class for save and load
-    //Methods for save and load
+    public Game getGame() {
+        return this;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    //Methods for save and load - maybe remove
+
+    public void save(Game model, String filename) {
+        try {
+            FileOutputStream output = new FileOutputStream(filename);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(output);
+            objectOutputStream.writeObject(model);
+            objectOutputStream.flush();
+            objectOutputStream.close();
+            System.out.println(filename + " stored.");
+        } catch (IOException e) {
+            System.out.println("save failed because " + e);
+        }
+    }
+    /*
     public void SaveFile(Game model, String filename) {
         try {
             //fileName should be the name of model-object we want to save
@@ -135,7 +112,9 @@ public class Game implements Serializable {
             ioException.printStackTrace(); //for debugging
         }
     }
+    */
 
+/*
     public Game load(String filename) {
         try {
             FileInputStream input = new FileInputStream(filename);
@@ -148,8 +127,8 @@ public class Game implements Serializable {
             System.out.println("load failed because " + e);
             //System.out.println("returned current game.");
             //return othelloView.getModel(); //getModel static?
-            return new Game("player1","player2"); //tillfällig lösning tills getModel funkar
+            return new Game("player1","player2", board); //tillfällig lösning tills getGame funkar
         }
-    }
+    }*/
 }
 
