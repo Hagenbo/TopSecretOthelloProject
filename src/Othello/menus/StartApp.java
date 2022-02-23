@@ -4,6 +4,7 @@ package Othello.menus;
 import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
 
 import Othello.model.Board;
 import Othello.model.Game;
@@ -83,6 +84,34 @@ public class StartApp extends JFrame implements PropertyChangeListener {
             }
 
            else if(state == States.LOAD){
+               String filename = JOptionPane.showInputDialog("Give a file name:");
+                /*game.setModel(load(filename));
+                setPanel(game);
+                createMenuBar(this);
+                setSize(600, 600);
+                game.revalidate();
+                game.flipButtons();*/
+
+                try {
+                    Game game = new Load().load(filename);
+                    new GameMenubar(game, options, observable,this);
+                    game_GUI = new OthelloView(game, game.getBoard(), options);
+                    setContentPane(game_GUI);
+                    setSize(600, 600);
+                    game_GUI.revalidate();
+                    game_GUI.flipButtons();
+
+                } catch (IOException e) {
+                    //stoppa in beteende
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    //stoppa in beteende
+                    e.printStackTrace();
+                }
+
+
+
+
                /* Load loadFile = new Load();
                 String filename = JOptionPane.showInputDialog("Give a file name:");
                 Game loadGame = loadFile.load(filename);

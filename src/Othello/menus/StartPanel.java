@@ -76,6 +76,7 @@ public class StartPanel extends JPanel implements ActionListener {
 
             case "Load Game":
                 //TODO load game somehow, but first the "conncection panel"
+                obsrvble.setValue(States.LOAD);
                 //obsrvble.setValue(States.LOAD);
                 //String filename = JOptionPane.showInputDialog("Give a file name:");
                 /*game.setModel(load(filename));

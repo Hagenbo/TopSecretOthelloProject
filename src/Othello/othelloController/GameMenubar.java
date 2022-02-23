@@ -66,7 +66,6 @@ public class GameMenubar implements MenuListener, Serializable {
             case "Save Game":
                 String filename = JOptionPane.showInputDialog("Enter a file name:");
                 game.save(game, filename);
-                //saveTest.SaveFile(game.getModel(), filename);
                 break;
 
             case "Quit":

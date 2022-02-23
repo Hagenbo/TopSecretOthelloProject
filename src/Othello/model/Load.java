@@ -1,6 +1,7 @@
 package Othello.model;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 
 public class Load {
@@ -12,8 +13,8 @@ public class Load {
         //load(fileName);
     }
 
-    public Game load(String filename) {
-        try {
+    public Game load(String filename) throws IOException, ClassNotFoundException {
+
             //FileInputStream input = new FileInputStream(filename);
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filename));
             Game stored = (Game) (objectInputStream.readObject());
@@ -23,13 +24,6 @@ public class Load {
             return stored;
 
 
-        } catch (Exception e) {
-            //TODO add prompt
-            System.out.println("load failed because ");
-            e.printStackTrace();
-            return new Game("player 1", "player 2", new Board(8) );
-
-        }
     }
 
 }
