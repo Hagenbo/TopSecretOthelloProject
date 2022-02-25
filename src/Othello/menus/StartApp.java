@@ -84,27 +84,29 @@ public class StartApp extends JFrame implements PropertyChangeListener {
 
            else if(state == States.LOAD){
                String filename = JOptionPane.showInputDialog("Give a file name:");
-                try {
-                    SaveInfo si = new Load().load(filename);
-                    Game game = new Game(si.getP1(), si.getP2(), si.getBoard());
-                    if(game.getCurrentColor() != si.getPlayerTurn()){
-                        game.changeTurn();
-                    }
-                    new GameMenubar(game, si.getOptions(), observable,this);
-                    game_GUI = new OthelloView(game, si.getOptions(), observable);
+               if( filename != null) {
+                   try {
+                       SaveInfo si = new Load().load(filename);
+                       Game game = new Game(si.getP1(), si.getP2(), si.getBoard());
+                       if(game.getCurrentColor() != si.getPlayerTurn()){
+                           game.changeTurn();
+                       }
+                       new GameMenubar(game, si.getOptions(), observable,this);
+                       game_GUI = new OthelloView(game, si.getOptions(), observable);
+                       setContentPane(game_GUI);
+                       setSize(600, 600);
+                       game_GUI.revalidate();
+                       game_GUI.flipButtons();
 
-                    setContentPane(game_GUI);
-                    setSize(600, 600);
-                    game_GUI.revalidate();
-                    game_GUI.flipButtons();
-
-                } catch (IOException e) {
-                    JOptionPane.showMessageDialog(null, "File " + filename + " not found :( Please check spelling.", "Error", JOptionPane.ERROR_MESSAGE);
-                    observable.setValue(States.START);
-                } catch (ClassNotFoundException e) {
-                    JOptionPane.showMessageDialog(null, "Can't load file " + filename, "Error", JOptionPane.ERROR_MESSAGE);
-                    observable.setValue(States.START);
-                }
+                   } catch (IOException e) {
+                       JOptionPane.showMessageDialog(null, "File " + filename + " not found :( Please check spelling.", "Error", JOptionPane.ERROR_MESSAGE);
+                       observable.setValue(States.START);
+                   } catch (ClassNotFoundException e) {
+                       JOptionPane.showMessageDialog(null, "Can't load file " + filename, "Error", JOptionPane.ERROR_MESSAGE);
+                       observable.setValue(States.START);
+                   }
+               }
+               else { observable.setValue(States.START);}
             }
 
            else if(state == States.REMATCH){

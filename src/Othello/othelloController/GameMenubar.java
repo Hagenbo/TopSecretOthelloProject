@@ -44,7 +44,6 @@ public class GameMenubar implements MenuListener, Serializable {
         saveGame.addMenuListener(this);
 
         frame.setJMenuBar(menuBar);
-        //add(menuBar);
     }
 
     @Override
@@ -65,9 +64,10 @@ public class GameMenubar implements MenuListener, Serializable {
 
             case "Save Game":
                 String filename = JOptionPane.showInputDialog("Enter a file name:");
-                SaveInfo si = new SaveInfo(game.getBoard(), game.getP1(), game.getP2(), game.getCurrentColor(), options);
-                //game.save(si, filename);
-                new Save().save(si, filename);
+                if (filename != null){
+                    SaveInfo si = new SaveInfo(game.getBoard(), game.getP1(), game.getP2(), game.getCurrentColor(), options);
+                    new Save().save(si, filename);
+                }
                 break;
 
             case "Quit":
