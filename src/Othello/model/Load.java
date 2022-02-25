@@ -8,13 +8,15 @@ public class Load {
 
     public Load(){}
 
-    public Game load(String filename) throws IOException, ClassNotFoundException {
-            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filename));
-            Game stored = (Game) (objectInputStream.readObject());
+    public SaveInfo load(String filename) throws IOException, ClassNotFoundException {
+        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filename));
+        SaveInfo stored = (SaveInfo) (objectInputStream.readObject());
 
-            objectInputStream.close();
-            System.out.println("Loaded " + filename);
-            return stored;
+        objectInputStream.close();
+        System.out.println("Loaded " + filename);
+        return stored;
+
+
     }
 
 }

@@ -81,54 +81,13 @@ public class Game implements Serializable {
         return board;
     }
 
-    //Methods for save and load - maybe remove
-
-    public void save(Game model, String filename) {
-        try {
-            FileOutputStream output = new FileOutputStream(filename);
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(output);
-            objectOutputStream.writeObject(model);
-            objectOutputStream.flush();
-            objectOutputStream.close();
-            System.out.println(filename + " stored.");
-        } catch (IOException e) {
-            System.out.println("save failed because " + e);
-        }
+    public Player getP1(){
+        return player1;
     }
-    /*
-    public void SaveFile(Game model, String filename) {
-        try {
-            //fileName should be the name of model-object we want to save
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename));
-            //model is the model object we want to save
-            oos.writeObject(model);
-            oos.close();
-            //promt sayin file saved?
 
-
-        } catch (IOException ioException) {
-            //should come up as prompt
-            System.out.println("Error saving");
-            ioException.printStackTrace(); //for debugging
-        }
+    public Player getP2(){
+        return player2;
     }
-    */
 
-/*
-    public Game load(String filename) {
-        try {
-            FileInputStream input = new FileInputStream(filename);
-            ObjectInputStream objectInputStream = new ObjectInputStream(input);
-            Game stored = (Game) (objectInputStream.readObject());
-            objectInputStream.close();
-            System.out.println("Loaded " + filename);
-            return stored;
-        } catch (Exception e) {
-            System.out.println("load failed because " + e);
-            //System.out.println("returned current game.");
-            //return othelloView.getModel(); //getModel static?
-            return new Game("player1","player2", board); //tillfällig lösning tills getGame funkar
-        }
-    }*/
 }
 

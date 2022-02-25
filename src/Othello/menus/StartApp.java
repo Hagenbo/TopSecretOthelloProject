@@ -9,6 +9,7 @@ import java.io.IOException;
 import Othello.model.Board;
 import Othello.model.Game;
 import Othello.model.Load;
+import Othello.model.SaveInfo;
 import Othello.othelloController.*;
 
 
@@ -84,9 +85,19 @@ public class StartApp extends JFrame implements PropertyChangeListener {
            else if(state == States.LOAD){
                String filename = JOptionPane.showInputDialog("Give a file name:");
                 try {
-                    Game game = new Load().load(filename);
-                    new GameMenubar(game, options, observable,this);
-                    game_GUI = new OthelloView(game, options);
+                    SaveInfo si = new Load().load(filename);
+                    Game game = new Game(si.getP1(), si.getP2(), si.getBoard());
+                    if(game.getCurrentColor() != si.getPlayerTurn()){
+                        game.changeTurn();
+                    }
+                    new GameMenubar(game, si.getOptions(), observable,this);
+                    game_GUI = new OthelloView(game, si.getOptions());
+
+
+
+                    //Game game = new Load().load(filename);
+                    //new GameMenubar(game, options, observable,this);
+                    //game_GUI = new OthelloView(game, options);
                     setContentPane(game_GUI);
                     setSize(600, 600);
                     game_GUI.revalidate();
@@ -99,6 +110,7 @@ public class StartApp extends JFrame implements PropertyChangeListener {
                     //stoppa in beteende
                     e.printStackTrace();
                 }
+
 
 
 

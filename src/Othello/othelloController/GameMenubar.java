@@ -4,6 +4,7 @@ import Othello.menus.States;
 import Othello.menus.StatesObservable;
 import Othello.model.Game;
 import Othello.model.Save;
+import Othello.model.SaveInfo;
 
 import javax.swing.*;
 import javax.swing.event.MenuEvent;
@@ -65,7 +66,9 @@ public class GameMenubar implements MenuListener, Serializable {
 
             case "Save Game":
                 String filename = JOptionPane.showInputDialog("Enter a file name:");
-                game.save(game, filename);
+                SaveInfo si = new SaveInfo(game.getBoard(), game.getP1(), game.getP2(), game.getCurrentColor(), options);
+                //game.save(si, filename);
+                new Save().save(si, filename);
                 break;
 
             case "Quit":

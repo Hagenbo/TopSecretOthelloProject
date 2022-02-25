@@ -1,6 +1,8 @@
 package Othello.othelloController;
 
-public class Options {
+import java.io.Serializable;
+
+public class Options implements Serializable {
     private Boolean soundOn;
 
     public Options() {

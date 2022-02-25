@@ -103,6 +103,8 @@ public class OthelloView extends JPanel {
     public void displayWinner(PieceColor winner){
         JOptionPane.showMessageDialog(null, "The winner is " + winner, "Winner", JOptionPane.PLAIN_MESSAGE);
         //TODO exit game on "OK", maybe make the JOptionPane more pretty
+        //return to startPanel or ask if play again?? Or smth else
+
     }
 
 }
