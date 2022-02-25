@@ -5,7 +5,6 @@ import java.util.function.Consumer;
 
 public class Game implements Serializable {
 
-    // behövs vid serializable: private static final long serialVersionUID = 1L;
     private int gameID;
     private boolean isBlackTurn;
     private PieceColor currentColor;
@@ -35,6 +34,7 @@ public class Game implements Serializable {
         onGameOver = c;
     }
 
+
     private void setColor() {
         if (isBlackTurn) {
             currentColor = PieceColor.BLACK;
@@ -54,8 +54,7 @@ public class Game implements Serializable {
 
     public String gameOver() {
         String winner = board.countPieces();
-        //TODO add prompt with an "ok"-button saying who is the winner.
-        // when ok_button is pressed the game ends and returns to main menu. Should be in view somehow...
+
         if (winner.equals("Black")) {
             if (onGameOver != null) {
                 onGameOver.accept(PieceColor.BLACK);
@@ -66,9 +65,10 @@ public class Game implements Serializable {
                 onGameOver.accept(PieceColor.WHITE);
             }
         } else {
-            //TODO add for draw
-            //System.out.println("It's a draw!");
-            System.out.println("Draw");
+            if (onGameOver != null) {
+                onGameOver.accept(PieceColor.EMPTY);
+            }
+            
         }
         return winner;
     }

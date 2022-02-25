@@ -75,7 +75,7 @@ public class StartApp extends JFrame implements PropertyChangeListener {
             else if(state == States.PLAY){
                 Game game = new Game("player1","player2", new Board(n));
                 new GameMenubar(game, options, observable,this);
-                game_GUI = new OthelloView(game, options);
+                game_GUI = new OthelloView(game, options, observable);
                 setContentPane(game_GUI);
                 setSize(600, 600);
                 game_GUI.revalidate();
@@ -91,47 +91,24 @@ public class StartApp extends JFrame implements PropertyChangeListener {
                         game.changeTurn();
                     }
                     new GameMenubar(game, si.getOptions(), observable,this);
-                    game_GUI = new OthelloView(game, si.getOptions());
+                    game_GUI = new OthelloView(game, si.getOptions(), observable);
 
-
-
-                    //Game game = new Load().load(filename);
-                    //new GameMenubar(game, options, observable,this);
-                    //game_GUI = new OthelloView(game, options);
                     setContentPane(game_GUI);
                     setSize(600, 600);
                     game_GUI.revalidate();
                     game_GUI.flipButtons();
 
                 } catch (IOException e) {
-                    //stoppa in beteende
-                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "File " + filename + " not found :( Please check spelling.", "Error", JOptionPane.ERROR_MESSAGE);
                 } catch (ClassNotFoundException e) {
-                    //stoppa in beteende
-                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Can't load file " + filename, "Error", JOptionPane.ERROR_MESSAGE);
                 }
-
-
-
-
-
-               /* Load loadFile = new Load();
-                String filename = JOptionPane.showInputDialog("Give a file name:");
-                Game loadGame = loadFile.load(filename);
-                game_GUI = new OthelloView(loadGame, loadGame.getBoard(), options);
-                new GameMenubar(loadGame, options, observable,this);
-                //setModel(load(filename));
-                setContentPane(game_GUI);
-
-                setSize(600, 600);
-                game_GUI.revalidate();
-                game_GUI.flipButtons();
-
-                //load("filename");*/
             }
 
+           else if(state == States.REMATCH){
+               observable.setValue(States.PLAY);
+            }
         }
-
 
         public static void main(String[] args) {
             StartApp start = new StartApp();

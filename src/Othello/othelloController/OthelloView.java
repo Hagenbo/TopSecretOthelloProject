@@ -1,5 +1,7 @@
 package Othello.othelloController;
 import Othello.MyButton;
+import Othello.menus.States;
+import Othello.menus.StatesObservable;
 import Othello.model.*;
 
 import javax.swing.*;
@@ -11,13 +13,17 @@ public class OthelloView extends JPanel {
     private Game game;
     private static final Color color = new Color(0, 78, 56);
     private final Options options;
+    private final StatesObservable observable;
+
+
 
     //ska dessa nedan va private? eller ska dom ligga här såhär?
     private final ImageIcon transparent = new ImageIcon(getClass().getResource("/transparent.png"), "1");
     private final ImageIcon blackPiece = new ImageIcon(getClass().getResource("/blackPiece.png"), "2");
     private final ImageIcon whitePiece = new ImageIcon(getClass().getResource("/whitePiece.png"), "3");
 
-    public OthelloView(Game g, Options options) {
+    public OthelloView(Game g, Options options, StatesObservable so) {
+        this.observable = so;
         this.options = options;
         this.game = g; //TODO use a userinput variable
         int n = game.getBoard().getBoardSize();
@@ -68,6 +74,9 @@ public class OthelloView extends JPanel {
         game.setOnGameOver((color)->{
             displayWinner(color);
         });
+        //TODO LÄGG DRAW HÄR
+
+
     }
 
     public void flipButtons() {
@@ -101,10 +110,19 @@ public class OthelloView extends JPanel {
     }
 
     public void displayWinner(PieceColor winner){
-        JOptionPane.showMessageDialog(null, "The winner is " + winner, "Winner", JOptionPane.PLAIN_MESSAGE);
-        //TODO exit game on "OK", maybe make the JOptionPane more pretty
-        //return to startPanel or ask if play again?? Or smth else
-
+        int result;
+        if(winner == PieceColor.EMPTY){
+            result = JOptionPane.showConfirmDialog(null, "It's a draw! Do you want a rematch?" , "Game over", JOptionPane.YES_NO_OPTION);
+        }
+        else{
+            result = JOptionPane.showConfirmDialog(null, "The winner is " + winner + "! " + "Do you want a rematch?" , "Game over", JOptionPane.YES_NO_OPTION);
+        }
+        if(result == JOptionPane.NO_OPTION){
+            observable.setValue(States.START);
+        }
+        else{
+            observable.setValue(States.REMATCH);
+        }
     }
 
 }
