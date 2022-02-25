@@ -11,10 +11,10 @@ import javax.swing.*;
 
 public class OptionsPanel extends JPanel implements ActionListener, MouseListener {
 
-    private StatesObservable observable;
+    private final StatesObservable observable;
     private static final Color color = new Color(0, 78, 56);
-    JLabel optionsOverview;
-    private Options sound;
+    private JLabel optionsOverview;
+    private final Options sound;
 
     //behöver skicka med so så panel kan säga till att den ändrar just "den instansen av observable"
     public OptionsPanel(StatesObservable so, Options sound) {

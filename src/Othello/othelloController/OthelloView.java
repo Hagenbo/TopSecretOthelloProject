@@ -11,7 +11,7 @@ import java.util.Objects;
 public class OthelloView extends JPanel {
 
     private MyButton[][] buttons;
-    private Game game;
+    private final Game game;
     private static final Color color = new Color(0, 78, 56);
     private final Options options;
     private final StatesObservable observable;
@@ -79,9 +79,7 @@ public class OthelloView extends JPanel {
         }
         add(boardPanel);
         add(bottomLabel, BorderLayout.SOUTH);
-        game.setOnGameOver((color)->{
-            displayWinner(color);
-        });
+        game.setOnGameOver((color)-> displayWinner(color));
     }
 
     public void flipButtons() {
@@ -100,14 +98,6 @@ public class OthelloView extends JPanel {
                 }
             }
         }
-    }
-
-    public void setGame(Game g){
-        game = g;
-    }
-
-    public Game getGame(){
-        return game;
     }
 
     public void withdraw() {

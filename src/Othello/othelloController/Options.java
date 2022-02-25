@@ -15,7 +15,6 @@ public class Options implements Serializable {
     }
 
     public String isSoundOn() {
-
         if (soundOn) {
             return "On";
         }

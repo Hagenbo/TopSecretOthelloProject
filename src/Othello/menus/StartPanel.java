@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class StartPanel extends JPanel implements ActionListener {
-    private StatesObservable observable;
+    private  final StatesObservable observable;
     private static final Color color = new Color(0, 78, 56);
 
     public StartPanel(StatesObservable so){
@@ -74,14 +74,6 @@ public class StartPanel extends JPanel implements ActionListener {
             case "Load Game":
                 //TODO load game somehow, but first the "conncection panel"
                 observable.setValue(States.LOAD);
-                //obsrvble.setValue(States.LOAD);
-                //String filename = JOptionPane.showInputDialog("Give a file name:");
-                /*game.setModel(load(filename));
-                setPanel(game);
-                createMenuBar(this);
-                setSize(600, 600);
-                game.revalidate();
-                game.flipButtons();*/
                 break;
 
             case "Options":

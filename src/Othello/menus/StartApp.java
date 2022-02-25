@@ -54,7 +54,7 @@ public class StartApp extends JFrame implements PropertyChangeListener {
         }
 
     }
-        public void setPanel(){
+    public void setPanel(){
             if(state == States.START){
                 this.setJMenuBar(null);
                 setContentPane(sp);

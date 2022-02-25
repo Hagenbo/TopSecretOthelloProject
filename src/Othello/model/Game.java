@@ -73,10 +73,6 @@ public class Game implements Serializable {
         return winner;
     }
 
-    public Game getGame() {
-        return this;
-    }
-
     public Board getBoard() {
         return board;
     }
