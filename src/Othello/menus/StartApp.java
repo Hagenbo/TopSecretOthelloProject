@@ -100,8 +100,10 @@ public class StartApp extends JFrame implements PropertyChangeListener {
 
                 } catch (IOException e) {
                     JOptionPane.showMessageDialog(null, "File " + filename + " not found :( Please check spelling.", "Error", JOptionPane.ERROR_MESSAGE);
+                    observable.setValue(States.START);
                 } catch (ClassNotFoundException e) {
                     JOptionPane.showMessageDialog(null, "Can't load file " + filename, "Error", JOptionPane.ERROR_MESSAGE);
+                    observable.setValue(States.START);
                 }
             }
 

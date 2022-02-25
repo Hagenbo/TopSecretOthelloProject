@@ -16,7 +16,6 @@ public class GameMenubar implements MenuListener, Serializable {
     private final StatesObservable observable;
     private final Game game;
     private final Options options;
-    private Save save;
 
     public GameMenubar(Game game, Options options, StatesObservable so, JFrame f){
         observable = so;
@@ -77,6 +76,8 @@ public class GameMenubar implements MenuListener, Serializable {
 
             case "Toggle sound":
                 options.toggleSound();
+
+
                 break;
         }
     }

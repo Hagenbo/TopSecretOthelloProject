@@ -6,6 +6,7 @@ import Othello.model.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Objects;
 
 public class OthelloView extends JPanel {
 
@@ -14,8 +15,6 @@ public class OthelloView extends JPanel {
     private static final Color color = new Color(0, 78, 56);
     private final Options options;
     private final StatesObservable observable;
-
-
 
     //ska dessa nedan va private? eller ska dom ligga här såhär?
     private final ImageIcon transparent = new ImageIcon(getClass().getResource("/transparent.png"), "1");
@@ -28,8 +27,13 @@ public class OthelloView extends JPanel {
         this.game = g; //TODO use a userinput variable
         int n = game.getBoard().getBoardSize();
         this.buttons = new MyButton[n][n];
-        setBackground(color);
-        setLayout(new GridLayout(8, 8, 3, 3));
+        setLayout(new BorderLayout());
+
+        JLabel bottomLabel = new JLabel("Turn: " + game.getCurrentColor());
+
+        JPanel boardPanel = new JPanel();
+        boardPanel.setLayout(new GridLayout(8, 8, 3, 3));
+        boardPanel.setBackground(color);
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -44,7 +48,8 @@ public class OthelloView extends JPanel {
                 }
                 buttons[i][j] = mb;
                 mb.setBackground(color);
-                add(mb);
+                boardPanel.add(mb);
+
 
                 mb.addActionListener(e -> {
                     MyButton pressedButton = (MyButton) e.getSource();
@@ -52,7 +57,7 @@ public class OthelloView extends JPanel {
                     int y = pressedButton.getRow();
 
                     if (!game.getBoard().placePieceAt(y, x, game.getCurrentColor())) {
-                        if(options.isSoundOn()){
+                        if(Objects.equals(options.isSoundOn(), "On")){
                             Toolkit.getDefaultToolkit().beep();
                         }
                         return;
@@ -68,15 +73,15 @@ public class OthelloView extends JPanel {
                             game.gameOver();
                         }
                     }
+                    bottomLabel.setText("Turn: " + game.getCurrentColor());
                 });
             }
         }
+        add(boardPanel);
+        add(bottomLabel, BorderLayout.SOUTH);
         game.setOnGameOver((color)->{
             displayWinner(color);
         });
-        //TODO LÄGG DRAW HÄR
-
-
     }
 
     public void flipButtons() {
