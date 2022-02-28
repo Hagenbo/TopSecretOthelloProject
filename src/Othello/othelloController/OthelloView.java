@@ -1,6 +1,7 @@
 package Othello.othelloController;
 import Othello.MyButton;
 import Othello.model.*;
+import Othello.server.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +14,7 @@ public class OthelloView extends JPanel /*implements Serializable*/ {
     private Board board;
     private static final Color color = new Color(0, 78, 56);
     private final Options options;
+    private DisDosUpdater DDU;
 
     //ska dessa nedan va private? eller ska dom ligga här såhär?
     private final ImageIcon transparent = new ImageIcon(getClass().getResource("/transparent.png"), "1");
@@ -76,6 +78,11 @@ public class OthelloView extends JPanel /*implements Serializable*/ {
 
     public void flipButtons() {
         int n = board.getBoardSize();
+        DDU = new DisDosUpdater();
+        if(DDU.DisDosWaiter()){
+            JOptionPane.showMessageDialog(null,"Waiting For Opponent");
+        } else{
+
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 PieceColor pc = board.getPiece(i,j);
@@ -90,6 +97,7 @@ public class OthelloView extends JPanel /*implements Serializable*/ {
                 }
             }
         }
+    }
     }
 
     public void setGame(Game g){

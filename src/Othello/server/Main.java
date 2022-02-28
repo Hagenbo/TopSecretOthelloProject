@@ -9,54 +9,42 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class Main implements Runnable{
+public class Main{
     private ServerSocket ServSock;
     private DataOutputStream dos;
     private DataInputStream dis;
     private Socket socket;
     private Scanner scanner = new Scanner(System.in);
     private int port = 1234;
-    private String ip = "localhost";
-    private Thread thread;
-
+    private String ip = "142.93.106.21";
+    private DisDosUpdater DDU = new DisDosUpdater();
 
     private boolean accepted = false;
 
 
-    public Main(){
-        ip = scanner.nextLine();
-        port = scanner.nextInt();
-
+    public Main(int i) {
         while (port < 1025 || port > 65535) {
             System.out.println("ye fucked up");
             port = scanner.nextInt();
         }
-        Connecting();
-        /* if (!Connecting()) {
-            initServ();
-        }*/
-
-        thread = new Thread(this, "OthelloServer");
-        thread.start();
+        initServ();
     }
 
-    @Override
-    public void run(){
-while(true) {
-    listenForServerRequest();
-}
-}
+    public Main() {
+            if (Connecting()) {
+                this.accepted = true;
+            } else {
+                this.accepted = false;
+            }
+        if(!accepted){
+            DDU.setCantConnect(true);
+        }
+    }
 
-    private void listenForServerRequest() {
-        Socket socket = null;
+    private void initServ() {
         try {
-            socket = ServSock.accept();
-            dos = new DataOutputStream(socket.getOutputStream());
-            dis = new DataInputStream(socket.getInputStream());
-            accepted = true;
-            System.out.println("Great success!");
-        } catch (IOException e) {
-            System.out.println("fail");
+            ServSock = new ServerSocket(port, 8, InetAddress.getByName(ip));
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -66,25 +54,14 @@ while(true) {
             socket = new Socket(ip, port);
             dos = new DataOutputStream(socket.getOutputStream());
             dis = new DataInputStream(socket.getInputStream());
-            accepted = true;
         } catch (IOException e) {
-            System.out.println("Unable to connect to: " + ip + ":" + port + " | Going solo");
+            System.out.println("Unable to connect to: " + ip + ":" + port + " | Waiting");
             return false;
         }
-        System.out.println("accepted");
         return true;
     }
 
-    private void initServ() {
-        try {
-            ServSock = new ServerSocket(port, 8, InetAddress.getByName(ip));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
     public static void main(String[] args){
-       new Main();
+       new Main(1);
     }
 }

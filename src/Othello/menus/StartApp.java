@@ -9,6 +9,7 @@ import Othello.model.Board;
 import Othello.model.Game;
 import Othello.model.Load;
 import Othello.othelloController.*;
+import Othello.server.*;
 
 
 public class StartApp extends JFrame implements PropertyChangeListener {
@@ -22,6 +23,7 @@ public class StartApp extends JFrame implements PropertyChangeListener {
         private final StatesObservable observable;
         private static final int n = 8;
         private Load load;
+        private Main server;
 
 
         public StartApp() {
@@ -78,8 +80,10 @@ public class StartApp extends JFrame implements PropertyChangeListener {
                 //game_GUI.setGame(new Game("player1","player2"));
                 setContentPane(game_GUI);
                 setSize(600, 600);
+                new Main();
                 game_GUI.revalidate();
                 game_GUI.flipButtons();
+
             }
 
            else if(state == States.LOAD){
