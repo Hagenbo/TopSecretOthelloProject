@@ -54,7 +54,7 @@ public class StartApp extends JFrame implements PropertyChangeListener {
         }
 
     }
-    public void setPanel(){
+    private void setPanel(){
             if(state == States.START){
                 this.setJMenuBar(null);
                 setContentPane(sp);
@@ -69,7 +69,6 @@ public class StartApp extends JFrame implements PropertyChangeListener {
                 setContentPane(rp);
                 validate();
             }
-
             // Do we want to add Options to Game instead of OthelloView? In that case we can keep the options
             // when we load a game... In that case we also need a getOptions()-method in Game.
             else if(state == States.PLAY){
@@ -81,7 +80,6 @@ public class StartApp extends JFrame implements PropertyChangeListener {
                 game_GUI.revalidate();
                 game_GUI.flipButtons();
             }
-
            else if(state == States.LOAD){
                String filename = JOptionPane.showInputDialog("Give a file name:");
                if( filename != null) {
@@ -97,7 +95,6 @@ public class StartApp extends JFrame implements PropertyChangeListener {
                        setSize(600, 600);
                        game_GUI.revalidate();
                        game_GUI.flipButtons();
-
                    } catch (IOException e) {
                        JOptionPane.showMessageDialog(null, "File " + filename + " not found :( Please check spelling.", "Error", JOptionPane.ERROR_MESSAGE);
                        observable.setValue(States.START);
@@ -106,7 +103,7 @@ public class StartApp extends JFrame implements PropertyChangeListener {
                        observable.setValue(States.START);
                    }
                }
-               else { observable.setValue(States.START);}
+               //else { observable.setValue(States.START);}
             }
 
            else if(state == States.REMATCH){

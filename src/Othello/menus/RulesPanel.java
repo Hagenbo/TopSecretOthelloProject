@@ -32,7 +32,7 @@ public class RulesPanel extends JPanel implements MouseListener {
         add(bottomPanel, BorderLayout.SOUTH);
     }
 
-    public String getRules() {
+    private String getRules() {
         String str = "MAssa regler sjdfhdwsöuihwuiöewhiuöweywuiw23838bfebjs";
         return str;
     }

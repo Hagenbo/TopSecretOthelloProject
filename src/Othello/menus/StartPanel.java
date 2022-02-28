@@ -15,13 +15,13 @@ public class StartPanel extends JPanel implements ActionListener {
         add(this.buttons(), BorderLayout.CENTER);
     }
 
-    public JPanel setUpButtonPanel(){
+    private JPanel setUpButtonPanel(){
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(5, 5));
         return buttonPanel;
     }
 
-    public JPanel buttons(){
+    private JPanel buttons(){
         JPanel buttonPanel = this.setUpButtonPanel();
 
         JButton b0 = new JButton("New Game");
