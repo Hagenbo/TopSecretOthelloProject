@@ -39,12 +39,12 @@ public class RulesPanel extends JPanel implements MouseListener {
                 "One player plays black and the other white.\n" +
                 "\n" +
                 "Each player gets 32 discs and black always starts the game. Then the game alternates \n" +
-                "between white and black until: \n \n" +
-                "one player can not make a valid move to outflank the opponent \n" +
-                "both players have no valid moves.\n \n" +
+                "between white and black until: \n" +
+                "   - one player can not make a valid move to outflank the opponent \n" +
+                "   - both players have no valid moves.\n \n" +
                 "When a player has no valid moves, he pass his turn and the opponent continues. \n" +
                 "When both players can not make a valid move the game ends, and the player with \n" +
-                "the most discs in their colour wins.\n \n" +
+                "the most discs in their colour wins.\n" +
                 "Good luck!";
         return str;
     }

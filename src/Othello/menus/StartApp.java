@@ -27,8 +27,9 @@ public class StartApp extends JFrame implements PropertyChangeListener {
 
         public StartApp() {
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            setSize(500, 275);
+            setSize(500, 280);
             setLocation(200, 200);
+            setResizable(false);
 
             state = States.START;
             observable = new StatesObservable();
@@ -58,6 +59,7 @@ public class StartApp extends JFrame implements PropertyChangeListener {
                 this.setJMenuBar(null);
                 this.setSize(500,275);
                 setContentPane(sp);
+                setResizable(false);
                 validate();
             }
             else if(state == States.OPTIONS){

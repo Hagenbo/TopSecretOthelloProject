@@ -9,9 +9,11 @@ import Othello.model.SaveInfo;
 import javax.swing.*;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.Serializable;
 
-public class GameMenubar implements MenuListener, Serializable {
+public class GameMenubar implements ActionListener, MenuListener, Serializable {
     private JMenuBar menuBar;
     private final StatesObservable observable;
     private final Game game;
@@ -39,10 +41,17 @@ public class GameMenubar implements MenuListener, Serializable {
         toggleSound.addMenuListener(this);
         menuBar.add(toggleSound);
 
-        JMenu saveGame = new JMenu("Save Game");
-        menuBar.add(saveGame);
-        saveGame.addMenuListener(this);
+        // added JMenuItems with actionlistener instead of menuListener.
+        JMenu save_load = new JMenu("Save/Load");
+        JMenuItem save = new JMenuItem("Save");
+        save.addActionListener(this);
 
+        JMenuItem load = new JMenuItem("Load");
+        load.addActionListener(this);
+
+        save_load.add(save);
+        save_load.add(load);
+        menuBar.add(save_load);
         frame.setJMenuBar(menuBar);
     }
 
@@ -62,13 +71,13 @@ public class GameMenubar implements MenuListener, Serializable {
                 observable.setValue(States.START);
                 break;
 
-            case "Save Game":
+            /*case "Save Game":
                 String filename = JOptionPane.showInputDialog("Enter a file name:");
                 if (filename != null){
                     SaveInfo si = new SaveInfo(game.getBoard(), game.getP1(), game.getP2(), game.getCurrentColor(), options);
                     new Save().save(si, filename);
                 }
-                break;
+                break;*/
 
             case "Quit":
                 observable.setValue(States.START);
@@ -81,11 +90,31 @@ public class GameMenubar implements MenuListener, Serializable {
                 break;
         }
     }
-
     @Override
     public void menuDeselected(MenuEvent e) {
     }
     @Override
     public void menuCanceled(MenuEvent e) {
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object obj = e.getSource();
+        if(!(obj instanceof JMenuItem m)) {
+            return;
+        }
+        String str = m.getText();
+        switch (str) {
+            case "Save":
+                String filename = JOptionPane.showInputDialog("Enter a file name:");
+                if (filename != null) {
+                    SaveInfo si = new SaveInfo(game.getBoard(), game.getP1(), game.getP2(), game.getCurrentColor(), options);
+                    new Save().save(si, filename);
+                }
+                    break;
+            case "Load":
+                observable.setValue(States.LOAD);
+                break;
+        }
     }
 }
