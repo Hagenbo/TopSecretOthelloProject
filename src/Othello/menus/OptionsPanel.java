@@ -11,9 +11,10 @@ import javax.swing.*;
 
 public class OptionsPanel extends JPanel implements ActionListener, MouseListener {
 
-    private StatesObservable observable;
+    private final StatesObservable observable;
     private static final Color color = new Color(0, 78, 56);
-    private Options sound;
+    private JLabel optionsOverview;
+    private final Options sound;
 
     //behöver skicka med so så panel kan säga till att den ändrar just "den instansen av observable"
     public OptionsPanel(StatesObservable so, Options sound) {
@@ -55,6 +56,10 @@ public class OptionsPanel extends JPanel implements ActionListener, MouseListene
             back.addMouseListener(this);
             bottomPanel.add(back, BorderLayout.LINE_END);
 
+            this.optionsOverview = new JLabel("Sound: " + sound.isSoundOn());
+            optionsOverview.setForeground(Color.white);
+            bottomPanel.add(optionsOverview, BorderLayout.LINE_START);
+
             return bottomPanel;
 
         }
@@ -84,6 +89,8 @@ public class OptionsPanel extends JPanel implements ActionListener, MouseListene
     @Override
     public void actionPerformed(ActionEvent e) {
         sound.toggleSound();
+        optionsOverview.setText("Sound: " + sound.isSoundOn());
+
     }
 }
 

@@ -1,7 +1,6 @@
 package Othello.menus;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -21,11 +20,12 @@ public class RulesPanel extends JPanel implements MouseListener {
         bottomPanel.add(back, BorderLayout.LINE_END);
 
         JPanel topPanel = new JPanel();
+        topPanel.setLayout(new BorderLayout());
         topPanel.setBackground(color);
-        JTextArea rulesText = new JTextArea(getRules(), 10, 10);
+        JTextArea rulesText = new JTextArea(getRules(), 20, 20);
         rulesText.setBackground(color);
         rulesText.setForeground(Color.white);
-        topPanel.add(rulesText);
+        topPanel.add(rulesText, BorderLayout.CENTER);
 
         setBackground(color);
         setLayout(new BorderLayout());
@@ -33,11 +33,21 @@ public class RulesPanel extends JPanel implements MouseListener {
         add(bottomPanel, BorderLayout.SOUTH);
     }
 
-    public String getRules() {
-        String str = "MAssa regler sjdfhdwsöuihwuiöewhiuöweywuiw23838bfebjs";
+    private String getRules() {
+        String str = " \n" +
+                "Othello is a strategy board game played between 2 players. \n" +
+                "One player plays black and the other white.\n" +
+                "\n" +
+                "Each player gets 32 discs and black always starts the game. Then the game alternates \n" +
+                "between white and black until: \n \n" +
+                "one player can not make a valid move to outflank the opponent \n" +
+                "both players have no valid moves.\n \n" +
+                "When a player has no valid moves, he pass his turn and the opponent continues. \n" +
+                "When both players can not make a valid move the game ends, and the player with \n" +
+                "the most discs in their colour wins.\n \n" +
+                "Good luck!";
         return str;
     }
-
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -59,5 +69,4 @@ public class RulesPanel extends JPanel implements MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
     }
-
 }

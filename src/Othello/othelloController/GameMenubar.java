@@ -4,6 +4,7 @@ import Othello.menus.States;
 import Othello.menus.StatesObservable;
 import Othello.model.Game;
 import Othello.model.Save;
+import Othello.model.SaveInfo;
 
 import javax.swing.*;
 import javax.swing.event.MenuEvent;
@@ -15,7 +16,6 @@ public class GameMenubar implements MenuListener, Serializable {
     private final StatesObservable observable;
     private final Game game;
     private final Options options;
-    private Save save;
 
     public GameMenubar(Game game, Options options, StatesObservable so, JFrame f){
         observable = so;
@@ -44,7 +44,6 @@ public class GameMenubar implements MenuListener, Serializable {
         saveGame.addMenuListener(this);
 
         frame.setJMenuBar(menuBar);
-        //add(menuBar);
     }
 
     @Override
@@ -65,8 +64,10 @@ public class GameMenubar implements MenuListener, Serializable {
 
             case "Save Game":
                 String filename = JOptionPane.showInputDialog("Enter a file name:");
-                game.save(game, filename);
-                //saveTest.SaveFile(game.getModel(), filename);
+                if (filename != null){
+                    SaveInfo si = new SaveInfo(game.getBoard(), game.getP1(), game.getP2(), game.getCurrentColor(), options);
+                    new Save().save(si, filename);
+                }
                 break;
 
             case "Quit":
@@ -75,10 +76,11 @@ public class GameMenubar implements MenuListener, Serializable {
 
             case "Toggle sound":
                 options.toggleSound();
+
+
                 break;
         }
     }
-
 
     @Override
     public void menuDeselected(MenuEvent e) {

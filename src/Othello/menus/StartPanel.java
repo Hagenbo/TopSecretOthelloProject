@@ -6,23 +6,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class StartPanel extends JPanel implements ActionListener {
-    private StatesObservable obsrvble;
+    private  final StatesObservable observable;
     private static final Color color = new Color(0, 78, 56);
 
     public StartPanel(StatesObservable so){
-        obsrvble = so;
+        observable= so;
         setBackground(color);
         add(this.buttons(), BorderLayout.CENTER);
-
-
     }
-    public JPanel setUpButtonPanel(){
+
+    private JPanel setUpButtonPanel(){
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(5, 5));
         return buttonPanel;
     }
 
-    public JPanel buttons(){
+    private JPanel buttons(){
         JPanel buttonPanel = this.setUpButtonPanel();
 
         JButton b0 = new JButton("New Game");
@@ -56,9 +55,7 @@ public class StartPanel extends JPanel implements ActionListener {
         buttonPanel.add(b4);
 
         return buttonPanel;
-
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -71,36 +68,27 @@ public class StartPanel extends JPanel implements ActionListener {
         switch(str){
             case "New Game":
                 //TODO start a new game, have a new JPanel where players put in their names (and IP-adresses if thats how this works)?
-                obsrvble.setValue(States.PLAY);
+                observable.setValue(States.PLAY);
                 break;
 
             case "Load Game":
                 //TODO load game somehow, but first the "conncection panel"
-                //obsrvble.setValue(States.LOAD);
-                //String filename = JOptionPane.showInputDialog("Give a file name:");
-                /*game.setModel(load(filename));
-                setPanel(game);
-                createMenuBar(this);
-                setSize(600, 600);
-                game.revalidate();
-                game.flipButtons();*/
+                observable.setValue(States.LOAD);
                 break;
 
             case "Options":
-                obsrvble.setValue(States.OPTIONS);
+                observable.setValue(States.OPTIONS);
                 break;
 
             case "Rules":
-                obsrvble.setValue(States.RULES);
+                observable.setValue(States.RULES);
                 break;
 
             case "Exit":
                 System.exit(0);
                 break;
-
         }
     }
-
 }
 
 

@@ -4,10 +4,12 @@ package Othello.menus;
 import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
 
 import Othello.model.Board;
 import Othello.model.Game;
 import Othello.model.Load;
+import Othello.model.SaveInfo;
 import Othello.othelloController.*;
 import Othello.server.*;
 
@@ -43,7 +45,6 @@ public class StartApp extends JFrame implements PropertyChangeListener {
             //lägger till startApp som observer till observable
             observable.addPropertyChangeListener(this);
             setVisible(true);
-
         }
 
     @Override
@@ -56,7 +57,7 @@ public class StartApp extends JFrame implements PropertyChangeListener {
         }
 
     }
-        public void setPanel(){
+    private void setPanel(){
             if(state == States.START){
                 this.setJMenuBar(null);
                 setContentPane(sp);
@@ -71,13 +72,12 @@ public class StartApp extends JFrame implements PropertyChangeListener {
                 setContentPane(rp);
                 validate();
             }
-
+            // Do we want to add Options to Game instead of OthelloView? In that case we can keep the options
+            // when we load a game... In that case we also need a getOptions()-method in Game.
             else if(state == States.PLAY){
-                Board board = new Board(n);
-                Game game = new Game("player1","player2", board);
+                Game game = new Game("player1","player2", new Board(n));
                 new GameMenubar(game, options, observable,this);
-                game_GUI = new OthelloView(game, board, options /*, observable*/);
-                //game_GUI.setGame(new Game("player1","player2"));
+                game_GUI = new OthelloView(game, options, observable);
                 setContentPane(game_GUI);
                 setSize(600, 600);
                 new Main();
@@ -85,25 +85,36 @@ public class StartApp extends JFrame implements PropertyChangeListener {
                 game_GUI.flipButtons();
 
             }
-
            else if(state == States.LOAD){
-               /* Load loadFile = new Load();
-                String filename = JOptionPane.showInputDialog("Give a file name:");
-                Game loadGame = loadFile.load(filename);
-                game_GUI = new OthelloView(loadGame, loadGame.getBoard(), options);
-                new GameMenubar(loadGame, options, observable,this);
-                //setModel(load(filename));
-                setContentPane(game_GUI);
-
-                setSize(600, 600);
-                game_GUI.revalidate();
-                game_GUI.flipButtons();
-
-                //load("filename");*/
+               String filename = JOptionPane.showInputDialog("Give a file name:");
+               if( filename != null) {
+                   try {
+                       SaveInfo si = new Load().load(filename);
+                       Game game = new Game(si.getP1(), si.getP2(), si.getBoard());
+                       if(game.getCurrentColor() != si.getPlayerTurn()){
+                           game.changeTurn();
+                       }
+                       new GameMenubar(game, si.getOptions(), observable,this);
+                       game_GUI = new OthelloView(game, si.getOptions(), observable);
+                       setContentPane(game_GUI);
+                       setSize(600, 600);
+                       game_GUI.revalidate();
+                       game_GUI.flipButtons();
+                   } catch (IOException e) {
+                       JOptionPane.showMessageDialog(null, "File " + filename + " not found :( Please check spelling.", "Error", JOptionPane.ERROR_MESSAGE);
+                       observable.setValue(States.START);
+                   } catch (ClassNotFoundException e) {
+                       JOptionPane.showMessageDialog(null, "Can't load file " + filename, "Error", JOptionPane.ERROR_MESSAGE);
+                       observable.setValue(States.START);
+                   }
+               }
+               //else { observable.setValue(States.START);}
             }
 
+           else if(state == States.REMATCH){
+               observable.setValue(States.PLAY);
+            }
         }
-
 
         public static void main(String[] args) {
             StartApp start = new StartApp();
