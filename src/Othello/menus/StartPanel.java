@@ -12,7 +12,10 @@ public class StartPanel extends JPanel implements ActionListener {
     public StartPanel(StatesObservable so){
         observable= so;
         setBackground(color);
+        JLabel imgLabel = new JLabel(new ImageIcon(getClass().getResource("/othelloLogo.png")));
+        add(imgLabel, BorderLayout.NORTH);
         add(this.buttons(), BorderLayout.CENTER);
+
     }
 
     private JPanel setUpButtonPanel(){
