@@ -6,6 +6,7 @@ import Othello.model.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.util.Objects;
 
 public class OthelloView extends JPanel {
@@ -15,6 +16,7 @@ public class OthelloView extends JPanel {
     private static final Color color = new Color(0, 78, 56);
     private final Options options;
     private final StatesObservable observable;
+    private JLabel bottomLabel;
 
     //ska dessa nedan va private? eller ska dom ligga här såhär?
     private final ImageIcon transparent = new ImageIcon(getClass().getResource("/transparent.png"), "1");
@@ -29,8 +31,13 @@ public class OthelloView extends JPanel {
         this.buttons = new MyButton[n][n];
         setLayout(new BorderLayout());
 
-        JLabel bottomLabel = new JLabel("Turn: " + game.getCurrentColor());
+        bottomLabel = new JLabel("Turn: " + game.getCurrentColor());
+        add(setUpBoardPanel(n));
+        add(bottomLabel, BorderLayout.SOUTH);
+        game.setOnGameOver((color)-> displayWinner(color));
+    }
 
+    private JPanel setUpBoardPanel(int n) {
         JPanel boardPanel = new JPanel();
         boardPanel.setLayout(new GridLayout(8, 8, 3, 3));
         boardPanel.setBackground(color);
@@ -50,36 +57,37 @@ public class OthelloView extends JPanel {
                 mb.setBackground(color);
                 boardPanel.add(mb);
 
-
                 mb.addActionListener(e -> {
-                    MyButton pressedButton = (MyButton) e.getSource();
-                    int x = pressedButton.getCol();
-                    int y = pressedButton.getRow();
-
-                    if (!game.getBoard().placePieceAt(y, x, game.getCurrentColor())) {
-                        if(Objects.equals(options.isSoundOn(), "On")){
-                            Toolkit.getDefaultToolkit().beep();
-                        }
-                        return;
-                    }
-                    game.changeTurn();
-                    flipButtons();
-
-                    if (!game.getBoard().playPossible(game.getCurrentColor())) {
-
-                        //TODO add prompt saying move for next player is not possible, include an "ok"-button
-                        game.changeTurn();           // changes turn
-                        if (!game.getBoard().playPossible(game.getCurrentColor())) {  //if none of the players can make a move, the game ends.
-                            game.gameOver();
-                        }
-                    }
-                    bottomLabel.setText("Turn: " + game.getCurrentColor());
+                    playerAction(e);
                 });
             }
         }
-        add(boardPanel);
-        add(bottomLabel, BorderLayout.SOUTH);
-        game.setOnGameOver((color)-> displayWinner(color));
+        return boardPanel;
+    }
+
+    private void playerAction(ActionEvent e) {
+        MyButton pressedButton = (MyButton) e.getSource();
+        int x = pressedButton.getCol();
+        int y = pressedButton.getRow();
+
+        if (!game.getBoard().placePieceAt(y, x, game.getCurrentColor())) {
+            if (Objects.equals(options.isSoundOn(), "On")) {
+                Toolkit.getDefaultToolkit().beep();
+            }
+            return;
+        }
+        game.changeTurn();
+        flipButtons();
+
+        if (!game.getBoard().playPossible(game.getCurrentColor())) {
+
+            //TODO add prompt saying move for next player is not possible, include an "ok"-button
+            game.changeTurn();           // changes turn
+            if (!game.getBoard().playPossible(game.getCurrentColor())) {  //if none of the players can make a move, the game ends.
+                game.gameOver();
+            }
+        }
+        bottomLabel.setText("Turn: " + game.getCurrentColor());
     }
 
     public void flipButtons() {
@@ -119,7 +127,6 @@ public class OthelloView extends JPanel {
             observable.setValue(States.REMATCH);
         }
     }
-
 }
 
 

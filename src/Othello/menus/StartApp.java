@@ -52,7 +52,6 @@ public class StartApp extends JFrame implements PropertyChangeListener {
             state = (States) evt.getNewValue();
             setPanel();
         }
-
     }
     private void setPanel(){
             if(state == States.START){
