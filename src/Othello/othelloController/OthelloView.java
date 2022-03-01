@@ -8,6 +8,7 @@ import Othello.server.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.sql.SQLOutput;
 import java.util.Objects;
 
 public class OthelloView extends JPanel {
@@ -16,7 +17,6 @@ public class OthelloView extends JPanel {
     private final Game game;
     private static final Color color = new Color(0, 78, 56);
     private final Options options;
-    private DisDosUpdater DDU;
     private final StatesObservable observable;
     private JLabel bottomLabel;
 
@@ -79,7 +79,9 @@ public class OthelloView extends JPanel {
             return;
         }
         game.changeTurn();
+
         flipButtons();
+
 
         if (!game.getBoard().playPossible(game.getCurrentColor())) {
 
@@ -90,31 +92,6 @@ public class OthelloView extends JPanel {
             }
         }
         bottomLabel.setText("Turn: " + game.getCurrentColor());
-    }
-
-    public void flipButtons() {
-        int n = board.getBoardSize();
-        DDU = new DisDosUpdater();
-        if(DDU.DisDosWaiter()){
-            JOptionPane.showMessageDialog(null,"Waiting For Opponent");
-        } else{
-
-        int n = game.getBoard().getBoardSize();
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                PieceColor pc = game.getBoard().getPiece(i,j);
-                if (pc == PieceColor.BLACK) {
-                    buttons[i][j].setIcon2(blackPiece);
-                }
-                else if (pc == PieceColor.WHITE) {
-                    buttons[i][j].setIcon2(whitePiece);
-                }
-                else {
-                    buttons[i][j].setIcon2(transparent);
-                }
-            }
-        }
-    }
     }
 
     public void withdraw() {
@@ -136,7 +113,25 @@ public class OthelloView extends JPanel {
             observable.setValue(States.REMATCH);
         }
     }
-}
+
+        public void flipButtons() {
+            System.out.println("SWITCH");
+            int n = game.getBoard().getBoardSize();
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    PieceColor pc = game.getBoard().getPiece(i, j);
+                    if (pc == PieceColor.BLACK) {
+                        buttons[i][j].setIcon2(blackPiece);
+                    } else if (pc == PieceColor.WHITE) {
+                        buttons[i][j].setIcon2(whitePiece);
+                    } else {
+                        buttons[i][j].setIcon2(transparent);
+                    }
+                }
+            }
+        }
+    }
+
 
 
 

@@ -1,67 +1,78 @@
 package Othello.server;
 
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketAddress;
 import java.util.Scanner;
 
 public class Main{
     private ServerSocket ServSock;
-    private DataOutputStream dos;
-    private DataInputStream dis;
+    private OutputStream dos1;
+    private InputStream dis1;
+    private OutputStream dos2;
+    private InputStream dis2;
     private Socket socket;
     private Scanner scanner = new Scanner(System.in);
     private int port = 1234;
-    private String ip = "142.93.106.21";
-    private DisDosUpdater DDU = new DisDosUpdater();
+ //   private String ip = "142.93.106.21";
+    private String ip = "localhost";
+    private Socket connected;
+    private int amountConnected = 0;
+    private InetAddress inetaddress1;
+    private InetAddress inetaddress2;
 
-    private boolean accepted = false;
 
-
-    public Main(int i) {
-        while (port < 1025 || port > 65535) {
-            System.out.println("ye fucked up");
-            port = scanner.nextInt();
-        }
-        initServ();
-    }
 
     public Main() {
-            if (Connecting()) {
-                this.accepted = true;
-            } else {
-                this.accepted = false;
+
+        initServ();
+        while (true) {
+            System.out.println("WAITING");
+            try {
+                connected = ServSock.accept();
+                if (amountConnected == 0) {
+                    inetaddress1 = connected.getInetAddress();
+                    dos1 = connected.getOutputStream(); //MIGHT NEED NEW DATAINPUTSTREAM AND NEW DATAOUTPUTSTREAM
+                    dis1 = connected.getInputStream();
+                    ObjectOutputStream obj1;
+                    obj1 = new ObjectOutputStream(dos1);
+                    obj1.writeObject(null);
+                    amountConnected = 1;
+                } else {
+                    System.out.println("IS DONE");
+                    inetaddress2 = connected.getInetAddress();
+                    dos2 = connected.getOutputStream();
+                    dis2 = connected.getInputStream();
+                    ObjectOutputStream obj2;
+                    obj2 = new ObjectOutputStream(dos2);
+                    System.out.println(inetaddress1);
+                    obj2.writeObject(inetaddress1);
+                    amountConnected = 0;
+                }
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        if(!accepted){
-            DDU.setCantConnect(true);
         }
     }
 
     private void initServ() {
         try {
-            ServSock = new ServerSocket(port, 8, InetAddress.getByName(ip));
+            ServSock = new ServerSocket(port);
+            System.out.println( ServSock.getLocalSocketAddress());
         } catch (Exception e) {
             e.printStackTrace();
+            System.exit(0);
         }
     }
 
-    private boolean Connecting() {
-        try {
-            socket = new Socket(ip, port);
-            dos = new DataOutputStream(socket.getOutputStream());
-            dis = new DataInputStream(socket.getInputStream());
-        } catch (IOException e) {
-            System.out.println("Unable to connect to: " + ip + ":" + port + " | Waiting");
-            return false;
-        }
-        return true;
-    }
+//port, 8, InetAddress.getByName(ip)
 
     public static void main(String[] args){
-       new Main(1);
+       new Main();
     }
 }
