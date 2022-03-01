@@ -1,0 +1,25 @@
+Protokoll 2022-02-23
+Projektgrupp 10/G055
+
+Hanterade frågeställningar:
+    1. Genomgång av programmet
+    2. Problem med load/save
+    3. Server
+    4. Rapport
+
+1. Genomgång av programmet. Flera av de större klasserna har brutits upp till mindre beståndsdelar.
+   Model har delats upp i klasserna Board och Game. Board innefattar brädet och alla metoder för att läsa av det, medan
+   game äger all övrig inforamtion om spelet, så som vems tur det är och vilka som är spelare.
+   Start-menyn har även den delats upp till olika paneler som byts ut i enlighet med de knapptryck
+   som görs. För att smidigt kunna byta mellan paneler har ett observermönster implementerats.
+
+
+2. Vi har stött på problem med load och save då programmet varnar att en klass vi inte vill spara
+   undan inte är serializible. Det konstateras att det antagligen är lamnda i OthelloView som ställer till det.
+   Lösning blir att skapa en ny klass med basinformation som sparas undan och packas upp vid laddning av ett spel.
+
+3. Alla gruppmedlemmar har nu lösen till servern och vi kommer arbeta vidare med att lista ut hur kommunikationen
+   mellan spelare ska gå till.
+
+4. Detaljer gällande rapporten ligger ännu inte ute på Canvas. Ett UML-diagram har konstruerats och ska finnas
+   med i rapporten. Troligtvis bör även ett sekvensdiagram finnas med.
