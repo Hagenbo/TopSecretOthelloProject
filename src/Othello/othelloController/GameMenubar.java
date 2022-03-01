@@ -35,13 +35,21 @@ public class GameMenubar implements ActionListener, MenuListener, Serializable {
 
          */
 
-        JMenuItem withdraw = new JMenuItem("Withdraw");
-        withdraw.addActionListener(this);
+        JMenu withdraw = new JMenu("Withdraw");
+        JMenuItem yesChoice = new JMenuItem("Yes");
+        yesChoice.addActionListener(this);
+
+        JMenuItem noChoice = new JMenuItem("No");
+        noChoice.addActionListener(this);
+        withdraw.add(yesChoice);
+        withdraw.add(noChoice);
         menuBar.add(withdraw);
 
+        JMenu options = new JMenu("Options");
         JMenuItem toggleSound = new JMenuItem("Toggle sound");
         toggleSound.addActionListener(this);
-        menuBar.add(toggleSound);
+        options.add(toggleSound);
+        menuBar.add(options);
 
         JMenu save_load = new JMenu("Save/Load");
         JMenuItem save = new JMenuItem("Save");
@@ -84,9 +92,11 @@ public class GameMenubar implements ActionListener, MenuListener, Serializable {
             case "Load":
                 observable.setValue(States.LOAD);
                 break;
-            case "Withdraw":
+            case "Yes":
                 //TODO add prompt asking if they rly want to withdraw
                 observable.setValue(States.START);
+                break;
+            case "No":
                 break;
             case "Toggle sound":
                 options.toggleSound();
