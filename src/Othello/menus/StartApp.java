@@ -30,8 +30,9 @@ public class StartApp extends JFrame implements PropertyChangeListener {
 
         public StartApp() {
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            setSize(500, 500);
+            setSize(500, 280);
             setLocation(200, 200);
+            setResizable(false);
 
             state = States.START;
             observable = new StatesObservable();
@@ -60,7 +61,9 @@ public class StartApp extends JFrame implements PropertyChangeListener {
     private void setPanel(){
             if(state == States.START){
                 this.setJMenuBar(null);
+                this.setSize(500,275);
                 setContentPane(sp);
+                setResizable(false);
                 validate();
             }
             else if(state == States.OPTIONS){
@@ -79,6 +82,8 @@ public class StartApp extends JFrame implements PropertyChangeListener {
                 new GameMenubar(game, options, observable,this);
                 game_GUI = new OthelloView(game, options, observable);
                 setContentPane(game_GUI);
+                setSize(700, 700);
+                setResizable(false);
                 setSize(600, 600);
                 new Main();
                 game_GUI.revalidate();
@@ -97,7 +102,8 @@ public class StartApp extends JFrame implements PropertyChangeListener {
                        new GameMenubar(game, si.getOptions(), observable,this);
                        game_GUI = new OthelloView(game, si.getOptions(), observable);
                        setContentPane(game_GUI);
-                       setSize(600, 600);
+                       setSize(700, 700);
+                       setResizable(false);
                        game_GUI.revalidate();
                        game_GUI.flipButtons();
                    } catch (IOException e) {
