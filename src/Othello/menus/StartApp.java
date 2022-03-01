@@ -99,9 +99,12 @@ public class StartApp extends JFrame implements PropertyChangeListener {
                        setResizable(false);
                        game_GUI.revalidate();
                        game_GUI.flipButtons();
+
+
                    } catch (IOException e) {
-                       JOptionPane.showMessageDialog(null, "File " + filename + " not found :( Please check spelling.", "Error", JOptionPane.ERROR_MESSAGE);
-                       observable.setValue(States.START);
+                        JOptionPane.showMessageDialog(null, "File " + filename + " not found :( Please check spelling.", "Error", JOptionPane.ERROR_MESSAGE);
+                           //observable.setValue(States.START);
+
                    } catch (ClassNotFoundException e) {
                        JOptionPane.showMessageDialog(null, "Can't load file " + filename, "Error", JOptionPane.ERROR_MESSAGE);
                        observable.setValue(States.START);
@@ -120,5 +123,10 @@ public class StartApp extends JFrame implements PropertyChangeListener {
         }
 }
 
+
+
+//om man börjar ett spel och sen vill ladda men man skriver in fel namn, kommer man till startsidan igen. Kanske inte ska va så?
+//om man i början vill ladda ett spel men skriver in fel namn kommer man till startsidan igen, kanske ska ha så prompten med "enter file name" kanske
+       //kommer upp igen?
 
 
