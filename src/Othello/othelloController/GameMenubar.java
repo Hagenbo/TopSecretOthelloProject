@@ -28,20 +28,21 @@ public class GameMenubar implements ActionListener, MenuListener, Serializable {
 
     private void createMenuBar(JFrame frame) {
         this.menuBar = new JMenuBar();
+        /*
         JMenu quit = new JMenu("Quit");
         quit.addMenuListener(this);
         menuBar.add(quit);
 
-        //TODO ask if player is certain they want to withdraw, update panel how?
-        JMenu withdraw = new JMenu("Withdraw");
-        withdraw.addMenuListener(this);
+         */
+
+        JMenuItem withdraw = new JMenuItem("Withdraw");
+        withdraw.addActionListener(this);
         menuBar.add(withdraw);
 
-        JMenu toggleSound = new JMenu("Toggle sound");
-        toggleSound.addMenuListener(this);
+        JMenuItem toggleSound = new JMenuItem("Toggle sound");
+        toggleSound.addActionListener(this);
         menuBar.add(toggleSound);
 
-        // added JMenuItems with actionlistener instead of menuListener.
         JMenu save_load = new JMenu("Save/Load");
         JMenuItem save = new JMenuItem("Save");
         save.addActionListener(this);
@@ -57,38 +58,6 @@ public class GameMenubar implements ActionListener, MenuListener, Serializable {
 
     @Override
     public void menuSelected(MenuEvent e) {
-        Object obj = e.getSource();
-        if (!(obj instanceof JMenu j)) {
-            return;
-        }
-        String str = j.getText();
-
-        switch (str) {
-            case "Withdraw":
-                //TODO add prompt asking if they rly want to withdraw
-                //setJMenuBar(null);
-                //setSize(500, 500);
-                observable.setValue(States.START);
-                break;
-
-            /*case "Save Game":
-                String filename = JOptionPane.showInputDialog("Enter a file name:");
-                if (filename != null){
-                    SaveInfo si = new SaveInfo(game.getBoard(), game.getP1(), game.getP2(), game.getCurrentColor(), options);
-                    new Save().save(si, filename);
-                }
-                break;*/
-
-            case "Quit":
-                observable.setValue(States.START);
-                break;
-
-            case "Toggle sound":
-                options.toggleSound();
-
-
-                break;
-        }
     }
     @Override
     public void menuDeselected(MenuEvent e) {
@@ -114,6 +83,13 @@ public class GameMenubar implements ActionListener, MenuListener, Serializable {
                     break;
             case "Load":
                 observable.setValue(States.LOAD);
+                break;
+            case "Withdraw":
+                //TODO add prompt asking if they rly want to withdraw
+                observable.setValue(States.START);
+                break;
+            case "Toggle sound":
+                options.toggleSound();
                 break;
         }
     }

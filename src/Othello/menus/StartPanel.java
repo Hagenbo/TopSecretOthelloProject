@@ -70,12 +70,10 @@ public class StartPanel extends JPanel implements ActionListener {
 
         switch(str){
             case "New Game":
-                //TODO start a new game, have a new JPanel where players put in their names (and IP-adresses if thats how this works)?
                 observable.setValue(States.PLAY);
                 break;
 
             case "Load Game":
-                //TODO load game somehow, but first the "conncection panel"
                 observable.setValue(States.LOAD);
                 break;
 
