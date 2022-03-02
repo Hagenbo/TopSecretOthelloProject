@@ -92,7 +92,7 @@ public class StartApp extends JFrame implements PropertyChangeListener {
 
             }
            else if(state == States.LOAD){
-               String filename = JOptionPane.showInputDialog("Give a file name:");
+               String filename = JOptionPane.showInputDialog("Enter a file name:");
                if( filename != null) {
                    try {
                        SaveInfo si = new Load().load(filename);
