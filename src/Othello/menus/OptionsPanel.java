@@ -1,6 +1,6 @@
 package Othello.menus;
 
-import Othello.othelloController.Options;
+import Othello.model.Options;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

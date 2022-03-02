@@ -6,11 +6,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
 
-import Othello.othelloController.OthelloView.*;
-import Othello.model.Board;
-import Othello.model.Game;
-import Othello.model.Load;
-import Othello.model.SaveInfo;
+import Othello.model.*;
 import Othello.othelloController.*;
 import Othello.server.*;
 
@@ -85,7 +81,6 @@ public class StartApp extends JFrame implements PropertyChangeListener {
                 setContentPane(game_GUI);
                 setSize(700, 700);
                 setResizable(false);
-                setSize(600, 600);
                 new DisDosUpdater();
                 game_GUI.revalidate();
                 game_GUI.flipButtons();
