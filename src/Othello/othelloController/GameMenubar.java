@@ -3,6 +3,7 @@ package Othello.othelloController;
 import Othello.menus.States;
 import Othello.menus.StatesObservable;
 import Othello.model.Game;
+import Othello.model.Options;
 import Othello.model.Save;
 import Othello.model.SaveInfo;
 

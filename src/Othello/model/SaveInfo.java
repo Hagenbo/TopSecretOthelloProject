@@ -1,7 +1,5 @@
 package Othello.model;
 
-import Othello.othelloController.Options;
-
 import java.io.Serializable;
 
 public class SaveInfo implements Serializable {

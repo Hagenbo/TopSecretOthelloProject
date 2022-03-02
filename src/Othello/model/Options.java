@@ -1,4 +1,4 @@
-package Othello.othelloController;
+package Othello.model;
 
 import java.io.Serializable;
 
@@ -11,7 +11,6 @@ public class Options implements Serializable {
 
     public void toggleSound() {
         soundOn = !soundOn;
-        //print sound off or sound on
     }
 
     public String isSoundOn() {

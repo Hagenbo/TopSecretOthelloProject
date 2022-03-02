@@ -3,12 +3,10 @@ import Othello.MyButton;
 import Othello.menus.States;
 import Othello.menus.StatesObservable;
 import Othello.model.*;
-import Othello.server.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.sql.SQLOutput;
 import java.util.Objects;
 
 public class OthelloView extends JPanel {
