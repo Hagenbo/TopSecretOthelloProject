@@ -13,8 +13,7 @@ import Othello.server.*;
 
 
 public class StartApp extends JFrame implements PropertyChangeListener {
-
-<<<<<<< HEAD
+    /*
         private States state;
         private final Options options;
         private final StartPanel sp;
@@ -45,8 +44,8 @@ public class StartApp extends JFrame implements PropertyChangeListener {
             observable.addPropertyChangeListener(this);
             setVisible(true);
         }
-=======
-    private OthelloView game_GUI;
+*/
+    //private OthelloView game_GUI;
     private OthelloViewSinglePlayer game_GUIsingle;
     private States state;
     private final Options options;
@@ -80,7 +79,6 @@ public class StartApp extends JFrame implements PropertyChangeListener {
         observable.addPropertyChangeListener(this);
         setVisible(true);
     }
->>>>>>> 939b1d303b06152594a678df5d9911306540a73f
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
@@ -92,8 +90,8 @@ public class StartApp extends JFrame implements PropertyChangeListener {
         }
 
     }
-<<<<<<< HEAD
-    private void setPanel(){
+
+    /*private void setPanel(){
             if(state == States.START){
                 this.setJMenuBar(null);
                 this.setSize(500,275);
@@ -122,8 +120,7 @@ public class StartApp extends JFrame implements PropertyChangeListener {
                 new DisDosUpdater();
                 game_GUI.revalidate();
                 game_GUI.flipButtons();
-=======
->>>>>>> 939b1d303b06152594a678df5d9911306540a73f
+*/
 
     private void setPanel() {
         if (state == States.START) {
@@ -167,7 +164,7 @@ public class StartApp extends JFrame implements PropertyChangeListener {
                         game.changeTurn();
                     }
                     new GameMenubar(game, si.getOptions(), observable, this);
-                    game_GUI = new OthelloView(game, si.getOptions(), observable);
+                    OthelloView game_GUI = new OthelloView(game, si.getOptions(), observable);
                     setContentPane(game_GUI);
                     setSize(700, 700);
                     setResizable(false);
@@ -184,7 +181,7 @@ public class StartApp extends JFrame implements PropertyChangeListener {
                     observable.setValue(States.START);
                 }
             }
-<<<<<<< HEAD
+/*
            else if(state == States.LOAD){
                String filename = JOptionPane.showInputDialog("Enter a file name:");
                if( filename != null) {
@@ -213,21 +210,21 @@ public class StartApp extends JFrame implements PropertyChangeListener {
                    }
                }
                //else { observable.setValue(States.START);}
-            }
+            }*/
 
-           else if(state == States.REMATCH){
+           /*else if(state == States.REMATCH){
                observable.setValue(States.PLAY);
-            }
-=======
+            }*/
+
             //else { observable.setValue(States.START);}
         } else if (state == States.REMATCH) {
             observable.setValue(States.SINGLEPLAYER);
->>>>>>> 939b1d303b06152594a678df5d9911306540a73f
+
         }
         if (state == States.MULTIPLAYER) {
             Game game = new Game("player1", "player2", new Board(n));
             new GameMenubar(game, options, observable, this);
-            game_GUI = new OthelloView(game, options, observable);
+            OthelloView game_GUI = new OthelloView(game, options, observable);
             new DisDosUpdater(game_GUI);
             setSize(700, 700);
             setResizable(false);
