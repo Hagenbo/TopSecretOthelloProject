@@ -80,7 +80,7 @@ public class StartPanel extends JPanel implements ActionListener {
                 break;
 
             case "MultiPlayer":
-                observable.setValue(States.MULTIPLAYERWAITINGROOM);
+                observable.setValue(States.MULTIPLAYER);
                 break;
 
             case "Load Game":

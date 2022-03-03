@@ -17,8 +17,8 @@ public class Main{
     private Socket socket;
     private Scanner scanner = new Scanner(System.in);
     private int port = 1234;
-  //  private String ip = "142.93.106.21";
-    private String ip = "localhost";
+    private String ip = "142.93.106.21";
+    //private String ip = "localhost";
     private Socket connected;
     private int amountConnected = 0;
     private InetAddress inetaddress1;
