@@ -13,7 +13,7 @@ public class WaitingRoom extends JPanel /*implements MouseListener*/ {
     private JButton startButton;
 
     public WaitingRoom(StatesObservable so) {
-        observable= so;
+        observable = so;
         setBackground(color);
         JLabel imgLabel = new JLabel(new ImageIcon(getClass().getResource("/othelloLogo.png")));
 
