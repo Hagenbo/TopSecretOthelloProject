@@ -20,9 +20,9 @@ public class Player implements Serializable {
         this.color = c;
     }
 
-    public PieceColor getColor() {
+  /* public PieceColor getColor() {
         return this.color;
-    }
+    }*/
 
     public String getPlayerName() {
         return this.userName;

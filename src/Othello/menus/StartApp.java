@@ -7,11 +7,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
 
-import Othello.othelloController.OthelloView.*;
-import Othello.model.Board;
-import Othello.model.Game;
-import Othello.model.Load;
-import Othello.model.SaveInfo;
+import Othello.model.*;
 import Othello.othelloController.*;
 import Othello.server.*;
 
