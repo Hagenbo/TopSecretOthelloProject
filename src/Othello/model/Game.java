@@ -9,7 +9,7 @@ public class Game implements Serializable {
     private boolean isBlackTurn;
     private PieceColor currentColor;
     private Consumer<PieceColor> onGameOver;
-    private final Board board;
+    private Board board;
 
     //some additions: See comments in player-class
     private final Player player1;
@@ -35,7 +35,7 @@ public class Game implements Serializable {
     }
 
 
-    private void setColor() {
+    public void setColor() {
         if (isBlackTurn) {
             currentColor = PieceColor.BLACK;
         } else {
@@ -50,6 +50,10 @@ public class Game implements Serializable {
     public void changeTurn() {
         isBlackTurn = !isBlackTurn;
         setColor();
+    }
+
+    public void multiChangeTurn(){
+        isBlackTurn = !isBlackTurn;
     }
 
     public String gameOver() {
@@ -74,7 +78,7 @@ public class Game implements Serializable {
     }
 
     public Board getBoard() {
-        return board;
+        return this.board;
     }
 
     public Player getP1(){

@@ -24,6 +24,10 @@ public class Board implements Serializable {
         }
     }
 
+    public void setBoard(Board board){
+        this.board = board.board;
+    }
+
     public PieceColor getPiece( int i, int j) {
         return board[i][j];
     }

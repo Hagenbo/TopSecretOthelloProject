@@ -20,18 +20,24 @@ public class StartPanel extends JPanel implements ActionListener {
 
     private JPanel setUpButtonPanel(){
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(5, 5));
+        buttonPanel.setLayout(new GridLayout(6, 5));
         return buttonPanel;
     }
 
     private JPanel buttons(){
         JPanel buttonPanel = this.setUpButtonPanel();
 
-        JButton b0 = new JButton("New Game");
+        JButton b0 = new JButton("SinglePlayer");
         b0.setBackground(Color.black);
         b0.setForeground(Color.white);
         b0.addActionListener(this);
         buttonPanel.add(b0);
+
+        JButton bm = new JButton("MultiPlayer");
+        bm.setBackground(Color.black);
+        bm.setForeground(Color.white);
+        bm.addActionListener(this);
+        buttonPanel.add(bm);
 
         JButton b1 = new JButton("Load Game");
         b1.setBackground(Color.black);
@@ -69,8 +75,12 @@ public class StartPanel extends JPanel implements ActionListener {
         String str = b.getText();
 
         switch(str){
-            case "New Game":
-                observable.setValue(States.PLAY);
+            case "SinglePlayer":
+                observable.setValue(States.SINGLEPLAYER);
+                break;
+
+            case "MultiPlayer":
+                observable.setValue(States.MULTIPLAYERWAITINGROOM);
                 break;
 
             case "Load Game":

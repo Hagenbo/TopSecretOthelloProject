@@ -30,26 +30,27 @@ public class Main{
 
         initServ();
         while (true) {
-            System.out.println("WAITING");
             try {
+                System.out.println("WAITING");
                 connected = ServSock.accept();
                 if (amountConnected == 0) {
                     inetaddress1 = connected.getInetAddress();
                     dos1 = connected.getOutputStream(); //MIGHT NEED NEW DATAINPUTSTREAM AND NEW DATAOUTPUTSTREAM
                     dis1 = connected.getInputStream();
-                    ObjectOutputStream obj1;
-                    obj1 = new ObjectOutputStream(dos1);
-                    obj1.writeObject(null);
+                    OutputStreamWriter obj1;
+                    obj1 = new OutputStreamWriter(dos1);
+                    obj1.write("notIp\n");
+                    obj1.flush();
                     amountConnected = 1;
                 } else {
                     System.out.println("IS DONE");
                     inetaddress2 = connected.getInetAddress();
                     dos2 = connected.getOutputStream();
                     dis2 = connected.getInputStream();
-                    ObjectOutputStream obj2;
-                    obj2 = new ObjectOutputStream(dos2);
-                    System.out.println(inetaddress1);
-                    obj2.writeObject(inetaddress1);
+                    OutputStreamWriter obj2;
+                    obj2 = new OutputStreamWriter(dos2);
+                    obj2.write(inetaddress1.getHostAddress() + "\n");
+                    obj2.flush();
                     amountConnected = 0;
                 }
 
@@ -62,8 +63,9 @@ public class Main{
 
     private void initServ() {
         try {
+            System.out.println("DID IT INITIALIZE?");
             ServSock = new ServerSocket(port);
-            System.out.println( ServSock.getLocalSocketAddress());
+           // System.out.println( ServSock.getLocalSocketAddress());
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(0);
