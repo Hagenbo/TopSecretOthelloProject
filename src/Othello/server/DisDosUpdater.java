@@ -116,9 +116,4 @@ public class DisDosUpdater implements Runnable{
             e.printStackTrace();
         }
     }
-/*
-    public boolean connectionAccepted() {
-        return (!this.start);
-    }
-*/
 }
