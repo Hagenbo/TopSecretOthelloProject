@@ -120,7 +120,6 @@ public class StartApp extends JFrame implements PropertyChangeListener {
             Game game = new Game("player1", "player2", new Board(n));
             new GameMenubar(game, options, observable, this);
             OthelloView game_GUI = new OthelloView(game, options, observable);
-            new DisDosUpdater(game_GUI);
             setSize(700, 700);
             setResizable(false);
             setContentPane(game_GUI);
@@ -128,6 +127,7 @@ public class StartApp extends JFrame implements PropertyChangeListener {
             game_GUI.revalidate();
             game_GUI.flipButtons();
             validate();
+            new DisDosUpdater(game_GUI);
         }
 
     }
