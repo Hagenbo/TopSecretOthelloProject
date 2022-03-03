@@ -16,7 +16,6 @@ public class OptionsPanel extends JPanel implements ActionListener, MouseListene
     private JLabel optionsOverview;
     private final Options sound;
 
-    //behöver skicka med so så panel kan säga till att den ändrar just "den instansen av observable"
     public OptionsPanel(StatesObservable so, Options sound) {
         observable = so;
         this.sound = sound;
@@ -64,11 +63,8 @@ public class OptionsPanel extends JPanel implements ActionListener, MouseListene
 
         }
 
-
-
         @Override
         public void mouseClicked(MouseEvent e) {
-        //trycket på texten informerar StatesObservable att ändra sig
         observable.setValue(States.START);
         }
 
@@ -83,14 +79,12 @@ public class OptionsPanel extends JPanel implements ActionListener, MouseListene
         }
         @Override
         public void mouseExited(MouseEvent e) {
-
         }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         sound.toggleSound();
         optionsOverview.setText("Sound: " + sound.isSoundOn());
-
     }
 }
 

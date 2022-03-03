@@ -27,11 +27,6 @@ public class GameMenubar implements ActionListener {
     private void createMenuBar(JFrame frame) {
         this.menuBar = new JMenuBar();
 
-        /*
-        JMenu quit = new JMenu("Quit");
-        quit.addMenuListener(this);
-        menuBar.add(quit);*/
-
         JMenu withdraw = new JMenu("Quit");
         JMenuItem yesChoice = new JMenuItem("Yes");
         yesChoice.addActionListener(this);

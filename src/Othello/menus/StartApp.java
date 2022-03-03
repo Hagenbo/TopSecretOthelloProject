@@ -2,7 +2,6 @@
 package Othello.menus;
 
 import javax.swing.*;
-import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
@@ -23,8 +22,6 @@ public class StartApp extends JFrame implements PropertyChangeListener {
     private final WaitingRoom wr;
     private final StatesObservable observable;
     private static final int n = 8;
-    private Load load;
-    private Main server;
 
 
     public StartApp() {
@@ -104,7 +101,6 @@ public class StartApp extends JFrame implements PropertyChangeListener {
 
                 } catch (IOException e) {
                     JOptionPane.showMessageDialog(null, "File " + filename + " not found :( Please check spelling.", "Error", JOptionPane.ERROR_MESSAGE);
-                    //observable.setValue(States.START);
 
                 } catch (ClassNotFoundException e) {
                     JOptionPane.showMessageDialog(null, "Can't load file " + filename, "Error", JOptionPane.ERROR_MESSAGE);

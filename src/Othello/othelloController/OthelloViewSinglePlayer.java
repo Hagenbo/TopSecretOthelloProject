@@ -21,7 +21,6 @@ public class OthelloViewSinglePlayer extends JPanel {
     private JLabel bottomLabel;
     private boolean viewTurn = false;
 
-    //ska dessa nedan va private? eller ska dom ligga här såhär?
     private final ImageIcon transparent = new ImageIcon(getClass().getResource("/transparent.png"), "1");
     private final ImageIcon blackPiece = new ImageIcon(getClass().getResource("/blackPiece.png"), "2");
     private final ImageIcon whitePiece = new ImageIcon(getClass().getResource("/whitePiece.png"), "3");
@@ -39,13 +38,6 @@ public class OthelloViewSinglePlayer extends JPanel {
         add(setUpBoardPanel(n));
         add(bottomLabel, BorderLayout.SOUTH);
         game.setOnGameOver((color)-> displayWinner(color));
-    }
-
-    public Options getOptions(){
-        return this.options;
-    }
-    public Game getGame(){
-        return this.game;
     }
 
     private JPanel setUpBoardPanel(int n) {
@@ -91,16 +83,11 @@ public class OthelloViewSinglePlayer extends JPanel {
             }
             return;
         }
-        SaveInfo si = new SaveInfo(game.getBoard(), game.getP1(), game.getP2(), game.getCurrentColor(), options);
+        new SaveInfo(game.getBoard(), game.getP1(), game.getP2(), game.getCurrentColor(), options);
         flipButtons();
         game.changeTurn();
 
-
-
-
         if (!game.getBoard().playPossible(game.getCurrentColor())) {
-
-            //TODO add prompt saying move for next player is not possible, include an "ok"-button
             game.changeTurn();           // changes turn
             if (!game.getBoard().playPossible(game.getCurrentColor())) {  //if none of the players can make a move, the game ends.
                 game.gameOver();

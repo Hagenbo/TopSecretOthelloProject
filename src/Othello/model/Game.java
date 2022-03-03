@@ -5,7 +5,6 @@ import java.util.function.Consumer;
 
 public class Game implements Serializable {
 
-    private int gameID;
     private boolean isBlackTurn;
     private PieceColor currentColor;
     private Consumer<PieceColor> onGameOver;
@@ -17,8 +16,6 @@ public class Game implements Serializable {
 
     public Game(String p1, String p2, Board b) {
         this.isBlackTurn = true;
-        /*Random r = new Random();        // this may not be used
-        this.gameID = r.nextInt();      // this may not be used*/
         setColor();
         this.board = b;
 

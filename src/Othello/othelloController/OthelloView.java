@@ -20,8 +20,6 @@ public class OthelloView extends JPanel {
     private final StatesObservable observable;
     private JLabel bottomLabel;
     private boolean viewTurn = false;
-
-    //ska dessa nedan va private? eller ska dom ligga här såhär?
     private final ImageIcon transparent = new ImageIcon(getClass().getResource("/transparent.png"), "1");
     private final ImageIcon blackPiece = new ImageIcon(getClass().getResource("/blackPiece.png"), "2");
     private final ImageIcon whitePiece = new ImageIcon(getClass().getResource("/whitePiece.png"), "3");
@@ -30,7 +28,7 @@ public class OthelloView extends JPanel {
     public OthelloView(Game g, Options options, StatesObservable so) {
         this.observable = so;
         this.options = options;
-        this.game = g; //TODO use a userinput variable
+        this.game = g;
         int n = game.getBoard().getBoardSize();
         this.buttons = new MyButton[n][n];
         setLayout(new BorderLayout());
@@ -41,9 +39,6 @@ public class OthelloView extends JPanel {
         game.setOnGameOver((color)-> displayWinner(color));
     }
 
-    public Options getOptions(){
-        return this.options;
-    }
     public Game getGame(){
         return this.game;
     }
@@ -91,8 +86,7 @@ public class OthelloView extends JPanel {
                 }
                 return;
             }
-
-            SaveInfo si = new SaveInfo(game.getBoard(), game.getP1(), game.getP2(), game.getCurrentColor(), options);
+            new SaveInfo(game.getBoard(), game.getP1(), game.getP2(), game.getCurrentColor(), options);
             try {
                 objectOutputClient.writeObject(game.getBoard());
                 objectOutputClient.flush();
@@ -104,12 +98,7 @@ public class OthelloView extends JPanel {
             }
             game.multiChangeTurn();
 
-
-
-
             if (!game.getBoard().playPossible(game.getCurrentColor())) {
-
-                //TODO add prompt saying move for next player is not possible, include an "ok"-button
                 game.changeTurn();           // changes turn
                 if (!game.getBoard().playPossible(game.getCurrentColor())) {  //if none of the players can make a move, the game ends.
                     game.gameOver();
@@ -117,8 +106,6 @@ public class OthelloView extends JPanel {
             }
             bottomLabel.setText("Turn: " + game.getCurrentColor());
         }
-
-
 
     public boolean getViewTurn(){
         return this.viewTurn;
@@ -128,11 +115,7 @@ public class OthelloView extends JPanel {
         this.viewTurn = turn;
     }
 
-    public void withdraw() {
-        game.gameOver();
-    }
-
-    public void displayWinner(PieceColor winner){
+    private void displayWinner(PieceColor winner){
         int result;
         if(winner == PieceColor.EMPTY){
             result = JOptionPane.showConfirmDialog(null, "It's a draw! Do you want a rematch?" , "Game over", JOptionPane.YES_NO_OPTION);
