@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.Objects;
 
-public class OthelloView extends JPanel {
+public class OthelloViewSinglePlayer extends JPanel {
 
     private ObjectOutputStream objectOutputClient;
     private MyButton[][] buttons;
@@ -28,7 +28,7 @@ public class OthelloView extends JPanel {
     private final ImageIcon whitePiece = new ImageIcon(getClass().getResource("/whitePiece.png"), "3");
 
 
-    public OthelloView(Game g, Options options, StatesObservable so) {
+    public OthelloViewSinglePlayer(Game g, Options options, StatesObservable so) {
         this.observable = so;
         this.options = options;
         this.game = g; //TODO use a userinput variable
@@ -86,38 +86,29 @@ public class OthelloView extends JPanel {
         int x = pressedButton.getCol();
         int y = pressedButton.getRow();
 
-            if (!game.getBoard().placePieceAt(y, x, game.getCurrentColor()) || !this.viewTurn) {
-                if (Objects.equals(options.isSoundOn(), "On")) {
-                    Toolkit.getDefaultToolkit().beep();
-                }
-                return;
+        if (!game.getBoard().placePieceAt(y, x, game.getCurrentColor())) {
+            if (Objects.equals(options.isSoundOn(), "On")) {
+                Toolkit.getDefaultToolkit().beep();
             }
-
-            SaveInfo si = new SaveInfo(game.getBoard(), game.getP1(), game.getP2(), game.getCurrentColor(), options);
-            try {
-                objectOutputClient.writeObject(game.getBoard());
-                objectOutputClient.flush();
-                objectOutputClient.reset();//NOT SURE ABOUT THIS ONE!!!
-                setViewTurn(false);
-                System.out.println("Sending packages");
-            } catch (IOException a) {
-                a.printStackTrace();
-            }
-            game.multiChangeTurn();
-
-
-
-
-            if (!game.getBoard().playPossible(game.getCurrentColor())) {
-
-                //TODO add prompt saying move for next player is not possible, include an "ok"-button
-                game.changeTurn();           // changes turn
-                if (!game.getBoard().playPossible(game.getCurrentColor())) {  //if none of the players can make a move, the game ends.
-                    game.gameOver();
-                }
-            }
-            bottomLabel.setText("Turn: " + game.getCurrentColor());
+            return;
         }
+        SaveInfo si = new SaveInfo(game.getBoard(), game.getP1(), game.getP2(), game.getCurrentColor(), options);
+        flipButtons();
+        game.changeTurn();
+
+
+
+
+        if (!game.getBoard().playPossible(game.getCurrentColor())) {
+
+            //TODO add prompt saying move for next player is not possible, include an "ok"-button
+            game.changeTurn();           // changes turn
+            if (!game.getBoard().playPossible(game.getCurrentColor())) {  //if none of the players can make a move, the game ends.
+                game.gameOver();
+            }
+        }
+        bottomLabel.setText("Turn: " + game.getCurrentColor());
+    }
 
 
 
