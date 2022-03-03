@@ -1,5 +1,4 @@
 package Othello.othelloController;
-import Othello.MyButton;
 import Othello.menus.States;
 import Othello.menus.StatesObservable;
 import Othello.model.*;
@@ -31,7 +30,7 @@ public class OthelloViewSinglePlayer extends JPanel {
     public OthelloViewSinglePlayer(Game g, Options options, StatesObservable so) {
         this.observable = so;
         this.options = options;
-        this.game = g; //TODO use a userinput variable
+        this.game = g;
         int n = game.getBoard().getBoardSize();
         this.buttons = new MyButton[n][n];
         setLayout(new BorderLayout());

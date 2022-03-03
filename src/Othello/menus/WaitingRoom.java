@@ -5,24 +5,36 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class WaitingRoom extends JPanel implements MouseListener {
+public class WaitingRoom extends JPanel /*implements MouseListener*/ {
 
     private StatesObservable observable;
     private static final Color color = new Color(0, 78, 56);
     private boolean boolStart=false;
+    private JButton startButton;
 
     public WaitingRoom(StatesObservable so) {
-        observable = so;
+        observable= so;
+        setBackground(color);
+        JLabel imgLabel = new JLabel(new ImageIcon(getClass().getResource("/othelloLogo.png")));
 
-        JPanel middlePanel = new JPanel(new BorderLayout());
-        middlePanel.setBackground(Color.ORANGE);
-        JLabel START = new JLabel("Press to Start");
-        START.setForeground(Color.white);
-        START.addMouseListener(this);
-        middlePanel.add(START, BorderLayout.CENTER);
+        add(imgLabel, BorderLayout.NORTH);
+
+        startButton = new JButton("Press when ready");
+        startButton.addActionListener(e -> {
+            observable.setValue(States.MULTIPLAYER);
+            boolStart = true;
+        });
+        add(startButton, BorderLayout.CENTER);
+
+        //JPanel middlePanel = new JPanel(new BorderLayout());
+        //middlePanel.setBackground(Color.ORANGE);
+
+        //START.setForeground(Color.white);
+        //START.addMouseListener(this);
+        //middlePanel.add(START, BorderLayout.CENTER);
 
 
-        JPanel topPanel = new JPanel();
+        /*JPanel topPanel = new JPanel();
         topPanel.setLayout(new BorderLayout());
         topPanel.setBackground(color);
         JTextArea info = new JTextArea("WAITING FOR OPPONENT", 20, 20);
@@ -32,15 +44,20 @@ public class WaitingRoom extends JPanel implements MouseListener {
 
         setBackground(color);
         setLayout(new BorderLayout());
-        add(middlePanel, BorderLayout.SOUTH);
+        //add(middlePanel, BorderLayout.SOUTH);
         add(topPanel, BorderLayout.CENTER);
+       /* observable.setValue(States.MULTIPLAYER);
+        boolStart = true;*/
+
+
     }
 
     public boolean getStart(){
         return this.boolStart;
     }
 
-    @Override
+
+  /*  @Override
     public void mouseClicked(MouseEvent e) {
         observable.setValue(States.MULTIPLAYER);
         boolStart = true;
@@ -60,5 +77,5 @@ public class WaitingRoom extends JPanel implements MouseListener {
 
     @Override
     public void mouseExited(MouseEvent e) {
-    }
+    }*/
 }

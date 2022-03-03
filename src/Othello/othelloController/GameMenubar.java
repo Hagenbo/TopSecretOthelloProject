@@ -32,7 +32,7 @@ public class GameMenubar implements ActionListener {
         quit.addMenuListener(this);
         menuBar.add(quit);*/
 
-        JMenu withdraw = new JMenu("Withdraw/Quit");
+        JMenu withdraw = new JMenu("Quit");
         JMenuItem yesChoice = new JMenuItem("Yes");
         yesChoice.addActionListener(this);
 

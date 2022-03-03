@@ -52,7 +52,6 @@ public class Board implements Serializable {
     }
 
     public boolean placePieceAt(int i, int j, PieceColor c) {
-        //System.out.println(startColor);
         if (!movePossible(i, j, c) || getPiece(i, j) != PieceColor.EMPTY) {
             return false;
         }
@@ -91,8 +90,6 @@ public class Board implements Serializable {
             return "White";
         }
         else {
-            //TODO add for draw
-            //System.out.println("It's a draw!");
             return "Draw";
         }
     }
@@ -182,126 +179,102 @@ public class Board implements Serializable {
     // Methods for checking if a "flippable move" is possible in every direction from a given piece.
     private boolean checkVerticalUp(int i, int j, PieceColor c) {
         if( i > 0 && checkAbove(i,j) == c) {
-            //System.out.println("VerticalUp = false");
             return false;
         }
         while (i > 0 && checkAbove(i,j) != PieceColor.EMPTY) {
             if (checkAbove(i, j) == c) {
-                //System.out.println("VerticalUp = true");
                 return true;
             }
             i--;
         }
-        //System.out.println("VerticalUp = false");
         return false;
     }
     private boolean checkVerticalDown(int i, int j, PieceColor c) {
         if( i < (n-1) && checkBelow(i,j) == c) {
-            //System.out.println("VerticalDown = false");
             return false;
         }
         while (i < (n-1) && checkBelow(i,j) != PieceColor.EMPTY) {
             if (checkBelow(i, j) == c) {
-                //System.out.println("VerticalDown = true");
                 return true;
             }
             i++;
         }
-        //System.out.println("VerticalDown = false");
         return false;
     }
     private boolean checkHorizontalRight(int i, int j, PieceColor c ) {
         if( j < (n-1)  && checkRight(i,j) == c) {
-            //System.out.println("HorizontalRight = false");
             return false;
         }
         while (j < (n-1) && checkRight(i,j) != PieceColor.EMPTY) {
             if (checkRight(i, j) == c) {
-                //System.out.println("HorizontalRight = true");
                 return true;
             }
             j++;
         }
-        //System.out.println("HorizontalRight = false");
         return false;
     }
     private boolean checkHorizontalLeft(int i, int j, PieceColor c) {
         if( j > 0 && checkLeft(i,j) == c) {
-            //System.out.println("HorizontalLeft = false");
             return false;
         }
         while (j > 0 && checkLeft(i,j) != PieceColor.EMPTY) {
             if (checkLeft(i, j) == c) {
-                //System.out.println("HorizontalLeft = true");
                 return true;
             }
             j--;
         }
-        //System.out.println("HorizontalLeft = false");
         return false;
     }
     private boolean checkDiagonalUR(int i, int j, PieceColor c) {
         if( (i > 0 && j < (n-1)) && checkUpRight(i,j) == c) {
-            //System.out.println("Diagonal UpRight = false");
             return false;
         }
         while ((i > 0 && j < (n-1)) && checkUpRight(i,j) != PieceColor.EMPTY) {
             if (checkUpRight(i, j) == c) {
-                //System.out.println("Diagonal UpRight = true");
                 return true;
             }
             i--;
             j++;
         }
-        //System.out.println("Diagonal UpRight = false");
         return false;
     }
     private boolean checkDiagonalDR(int i, int j, PieceColor c) {
         if( (i < n-1 && j < n-1) && checkDownRight(i,j) == c) {
-            //System.out.println("Diagonal DownRight = false");
             return false;
         }
         while ((i < n-1 && j < n-1) && checkDownRight(i,j) != PieceColor.EMPTY) {
             if (checkDownRight(i, j) == c) {
-                //System.out.println("Diagonal DownRight = true");
                 return true;
             }
             i++;
             j++;
         }
-        //System.out.println("Diagonal DownRight = false");
         return false;
     }
     private boolean checkDiagonalDL(int i, int j, PieceColor c) {
         if( i < n-1 && j > 0 && checkDownLeft(i,j) == c) {
-            //System.out.println("Diagonal DownLeft = false");
             return false;
         }
         while (i < n-1 && j > 0 && checkDownLeft(i,j) != PieceColor.EMPTY) {
             if (checkDownLeft(i, j) == c) {
-                //System.out.println("Diagonal DownLeft = true");
                 return true;
             }
             i++;
             j--;
         }
-        //System.out.println("Diagonal DownLeft = false");
         return false;
     }
     private boolean checkDiagonalUL(int i, int j, PieceColor c) {
         if( (i > 0 && j > 0) && checkUpLeft(i,j) == c) {
-            //System.out.println("Diagonal UpLeft = false");
             return false;
         }
         while ((i > 0 && j > 0) && checkUpLeft(i,j) != PieceColor.EMPTY) {
             if (checkUpLeft(i, j) == c) {
-                //System.out.println("Diagonal UpLeft = true");
                 return true;
             }
             i--;
             j--;
         }
-        //System.out.println("Diagonal UpLeft = false");
         return false;
     }
 }
