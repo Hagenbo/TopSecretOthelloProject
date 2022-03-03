@@ -1,5 +1,4 @@
 package Othello.othelloController;
-import Othello.MyButton;
 import Othello.menus.States;
 import Othello.menus.StatesObservable;
 import Othello.model.*;

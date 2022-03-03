@@ -1,4 +1,4 @@
-package Othello;
+package Othello.othelloController;
 
 import javax.swing.*;
 

@@ -8,13 +8,10 @@ import Othello.model.Save;
 import Othello.model.SaveInfo;
 
 import javax.swing.*;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.Serializable;
 
-public class GameMenubar implements ActionListener, MenuListener, Serializable {
+public class GameMenubar implements ActionListener {
     private JMenuBar menuBar;
     private final StatesObservable observable;
     private final Game game;
@@ -29,14 +26,13 @@ public class GameMenubar implements ActionListener, MenuListener, Serializable {
 
     private void createMenuBar(JFrame frame) {
         this.menuBar = new JMenuBar();
+
         /*
         JMenu quit = new JMenu("Quit");
         quit.addMenuListener(this);
-        menuBar.add(quit);
+        menuBar.add(quit);*/
 
-         */
-
-        JMenu withdraw = new JMenu("Withdraw");
+        JMenu withdraw = new JMenu("Withdraw/Quit");
         JMenuItem yesChoice = new JMenuItem("Yes");
         yesChoice.addActionListener(this);
 
@@ -66,16 +62,6 @@ public class GameMenubar implements ActionListener, MenuListener, Serializable {
     }
 
     @Override
-    public void menuSelected(MenuEvent e) {
-    }
-    @Override
-    public void menuDeselected(MenuEvent e) {
-    }
-    @Override
-    public void menuCanceled(MenuEvent e) {
-    }
-
-    @Override
     public void actionPerformed(ActionEvent e) {
         Object obj = e.getSource();
         if(!(obj instanceof JMenuItem m)) {
@@ -94,7 +80,6 @@ public class GameMenubar implements ActionListener, MenuListener, Serializable {
                 observable.setValue(States.LOAD);
                 break;
             case "Yes":
-                //TODO add prompt asking if they rly want to withdraw
                 observable.setValue(States.START);
                 break;
             case "No":
