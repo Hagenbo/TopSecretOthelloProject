@@ -12,7 +12,6 @@ import java.util.Objects;
 
 public class OthelloViewSinglePlayer extends JPanel {
 
-    private ObjectOutputStream objectOutputClient;
     private MyButton[][] buttons;
     private final Game game;
     private static final Color color = new Color(0, 78, 56);
@@ -68,10 +67,6 @@ public class OthelloViewSinglePlayer extends JPanel {
         return boardPanel;
     }
 
-    public void setObjectOutputClient(ObjectOutputStream dataOut){
-        this.objectOutputClient = dataOut;
-    }
-
     private void playerAction(ActionEvent e) {
         MyButton pressedButton = (MyButton) e.getSource();
         int x = pressedButton.getCol();
@@ -94,20 +89,6 @@ public class OthelloViewSinglePlayer extends JPanel {
             }
         }
         bottomLabel.setText("Turn: " + game.getCurrentColor());
-    }
-
-
-
-    public boolean getViewTurn(){
-        return this.viewTurn;
-    }
-
-    public void setViewTurn(boolean turn){
-        this.viewTurn = turn;
-    }
-
-    public void withdraw() {
-        game.gameOver();
     }
 
     public void displayWinner(PieceColor winner){

@@ -13,7 +13,6 @@ import Othello.server.*;
 
 public class StartApp extends JFrame implements PropertyChangeListener {
 
-    private OthelloViewSinglePlayer game_GUIsingle;
     private States state;
     private final Options options;
     private final StartPanel sp;
@@ -68,7 +67,7 @@ public class StartApp extends JFrame implements PropertyChangeListener {
         else if (state == States.SINGLEPLAYER) {
             Game game = new Game("player1", "player2", new Board(n));
             new GameMenubar(game, options, observable, this);
-            game_GUIsingle = new OthelloViewSinglePlayer(game, options, observable);
+            OthelloViewSinglePlayer game_GUIsingle = new OthelloViewSinglePlayer(game, options, observable);
             setContentPane(game_GUIsingle);
             setSize(700, 700);
             setResizable(false);
