@@ -54,7 +54,8 @@ public class DisDosUpdater implements Runnable{
             System.out.println(space);
             System.out.println("Received packages");
             othelloview.getGame().getBoard().setBoard(space);
-
+            othelloview.getGame().changeTurnLabel();
+            othelloview.getBottomLabel().setText("Turn: " + othelloview.getGame().getFakeColor());
             othelloview.setViewTurn(true);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -78,6 +79,7 @@ public class DisDosUpdater implements Runnable{
                 objectOutputClient = new ObjectOutputStream(clientSocket.getOutputStream());
                 othelloview.setObjectOutputClient(objectOutputClient);
                 othelloview.getGame().multiChangeTurn();
+                othelloview.getGame().changeTurnLabel();
                 othelloview.getGame().setColor();
                 othelloview.setViewTurn(false);
             }

@@ -92,20 +92,25 @@ public class OthelloView extends JPanel {
                 objectOutputClient.flush();
                 objectOutputClient.reset();//NOT SURE ABOUT THIS ONE!!!
                 setViewTurn(false);
+                game.changeTurnLabel();
+                game.multiChangeTurn();
+                bottomLabel.setText("Turn: " + game.getFakeColor());
                 System.out.println("Sending packages");
             } catch (IOException a) {
                 a.printStackTrace();
             }
-            game.multiChangeTurn();
 
-            if (!game.getBoard().playPossible(game.getCurrentColor())) {
+        if (!game.getBoard().playPossible(game.getCurrentColor())) {
                 game.changeTurn();           // changes turn
                 if (!game.getBoard().playPossible(game.getCurrentColor())) {  //if none of the players can make a move, the game ends.
                     game.gameOver();
                 }
             }
-            bottomLabel.setText("Turn: " + game.getFakeColor());
         }
+
+    public JLabel getBottomLabel(){
+        return bottomLabel;
+    }
 
     public boolean getViewTurn(){
         return this.viewTurn;

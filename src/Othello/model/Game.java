@@ -7,7 +7,7 @@ public class Game implements Serializable {
 
     private boolean isBlackTurn;
     private PieceColor currentColor;
-    private PieceColor fakeColor;
+    private PieceColor fakeColor = PieceColor.BLACK;
     private Consumer<PieceColor> onGameOver;
     private Board board;
 
@@ -55,10 +55,13 @@ public class Game implements Serializable {
 
     public void multiChangeTurn(){
         isBlackTurn = !isBlackTurn;
-        if(isBlackTurn) {
-            fakeColor = PieceColor.BLACK;
+    }
+
+    public void changeTurnLabel(){
+        if(fakeColor == PieceColor.BLACK) {
+            fakeColor = PieceColor.WHITE;
         }
-        else fakeColor = PieceColor.WHITE;
+        else fakeColor = PieceColor.BLACK;
     }
 
     public String gameOver() {
