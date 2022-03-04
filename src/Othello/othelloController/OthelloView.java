@@ -104,7 +104,7 @@ public class OthelloView extends JPanel {
                     game.gameOver();
                 }
             }
-            bottomLabel.setText("Turn: " + game.getCurrentColor());
+            bottomLabel.setText("Turn: " + game.getFakeColor());
         }
 
     public boolean getViewTurn(){
