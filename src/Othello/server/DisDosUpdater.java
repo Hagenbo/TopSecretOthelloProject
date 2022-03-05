@@ -17,8 +17,8 @@ public class DisDosUpdater implements Runnable{
     private Socket clientSocket;
     private Socket serverSocket;
     private int port = 2345;
-  //  private String ip = "142.93.106.21";
-    private String ip = "localhost";
+    private String ip = "142.93.106.21";
+  //  private String ip = "localhost";
     private boolean yourTurn = true;
     private boolean serverIsUp=false;
     private boolean start = true;
