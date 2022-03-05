@@ -2,10 +2,18 @@ package Othello.model;
 
 import java.io.Serializable;
 
+/**
+ * Class containing a grid representing an Othello board.
+ * @version 2022-03-04
+ */
 public class Board implements Serializable {
     private PieceColor[][] board;
     private final int n;
 
+    /**
+     * Contructor creating an Othello board
+     * @param n - decides size of board
+     */
     public Board(int n) {
         this.board = new PieceColor[n][n];
         this.n = n;
@@ -24,21 +32,45 @@ public class Board implements Serializable {
         }
     }
 
+    /**
+     * Setter-method that gives an instance another board
+     * @param board
+     */
     public void setBoard(Board board){
         this.board = board.board;
     }
 
+    /**
+     * Gets the piece on position i, j from the board
+     * @param i - represents row
+     * @param j - represents column
+     * @return PieceColor
+     */
     public PieceColor getPiece( int i, int j) {
         return board[i][j];
     }
 
+    /**
+     * Updates the board by adding a PieceColor at position i, j on the board.
+     * @param i - represents row
+     * @param j - represents column
+     * @param c - color of piece
+     */
     public void setPiece(int i, int j, PieceColor c) {
         this.board[i][j] = c;
     }
 
+    /**
+     * Returns number of rows/columns
+     * @return int n
+     */
     public int getBoardSize() { return n; }
 
-    // method checks if the player has any possible moves
+    /**
+     * Checks if there are any possible moves for player with PieceColor c
+     * @param c
+     * @return true, false
+     */
     public boolean playPossible(PieceColor c) {
         int possibleMoves = 0;
         for (int i = 0; i < n; i++) {
@@ -51,6 +83,14 @@ public class Board implements Serializable {
         return (possibleMoves > 0);
     }
 
+    /**
+     * Places a PieceColor at position i, j on the board if the move is legal.
+     * Calls flip()-method.
+     * @param i - represents row
+     * @param j - represents column
+     * @param c - color of piece
+     * @return true, false
+     */
     public boolean placePieceAt(int i, int j, PieceColor c) {
         if (!movePossible(i, j, c) || getPiece(i, j) != PieceColor.EMPTY) {
             return false;
@@ -60,9 +100,6 @@ public class Board implements Serializable {
         return true;
     }
 
-    // checks if a move is possible. Should be called each new turn.
-    // If this returns false, a prompt saying that no moves are possible should pop up,
-    // and it will be the next players turn.
     private boolean movePossible(int i, int j, PieceColor c) {
         return (checkVerticalUp(i,j, c) || checkVerticalDown(i,j, c) ||
                 checkHorizontalRight(i,j, c) || checkHorizontalLeft(i,j, c) ||
@@ -70,6 +107,10 @@ public class Board implements Serializable {
                 checkDiagonalDL(i,j, c) || checkDiagonalUL(i,j, c));
     }
 
+    /**
+     * Counts the pieces of each color. Returns a string with the color that has the most pieces.
+     * @return Black, White, Draw
+     */
     public  String countPieces() {
         int nr_black = 0;
         int nr_white = 0;
@@ -93,8 +134,12 @@ public class Board implements Serializable {
             return "Draw";
         }
     }
-
-    // changes the values in board[i][j] where applicable
+    /**
+     * Flips opposite color where applicable according to Othello rules starting from position i, j
+     * @param i - represents row
+     * @param j - represents column
+     * @param c - color of the placed piece
+     */
     public void flip(int i, int j, PieceColor c) {
         int x;
         int y;
