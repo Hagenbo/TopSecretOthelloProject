@@ -16,7 +16,7 @@ public class DisDosUpdater implements Runnable{
     private ObjectOutputStream objectOutputClient;
     private Socket clientSocket;
     private Socket serverSocket;
-    private int port = 2345;
+    private int port = 5000;
     private String ip = "142.93.106.21";
   //  private String ip = "localhost";
     private boolean yourTurn = true;
@@ -74,6 +74,7 @@ public class DisDosUpdater implements Runnable{
                 initServ();
             } else {
                 System.out.println("Connected to ClientServer");
+                System.out.println(address + " is adress");
                 clientSocket = new Socket(address, port);
                 objectInputClient = new ObjectInputStream(clientSocket.getInputStream());
                 objectOutputClient = new ObjectOutputStream(clientSocket.getOutputStream());
@@ -93,7 +94,7 @@ public class DisDosUpdater implements Runnable{
     private void initServ() {
         try {
             ServSock = new ServerSocket(port);
-            System.out.println("clientServer initialized at port: " + ServSock.getLocalSocketAddress());
+            System.out.println("clientServer initialized at port: " + ServSock.getInetAddress());
             serverIsUp = true;
             othelloview.setViewTurn(true);
         } catch (Exception e) {
