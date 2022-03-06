@@ -4,8 +4,8 @@ import java.io.*;
 import java.util.function.Consumer;
 
 /**
- * Class containing information regaring a specific game of Othello
- * @Version 2022-03-04
+ * Class containing information regarding a specific game of Othello
+ * @Version 2022-03-06
  */
 public class Game implements Serializable {
 
@@ -20,7 +20,7 @@ public class Game implements Serializable {
     private final Player player2;
 
     /**
-     * Contructor that creates a game by initalizing the variables player1, player 2 and board
+     * Contructor that creates a game by initializing the variables player1, player 2 and board
      * @param p1 - name of player1
      * @param p2 - name of player 2
      * @param b - the board for this game

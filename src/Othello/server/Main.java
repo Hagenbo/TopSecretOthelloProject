@@ -8,6 +8,11 @@ import java.net.Socket;
 import java.net.SocketAddress;
 import java.util.Scanner;
 
+/**
+ * Class for a server to pair up two connections.
+ * @Version 2022-03-06
+ */
+
 public class Main{
     private ServerSocket ServSock;
     private OutputStream dos1;
@@ -27,7 +32,14 @@ public class Main{
 
 
     public Main() {
-
+        /**
+         * A Contructor with no parameters. The Constructor initializes a server on the selected IP.
+         * After that, it uses the serversocket previously made in "initServ()" to wait for a connection to be made.
+         * When a connection is made, the Constructor creates an ObjectInputStream and ObjectOutputStream.
+         * If it's the first connection made, it puts a codeword in the OutPutStream, telling the connection to make a clientServer also storing the clients IP in the process.
+         * If it's the second connection made, it puts the previously acquired IP in the OutPutStream, signaling to the client it shall connect via a serversocket to that IP.
+         * Prints stacktrace on IOException.
+         */
         initServ();
         while (true) {
             try {
@@ -61,6 +73,10 @@ public class Main{
         }
     }
 
+    /**
+     * Initializes a server on the specified port for clients to connect to.
+     * Prints Stacktrace on Exception.
+     */
     private void initServ() {
         try {
             System.out.println("DID IT INITIALIZE?");

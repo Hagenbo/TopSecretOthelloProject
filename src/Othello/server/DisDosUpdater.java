@@ -8,6 +8,12 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ * A Runnable Class that first starts the clientServer and makes the connection.
+ * Then listens to the InputStream and updates the client thereafter.
+ * @Version 2022-03-06
+ */
+
 public class DisDosUpdater implements Runnable{
 
     private Thread thread;
@@ -24,6 +30,14 @@ public class DisDosUpdater implements Runnable{
     private boolean start = true;
     public OthelloView othelloview;
 
+    /**
+     * A Constructor with an OthelloView as parameter in order to call methods from the class
+     * The Constructor initializes the othelloview variable, and then checks if the client should start a clientServer or connect to one
+     * The if-statement only let the clientServer through to initialize the Input/Output-Streams
+     * Lastly it commences a thread.
+     * @param game_GUI
+     */
+
     public DisDosUpdater(OthelloView game_GUI) {
         this.othelloview = game_GUI;
         Connecting();
@@ -34,6 +48,11 @@ public class DisDosUpdater implements Runnable{
         thread.start();
     }
 
+    /**
+     * A runnable stuck in an eternal while-loop.
+     * Updates yourTurn to match the one in OthelloView since the OutPutStream is updated there.
+     * Updates the game and then checks with getState() if the client made a move or not.
+     */
     @Override
     public void run(){
         while(true) {
@@ -46,6 +65,13 @@ public class DisDosUpdater implements Runnable{
         }
     }
 
+    /**
+     * getState() lets the client through if it's not their turn.
+     * It stops the program at "objectInputClient.readObject()" until the opponent has sent their move with their OutPutStream.
+     * Afterwards it updates the boards enum-colors to match the incoming games one.
+     * It sets the label of whose turn it is and also flips whose turn it really is.
+     * Prints stacktrace on IOException or ClassNotFoundException
+     */
     private void getState() {
           if (!yourTurn) {
         try {
@@ -64,6 +90,13 @@ public class DisDosUpdater implements Runnable{
     }
     }
 
+    /**
+     * Connects to server on the specified IP.
+     * Checks if InputStream from server gave codeword or IP.
+     * If it gave codeword, the client will start a clientServer, if it gave an IP the client instead connects to the given IP.
+     * If it connects to the given IP, the client will change turn, pick the second color and create ObjectInput and ObjectOutputStreams.
+     * Prints stacktrace on IOException.
+     */
     private void Connecting() {
         try {
             serverSocket = new Socket(ip, 1234);
@@ -91,6 +124,11 @@ public class DisDosUpdater implements Runnable{
         }
     }
 
+    /**
+     * In case the codeword was given, this method will start a clientServer on their IP and set the turn to be their turn.
+     * It also sets the boolean "serverIsUp" to true, causing the if-statement in the Constructor to let it through to the "listenForServerRequest".
+     * Prints stacktrace on Exception and closes the program.
+     */
     private void initServ() {
         try {
             ServSock = new ServerSocket(port);
@@ -103,6 +141,13 @@ public class DisDosUpdater implements Runnable{
         }
     }
 
+    /**
+     * If the client started a server, it then waits in this method for another client to connect to it at "listenerSocket = ServSock.accept();".
+     * After a connection is made, it creates an ObjectInputStream and a ObjectOutputStream.
+     * The method sends the ObjectOutputStream to OthelloView where it's used in the ActionListener.
+     * The boolean "start" becomes false, locking this method until restart of the program.
+     * Prints stacktrace on IOException.
+     */
     private void listenForServerRequest() {
         Socket listenerSocket = null;
         try {
