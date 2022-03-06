@@ -35,7 +35,7 @@ public class DisDosUpdater implements Runnable{
      * The Constructor initializes the othelloview variable, and then checks if the client should start a clientServer or connect to one
      * The if-statement only let the clientServer through to initialize the Input/Output-Streams
      * Lastly it commences a thread.
-     * @param game_GUI
+     * @param game_GUI - OthelloView
      */
 
     public DisDosUpdater(OthelloView game_GUI) {

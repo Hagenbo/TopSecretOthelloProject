@@ -30,16 +30,16 @@ public class Main{
     private InetAddress inetaddress2;
 
 
-
+    /**
+     * A Contructor with no parameters. The Constructor initializes a server on the selected IP.
+     * After that, it uses the serversocket previously made in "initServ()" to wait for a connection to be made.
+     * When a connection is made, the Constructor creates an ObjectInputStream and ObjectOutputStream.
+     * If it's the first connection made, it puts a codeword in the OutPutStream, telling the connection to make a clientServer also storing the clients IP in the process.
+     * If it's the second connection made, it puts the previously acquired IP in the OutPutStream, signaling to the client it shall connect via a serversocket to that IP.
+     * Prints stacktrace on IOException.
+     */
     public Main() {
-        /**
-         * A Contructor with no parameters. The Constructor initializes a server on the selected IP.
-         * After that, it uses the serversocket previously made in "initServ()" to wait for a connection to be made.
-         * When a connection is made, the Constructor creates an ObjectInputStream and ObjectOutputStream.
-         * If it's the first connection made, it puts a codeword in the OutPutStream, telling the connection to make a clientServer also storing the clients IP in the process.
-         * If it's the second connection made, it puts the previously acquired IP in the OutPutStream, signaling to the client it shall connect via a serversocket to that IP.
-         * Prints stacktrace on IOException.
-         */
+
         initServ();
         while (true) {
             try {
@@ -88,8 +88,11 @@ public class Main{
         }
     }
 
-//port, 8, InetAddress.getByName(ip)
 
+    /**
+     * Creates a new Constructor Main();
+     * @param args
+     */
     public static void main(String[] args){
        new Main();
     }

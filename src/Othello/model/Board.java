@@ -68,7 +68,7 @@ public class Board implements Serializable {
 
     /**
      * Checks if there are any possible moves for player with PieceColor c
-     * @param c
+     * @param c - PieceColor
      * @return true, false
      */
     public boolean playPossible(PieceColor c) {
