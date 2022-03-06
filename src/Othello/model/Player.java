@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Class containing variables and methods regarding the players of the game
+ * @Author Viktoria Hagenbo, Lovisa Rosin, Casper von Schenck, Ernst Näslund, Alexander Bratic
  * @version 2022-03-04
  */
 public class Player implements Serializable {
@@ -13,7 +14,7 @@ public class Player implements Serializable {
 
     /**
      * Constructor that creates a player by being given a username
-     * @param uname
+     * @param uname - name for user
      */
     public Player(String uname) {
         this.userName = uname;
@@ -21,7 +22,7 @@ public class Player implements Serializable {
 
     /**
      * Assigns a color a player
-     * @param c
+     * @param c - one of the PieceColor enums
      */
     public void assignColor(PieceColor c) {  //called when a game starts
         this.color = c;
@@ -29,7 +30,7 @@ public class Player implements Serializable {
 
     /**
      * Returns the username of a player
-     * @return
+     * @return username
      */
     public String getPlayerName() {
         return this.userName;

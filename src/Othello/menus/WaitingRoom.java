@@ -5,6 +5,13 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+
+/**
+ * lägg till javadoc
+ * @Author Viktoria Hagenbo, Lovisa Rosin, Casper von Schenck, Ernst Näslund, Alexander Bratic
+ * @Version 2022-03-06
+ */
+
 public class WaitingRoom extends JPanel /*implements MouseListener*/ {
 
     private StatesObservable observable;

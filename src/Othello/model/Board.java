@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Class containing a grid representing an Othello board.
+ * @Author Viktoria Hagenbo, Lovisa Rosin, Casper von Schenck, Ernst Näslund, Alexander Bratic
  * @version 2022-03-04
  */
 public class Board implements Serializable {
@@ -34,7 +35,7 @@ public class Board implements Serializable {
 
     /**
      * Setter-method that gives an instance another board
-     * @param board
+     * @param board - board
      */
     public void setBoard(Board board){
         this.board = board.board;

@@ -11,6 +11,7 @@ import java.net.Socket;
 /**
  * A Runnable Class that first starts the clientServer and makes the connection.
  * Then listens to the InputStream and updates the client thereafter.
+ * @Author Viktoria Hagenbo, Lovisa Rosin, Casper von Schenck, Ernst Näslund, Alexander Bratic
  * @Version 2022-03-06
  */
 

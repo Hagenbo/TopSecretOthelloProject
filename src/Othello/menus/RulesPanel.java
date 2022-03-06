@@ -8,6 +8,7 @@ import java.awt.event.MouseListener;
 /**
  * Class that creates the JPanel RulesPanel which displays the rules. Implements MouseListener
  * for the buttons.
+ * @Author Viktoria Hagenbo, Lovisa Rosin, Casper von Schenck, Ernst Näslund, Alexander Bratic
  * @Version 2022-03-06
  */
 

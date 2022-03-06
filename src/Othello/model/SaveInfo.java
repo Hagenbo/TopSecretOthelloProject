@@ -5,6 +5,7 @@ import java.io.Serializable;
 /**
  * Class containing variables representing the basic information of a game
  * and getter-methods for unpacking this information
+ * @Author Viktoria Hagenbo, Lovisa Rosin, Casper von Schenck, Ernst Näslund, Alexander Bratic
  * @version 2022-03-04
  */
 public class SaveInfo implements Serializable {
@@ -17,11 +18,11 @@ public class SaveInfo implements Serializable {
     /**
      * Constructor that creates a SaveInfo-object by saving board, players, whose turn it os and options
      * in the variables of the instance
-     * @param b
-     * @param p1
-     * @param p2
-     * @param playerTurn
-     * @param o
+     * @param b - the board
+     * @param p1 - player 1
+     * @param p2 - player 2
+     * @param playerTurn - whos turn it is
+     * @param o - the options
      */
     public SaveInfo(Board b, Player p1, Player p2, PieceColor playerTurn, Options o) {
         this.b = b;

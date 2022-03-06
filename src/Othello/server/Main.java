@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 /**
  * Class for a server to pair up two connections.
+ * @Author Viktoria Hagenbo, Lovisa Rosin, Casper von Schenck, Ernst Näslund, Alexander Bratic
  * @Version 2022-03-06
  */
 
@@ -91,7 +92,7 @@ public class Main{
 
     /**
      * Creates a new Constructor Main();
-     * @param args
+     * @param args - arguments
      */
     public static void main(String[] args){
        new Main();

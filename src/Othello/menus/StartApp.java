@@ -12,6 +12,7 @@ import Othello.server.*;
 
 /**
  * Main class for the program that sets up the JFrame of the application. Implements PropertyChangeListener
+ * @Author Viktoria Hagenbo, Lovisa Rosin, Casper von Schenck, Ernst Näslund, Alexander Bratic
  * @Version 2022-03-06
  */
 
@@ -69,8 +70,8 @@ public class StartApp extends JFrame implements PropertyChangeListener {
      * For load: lets the user enter a file name the want to load and gets the right information from
      * SaveInfo which has information stored about previous saved games. Then delegates game, player 1, player 2,
      * and options from that saved game and sets up the view correctly.
-     * Catches IOException or ClassNotFoundException if the game can't load correctly or if the file name the user
-     * entered doesn't exist.
+     * @throws IOException - if the game can't load correctly
+     * @throws ClassNotFoundException - if the file name the user entered doesn't exist.
      */
     private void setPanel() {
         if (state == States.START) {

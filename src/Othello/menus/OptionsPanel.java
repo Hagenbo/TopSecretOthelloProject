@@ -12,6 +12,7 @@ import javax.swing.*;
 /**
  * Class that creates the JPanel OptionsPanel. Implements ActionListener, MouseListener
  * for the buttons.
+ * @Author Viktoria Hagenbo, Lovisa Rosin, Casper von Schenck, Ernst Näslund, Alexander Bratic
  * @Version 2022-03-06
  */
 public class OptionsPanel extends JPanel implements ActionListener, MouseListener {

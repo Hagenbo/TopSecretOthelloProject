@@ -13,6 +13,7 @@ import java.util.Objects;
 /**
  * Class containing the visual windows and configurations.
  * Extends JPanel.
+ * @Author Viktoria Hagenbo, Lovisa Rosin, Casper von Schenck, Ernst Näslund, Alexander Bratic
  * @Version 2022-03-06
  */
 public class OthelloView extends JPanel {

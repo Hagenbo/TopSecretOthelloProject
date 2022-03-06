@@ -5,6 +5,7 @@ import java.util.function.Consumer;
 
 /**
  * Class containing information regarding a specific game of Othello
+ * @Author Viktoria Hagenbo, Lovisa Rosin, Casper von Schenck, Ernst Näslund, Alexander Bratic
  * @Version 2022-03-06
  */
 public class Game implements Serializable {

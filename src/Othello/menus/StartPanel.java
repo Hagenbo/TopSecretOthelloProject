@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 /**
  * Class that creates the JPanel StartPanel which displays the main menu and it's buttons. Implements ActionListener
  * for the buttons.
+ * @Author Viktoria Hagenbo, Lovisa Rosin, Casper von Schenck, Ernst Näslund, Alexander Bratic
  * @Version 2022-03-06
  */
 

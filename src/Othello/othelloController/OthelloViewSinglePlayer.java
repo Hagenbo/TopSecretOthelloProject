@@ -13,6 +13,7 @@ import java.util.Objects;
 /**
  * Copy with some small changes of class "OthelloView" with purpose of use in singleplayer-mode.
  * Extends JPanel.
+ * @Author Viktoria Hagenbo, Lovisa Rosin, Casper von Schenck, Ernst Näslund, Alexander Bratic
  * @Version 2022-03-06
  */
 public class OthelloViewSinglePlayer extends JPanel {

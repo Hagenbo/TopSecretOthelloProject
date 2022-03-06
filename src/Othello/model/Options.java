@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Class containing variables and methods regarding game options
+ * @Author Viktoria Hagenbo, Lovisa Rosin, Casper von Schenck, Ernst Näslund, Alexander Bratic
  * @version 2022-03-04
  */
 public class Options implements Serializable {
