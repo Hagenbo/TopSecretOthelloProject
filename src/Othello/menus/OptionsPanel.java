@@ -9,6 +9,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.*;
 
+/**
+ * Class that creates the JPanel OptionsPanel. Implements ActionListener, MouseListener
+ * for the buttons.
+ * @Version 2022-03-06
+ */
 public class OptionsPanel extends JPanel implements ActionListener, MouseListener {
 
     private final StatesObservable observable;
@@ -16,6 +21,11 @@ public class OptionsPanel extends JPanel implements ActionListener, MouseListene
     private JLabel optionsOverview;
     private final Options sound;
 
+    /**
+     * Contructor that creates a JPanel
+     * @param so - observer for changing the state State
+     * @param sound - for toggling sound
+     */
     public OptionsPanel(StatesObservable so, Options sound) {
         observable = so;
         this.sound = sound;
@@ -27,6 +37,10 @@ public class OptionsPanel extends JPanel implements ActionListener, MouseListene
         add(bottomPanel(), BorderLayout.SOUTH);
     }
 
+    /**
+     * Method for setting up the top panel with buttons for the JPanel. Delegates ActionListeners.
+     * @return JPanel topPanel
+     */
         private JPanel topPanel(){
             JPanel topPanel = new JPanel(new BorderLayout());
             topPanel.setBackground(color);
@@ -46,6 +60,10 @@ public class OptionsPanel extends JPanel implements ActionListener, MouseListene
 
         }
 
+    /**
+     * Method for setting up the bottom panel with a JLabel for the JPanel. Delegates ActionListeners.
+     * @return JPanel bottomPanel
+     */
         private JPanel bottomPanel(){
             JPanel bottomPanel = new JPanel(new BorderLayout());
             bottomPanel.setBackground(color);
@@ -63,6 +81,11 @@ public class OptionsPanel extends JPanel implements ActionListener, MouseListene
 
         }
 
+    /**
+     * MouseClicked event for the MouseListeners. Changes the state and notifies the observer, which
+     * brings the player back to the start panel.
+     * @param e - MouseEvent
+     */
         @Override
         public void mouseClicked(MouseEvent e) {
         observable.setValue(States.START);
@@ -81,6 +104,10 @@ public class OptionsPanel extends JPanel implements ActionListener, MouseListene
         public void mouseExited(MouseEvent e) {
         }
 
+    /**
+     * ActionPerformed for the ActionListeners. Toggles the sound.
+     * @param e - ActionEvent
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         sound.toggleSound();

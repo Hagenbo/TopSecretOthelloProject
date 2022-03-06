@@ -10,6 +10,10 @@ import Othello.model.*;
 import Othello.othelloController.*;
 import Othello.server.*;
 
+/**
+ * Main class for the program that sets up the JFrame of the application. Implements PropertyChangeListener
+ * @Version 2022-03-06
+ */
 
 public class StartApp extends JFrame implements PropertyChangeListener {
 
@@ -22,7 +26,10 @@ public class StartApp extends JFrame implements PropertyChangeListener {
     private final StatesObservable observable;
     private static final int n = 8;
 
-
+    /**
+     * Contructor that sets up the JFrame. Initializes the state to START and creates the observer that
+     * observes the states. Also creates variables for the different panels.
+     */
     public StartApp() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(500, 280);
@@ -42,6 +49,11 @@ public class StartApp extends JFrame implements PropertyChangeListener {
         setVisible(true);
     }
 
+    /**
+     * PropertyChange for the PropertyChangeEvent evt. Checks that the event is an instance of States
+     * and delegates variable state with the new value of the event. Calls setPanel.
+     * @param evt - PropertyChangeEvent
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getNewValue() instanceof States) {
@@ -50,6 +62,16 @@ public class StartApp extends JFrame implements PropertyChangeListener {
         }
 
     }
+
+    /**
+     * Method for setting the content panel for the JFrame. Identifies what state the application is in, and acts
+     * accordingly to that state to set up the right content to be displayed or acted on.
+     * For load: lets the user enter a file name the want to load and gets the right information from
+     * SaveInfo which has information stored about previous saved games. Then delegates game, player 1, player 2,
+     * and options from that saved game and sets up the view correctly.
+     * Catches IOException or ClassNotFoundException if the game can't load correctly or if the file name the user
+     * entered doesn't exist.
+     */
     private void setPanel() {
         if (state == States.START) {
             this.setJMenuBar(null);
@@ -128,14 +150,13 @@ public class StartApp extends JFrame implements PropertyChangeListener {
 
     }
 
+    /**
+     * Main method that starts the application.
+     * @param args - String of arguments
+     */
     public static void main(String[] args) {
         StartApp start = new StartApp();
     }
 }
-
-
-//om man börjar ett spel och sen vill ladda men man skriver in fel namn, kommer man till startsidan igen. Kanske inte ska va så?
-//om man i början vill ladda ett spel men skriver in fel namn kommer man till startsidan igen, kanske ska ha så prompten med "enter file name" kanske
-//kommer upp igen?
 
 

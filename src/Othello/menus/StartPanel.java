@@ -5,10 +5,20 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Class that creates the JPanel StartPanel which displays the main menu and it's buttons. Implements ActionListener
+ * for the buttons.
+ * @Version 2022-03-06
+ */
+
 public class StartPanel extends JPanel implements ActionListener {
     private  final StatesObservable observable;
     private static final Color color = new Color(0, 78, 56);
 
+    /**
+     * Contructor that creates the JPanel and adds the images for the discs.
+     * @param so - observer for changing the state State
+     */
     public StartPanel(StatesObservable so){
         observable= so;
         setBackground(color);
@@ -17,12 +27,20 @@ public class StartPanel extends JPanel implements ActionListener {
         add(this.buttons(), BorderLayout.CENTER);
     }
 
+    /**
+     * Method for setting up the layout on the buttonPanel.
+     * @return JPanel buttonPanel
+     */
     private JPanel setUpButtonPanel(){
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(6, 5));
         return buttonPanel;
     }
 
+    /**
+     * Method for setting up the buttons. Delegates ActionListeners.
+     * @return JPanel buttonPanel
+     */
     private JPanel buttons(){
         JPanel buttonPanel = this.setUpButtonPanel();
 
@@ -65,6 +83,12 @@ public class StartPanel extends JPanel implements ActionListener {
         return buttonPanel;
     }
 
+    /**
+     * ActionPerformed for the ActionListeners. Identifies what button was pressed down through strings.
+     * Returns if e is not an instance of a JButton. Changes the state State and notifies the observer which
+     * changes the content panel for the JFrame. Exits the program if "Exit" is pressed down.
+     * @param e - ActionEvent
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Object obj = e.getSource();

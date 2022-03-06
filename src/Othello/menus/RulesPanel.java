@@ -5,10 +5,21 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+/**
+ * Class that creates the JPanel RulesPanel which displays the rules. Implements MouseListener
+ * for the buttons.
+ * @Version 2022-03-06
+ */
+
 public class RulesPanel extends JPanel implements MouseListener {
     private StatesObservable observable;
     private static final Color color = new Color(0, 78, 56);
 
+    /**
+     * Contructor that creates a JPanel. Sets up the panel with its JTextArea and JLabel.
+     * Delegates ActionListeners.
+     * @param so - observer for changing the state State
+     */
     public RulesPanel(StatesObservable so) {
         observable = so;
 
@@ -33,6 +44,10 @@ public class RulesPanel extends JPanel implements MouseListener {
         add(bottomPanel, BorderLayout.SOUTH);
     }
 
+    /**
+     * Method for getting the string of rules.
+     * @return String str
+     */
     private String getRules() {
         String str = " \n" +
                 "Othello is a strategy board game played between 2 players. \n" +
@@ -49,6 +64,11 @@ public class RulesPanel extends JPanel implements MouseListener {
         return str;
     }
 
+    /**
+     * MouseClicked event for the MouseListeners. Changes the state and notifies the observer, which
+     * brings the player back to the start panel.
+     * @param e - MouseEvent
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         observable.setValue(States.START);
