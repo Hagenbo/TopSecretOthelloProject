@@ -2,8 +2,6 @@ package Othello.menus;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 
 /**
@@ -40,29 +38,6 @@ public class WaitingRoom extends JPanel /*implements MouseListener*/ {
         });
         add(startButton, BorderLayout.CENTER);
 
-        //JPanel middlePanel = new JPanel(new BorderLayout());
-        //middlePanel.setBackground(Color.ORANGE);
-
-        //START.setForeground(Color.white);
-        //START.addMouseListener(this);
-        //middlePanel.add(START, BorderLayout.CENTER);
-
-
-        /*JPanel topPanel = new JPanel();
-        topPanel.setLayout(new BorderLayout());
-        topPanel.setBackground(color);
-        JTextArea info = new JTextArea("WAITING FOR OPPONENT", 20, 20);
-        info.setBackground(Color.cyan);
-        info.setForeground(Color.white);
-        topPanel.add(info, BorderLayout.NORTH);
-
-        setBackground(color);
-        setLayout(new BorderLayout());
-        //add(middlePanel, BorderLayout.SOUTH);
-        add(topPanel, BorderLayout.CENTER);
-       /* observable.setValue(States.MULTIPLAYER);
-        boolStart = true;*/
-
 
     }
 
@@ -75,26 +50,4 @@ public class WaitingRoom extends JPanel /*implements MouseListener*/ {
         return this.boolStart;
     }
 
-
-  /*  @Override
-    public void mouseClicked(MouseEvent e) {
-        observable.setValue(States.MULTIPLAYER);
-        boolStart = true;
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-    }*/
 }

@@ -25,7 +25,6 @@ public class Load {
         SaveInfo stored = (SaveInfo) (objectInputStream.readObject());
 
         objectInputStream.close();
-        // delete this when final clean up System.out.println("Loaded " + filename);
         return stored;
 
 
