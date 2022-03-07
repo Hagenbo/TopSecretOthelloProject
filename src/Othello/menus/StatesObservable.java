@@ -23,15 +23,7 @@ public class StatesObservable {
             this.pcs.addPropertyChangeListener(startApp);
         }
 
-        public void removePropertyChangeListener(PropertyChangeListener listener) {
-            this.pcs.removePropertyChangeListener(listener);
-        }
-
-        public States getValue() {
-            return this.state;
-        }
-
-        /**
+    /**
         * Sets state to newValue and sends the old and new states as arguments
          * to firePropertyChange so that the relevant PropertyChangeListener can
          * react to the change of state.
