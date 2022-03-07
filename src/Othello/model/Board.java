@@ -210,8 +210,13 @@ public class Board implements Serializable {
         }
     }
 
-    // private methods for checking all directions
-    //checks immediate neighbours
+    /**
+     * The following 8 methods are helper methods for checking immediate neighbours on the board,
+     * both left, right, above, below, and diagonally
+     * @param i - row
+     * @param j - column
+     * @return PieceColor of the immediate neighbour
+     */
     private PieceColor checkAbove(int i, int j) { return board[i - 1][j];}
     private PieceColor checkBelow( int i, int j ) { return board[i + 1][j];}
     private PieceColor checkRight( int i, int j ) { return board[i][j + 1];}
@@ -222,7 +227,17 @@ public class Board implements Serializable {
     private PieceColor checkDownLeft(int i, int j) { return board[i+1][j-1];}
     private PieceColor checkUpLeft(int i, int j) { return board[i-1][j-1];}
 
-    // Methods for checking if a "flippable move" is possible in every direction from a given piece.
+
+
+    /**
+     * The following 8 methods are methods for checking if a flippable move is possible in every
+     * direction from a given place. Checks vertical, horizontal, diagonally for both left, right, up, and down.
+     * @param i - row
+     * @param j - column
+     * @param c- a PieceColor
+     * @return boolean
+     */
+
     private boolean checkVerticalUp(int i, int j, PieceColor c) {
         if( i > 0 && checkAbove(i,j) == c) {
             return false;
